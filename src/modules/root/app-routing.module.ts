@@ -8,14 +8,29 @@ const routes: Routes = [
     path: "restaurant",
     component: RootLayoutComponent,
     children: [
+      // {
+      //   path: "auth",
+      //   loadChildren: () =>
+      //     import("./../auth/auth.module").then((m) => m.AuthModule),
+      // },
+    ],
+  },
+  {
+    path: "auth",
+    children: [
       {
-        path: "auth",
+        path: "",
         loadChildren: () =>
           import("./../auth/auth.module").then((m) => m.AuthModule),
       },
     ],
   },
-  { path: "cao", component: NotFoundPageComponent },
+  {
+    path: "",
+    redirectTo: "/auth/login",
+    pathMatch: "full",
+  },
+  { path: "**", component: NotFoundPageComponent }
 ];
 
 @NgModule({

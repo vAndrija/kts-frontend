@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import { CommonModule } from '@angular/common'; 
+import { BrowserModule } from '@angular/platform-browser'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RootLayoutComponent } from './pages/root-layout/root-layout.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
@@ -19,9 +20,10 @@ import { MatToolbarModule } from '@angular/material/toolbar'
     NavbarComponent
   ],
   imports: [
+    CommonModule,
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
+    AppRoutingModule,
     MatMenuModule,
     MatButtonModule,
     MatToolbarModule
