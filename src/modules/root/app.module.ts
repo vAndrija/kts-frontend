@@ -14,6 +14,7 @@ import { MatToolbarModule } from '@angular/material/toolbar'
 import { HttpClientModule } from '@angular/common/http';
 import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { InterceptorInterceptor } from "../shared/interceptors/interceptor.interceptor";
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,10 @@ import { InterceptorInterceptor } from "../shared/interceptors/interceptor.inter
     MatMenuModule,
     MatButtonModule,
     MatToolbarModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot({
+      positionClass :'toast-top-center'
+    })
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorInterceptor, multi: true },],
   bootstrap: [AppComponent]

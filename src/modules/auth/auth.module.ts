@@ -20,15 +20,10 @@ import { AuthService } from './services/auth/auth.service';
     MatCardModule,
     MatFormFieldModule,
     MatInputModule,
-    ReactiveFormsModule,
-    /*    ToastrModule.forRoot({
-      positionClass :'toast-bottom-right'
-    })*/
-
+    ReactiveFormsModule
   ],
   providers: [
-    AuthService,
-    //ToastrService
+    AuthService
   ]
 })
 export class AuthModule { }
