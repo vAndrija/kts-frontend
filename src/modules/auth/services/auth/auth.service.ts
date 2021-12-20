@@ -13,7 +13,6 @@ export class AuthService {
   constructor(private http: HttpClient) { }
 
   login(auth: Login): Observable<Token> {
-    //http://localhost:8080/api/
     return this.http.post<Token>("api/v1/auth/login", auth, {
       headers: this.headers,
       responseType: "json",

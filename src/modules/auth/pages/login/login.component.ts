@@ -6,6 +6,7 @@ import { AuthService } from '../../services/auth/auth.service';
 import { Login } from 'src/modules/shared/models/login';
 import { of } from 'rxjs';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Component({
   selector: 'app-login',
@@ -35,8 +36,12 @@ export class LoginComponent implements OnInit {
     this.authService.login(auth).subscribe(
       (result) => {
         this.notificationService.success("Successful login!");
-        localStorage.setItem("user", JSON.stringify(result));
-        this.router.navigate(["/wine/list"]);
+        const jwtUser = JSON.stringify(result);
+        localStorage.setItem("user", jwtUser);
+        const jwt: JwtHelperService = new JwtHelperService();
+        const role = jwt.decodeToken(jwtUser).role;
+        localStorage.setItem("role", role);
+        this.router.navigate(["/restaurant"]);
       },
       (error) => {
         this.notificationService.error(error.error);

@@ -1,7 +1,7 @@
 <mat-toolbar>
     <mat-toolbar-row class="header"> 
     </mat-toolbar-row>
-    <mat-toolbar-row *ngIf="role === 'MANAGER'">
+    <mat-toolbar-row *ngIf="role === 'ROLE_MANAGER'">
         <button [routerLink]="['/cao']" mat-button>Meni</button>
         <button mat-button>Zaposleni</button>
         <button mat-button>Izvestaji</button>
@@ -9,7 +9,7 @@
         <button mat-button>Profil</button>
         <button mat-button>Odjava</button>
     </mat-toolbar-row>
-    <mat-toolbar-row *ngIf="role === 'COOK' || role === 'BARTENDER' || role === 'WAITER'">
+    <mat-toolbar-row *ngIf="role === 'ROLE_COOK' || role === 'ROLE_BARTENDER' || role === 'ROLE_WAITER'">
         <button mat-button>Meni</button>
         <button mat-button>Restoran</button>
         <button mat-button>Porudzbine</button>
@@ -18,7 +18,7 @@
         <button mat-button>Profil</button>
         <button mat-button>Odjava</button>
     </mat-toolbar-row>
-    <mat-toolbar-row *ngIf="role === 'ADMIN'">
+    <mat-toolbar-row *ngIf="role === 'ROLE_SYSTEM_ADMIN'">
         <button mat-button>Meni</button>
         <button mat-button>Restoran</button>
         <button mat-button>Korisnici</button>

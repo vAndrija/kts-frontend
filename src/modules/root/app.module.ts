@@ -11,6 +11,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { MatMenuModule} from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button'
 import { MatToolbarModule } from '@angular/material/toolbar'
+import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from "@angular/common/http";
+import { InterceptorInterceptor } from "../shared/interceptors/interceptor.interceptor";
 
 @NgModule({
   declarations: [
@@ -26,9 +29,10 @@ import { MatToolbarModule } from '@angular/material/toolbar'
     AppRoutingModule,
     MatMenuModule,
     MatButtonModule,
-    MatToolbarModule
+    MatToolbarModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorInterceptor, multi: true },],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
