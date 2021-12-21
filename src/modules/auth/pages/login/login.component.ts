@@ -44,7 +44,9 @@ export class LoginComponent implements OnInit {
         this.router.navigate(["/restaurant"]);
       },
       (error) => {
-        this.notificationService.error(error.error);
+        if(error.status === 401) {
+          this.notificationService.error("Wrong credentials. Try again.");
+        }
       }
     );
   }
