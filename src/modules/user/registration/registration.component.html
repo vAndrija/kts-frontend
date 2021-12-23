@@ -22,8 +22,8 @@
                                     <form  [formGroup]="form" (ngSubmit)="submit()">
                                         <div class="form-group">
                                             <label class="mb-1"><strong>Ime</strong></label>
-                                            <input type="text" class="form-control" placeholder="Ime" formControlName="firstName">
-                                            <div *ngIf="errorHandling('firstName', 'required')" id="val-firstName-error" class="invalid-feedback animated fadeInUp"
+                                            <input type="text" class="form-control" placeholder="Ime" formControlName="name">
+                                            <div *ngIf="errorHandling('name', 'required')" id="val-firstName-error" class="invalid-feedback animated fadeInUp"
                                                 style="display: block;">
                                                 Ime korisnika mora biti uneseno
                                             </div>
@@ -34,16 +34,24 @@
                                           <div *ngIf="errorHandling('lastName', 'required')" id="val-lastName-error" class="invalid-feedback animated fadeInUp"
                                                 style="display: block;">
                                                 Prezime korisnika mora biti uneseno
-                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="mb-1"><strong>Tip zaposlenog</strong></label>
+                                            <select class="form-control form-white" formControlName="userType" data-placeholder="Izaberi tip zaposlenog..." name="category-color">
+                                              <option *ngFor="let prf of types"  [ngValue]="prf.prId">
+                                                {{ prf.prName }}
+                                               </option>
+                                            </select>
                                         </div>
                                         <div class="form-group">
                                             <label class="mb-1"><strong>Email adresa</strong></label>
-                                            <input type="email" class="form-control" placeholder="zaposleni@example.com" formControlName="email">
-                                            <div *ngIf="errorHandling('email', 'required')" id="val-email-error" class="invalid-feedback animated fadeInUp"
+                                            <input type="email" class="form-control" placeholder="zaposleni@example.com" formControlName="emailAddress">
+                                            <div *ngIf="errorHandling('emailAddress', 'required')" id="val-email-error" class="invalid-feedback animated fadeInUp"
                                                 style="display: block;">
                                                 Email korisnika mora biti uneseno
                                             </div>
-                                            <div *ngIf="errorHandling('email', 'email')" id="val-email-error1" class="invalid-feedback animated fadeInUp"
+                                            <div *ngIf="errorHandling('emailAddress', 'email')" id="val-email-error1" class="invalid-feedback animated fadeInUp"
                                                 style="display: block;">
                                                 Email mora biti ispravne forme
                                             </div>
