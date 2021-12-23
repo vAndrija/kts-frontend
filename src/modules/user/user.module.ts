@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { UserRoutingModule } from './user-routing.module';
-import { RegistrationComponent } from './registration/registration.component';
+import { RegistrationComponent } from './pages/registration/registration.component';
 import { ReactiveFormsModule } from "@angular/forms";
 import { RegistrationService } from "./services/registration.service"
 

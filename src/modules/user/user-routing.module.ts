@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RegistrationComponent} from './registration/registration.component'
+import { RegistrationComponent} from './pages/registration/registration.component'
 import { RoleGuard } from "../auth/guards/role/role.guard";
 
 const routes: Routes = [
