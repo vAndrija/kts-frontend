@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" class="h-100">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Registracija zaposlenih</title>
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="./images/favicon.png">
+</head>
+<body class="h-100">
+    <div class="authincation h-100">
+        <div class="container h-100">
+            <div class="row justify-content-center h-100 align-items-center">
+                <div class="col-md-6">
+                    <div class="authincation-content">
+                        <div class="row no-gutters">
+                            <div class="col-xl-12">
+                                <div class="auth-form">
+                                    <h4 class="text-center mb-4">Kreiranje zaposlenog</h4>
+                                    <form  [formGroup]="form" (ngSubmit)="submit()">
+                                        <div class="form-group">
+                                            <label class="mb-1"><strong>Ime</strong></label>
+                                            <input type="text" class="form-control" placeholder="Ime" formControlName="firstName">
+                                            <div *ngIf="errorHandling('firstName', 'required')" id="val-firstName-error" class="invalid-feedback animated fadeInUp"
+                                                style="display: block;">
+                                                Ime korisnika mora biti uneseno
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                          <label class="mb-1"><strong>Prezime</strong></label>
+                                          <input type="text" class="form-control" placeholder="Prezime" formControlName="lastName">
+                                          <div *ngIf="errorHandling('lastName', 'required')" id="val-lastName-error" class="invalid-feedback animated fadeInUp"
+                                                style="display: block;">
+                                                Prezime korisnika mora biti uneseno
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="mb-1"><strong>Email adresa</strong></label>
+                                            <input type="email" class="form-control" placeholder="zaposleni@example.com" formControlName="email">
+                                            <div *ngIf="errorHandling('email', 'required')" id="val-email-error" class="invalid-feedback animated fadeInUp"
+                                                style="display: block;">
+                                                Email korisnika mora biti uneseno
+                                            </div>
+                                            <div *ngIf="errorHandling('email', 'email')" id="val-email-error1" class="invalid-feedback animated fadeInUp"
+                                                style="display: block;">
+                                                Email mora biti ispravne forme
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="mb-1"><strong>Broj računa</strong></label>
+                                            <input type="text" class="form-control" placeholder="00304929223" formControlName="accountNumber">
+                                        </div>
+                                        <div class="form-group">
+                                          <label class="mb-1"><strong>Broj telefona</strong></label>
+                                          <input type="text" class="form-control" placeholder="0038162855798" formControlName="phoneNumber">
+                                        </div>
+                                        <div class="text-center mt-4">
+                                            <button type="submit" [disabled]="!form.valid" class="btn btn-primary btn-block">Kreiraj zaposlenog</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!--**********************************
+	Scripts
+***********************************-->
+<!-- Required vendors -->
+
+
+</body>
+</html>

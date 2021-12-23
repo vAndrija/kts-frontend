@@ -26,6 +26,16 @@ const routes: Routes = [
     ],
   },
   {
+    path: "users",
+    children: [
+      {
+        path:"",
+        loadChildren: () =>
+          import("./../user/user.module").then((m)=> m.UserModule)
+      }
+    ]
+  },
+  {
     path: "",
     redirectTo: "/auth/login",
     pathMatch: "full",
