@@ -40,7 +40,8 @@ export class LoginComponent implements OnInit {
         localStorage.setItem("user", jwtUser);
         const jwt: JwtHelperService = new JwtHelperService();
         const role = jwt.decodeToken(jwtUser).role;
-        localStorage.setItem("role", role);
+        const id = jwt.decodeToken(jwtUser).id;
+        localStorage.setItem("id", id);
         this.router.navigate(["/restaurant"]);
       },
       (error) => {
