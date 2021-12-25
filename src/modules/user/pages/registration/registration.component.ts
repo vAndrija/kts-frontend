@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import {SelectModel} from "src/modules/shared/models/select-model"
-import {RegistrationService} from "../../services/registration.service"
+import {RegistrationService} from "../../services/registration/registration.service"
 import {RegisterUser} from "src/modules/shared/models/user"
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
 import { Router } from "@angular/router";
@@ -43,18 +43,18 @@ export class RegistrationComponent implements OnInit {
   submit() {
     const userType: string = this.form.value.userType
     const registrationData: RegisterUser  =  this.form.value;
-    this.registrationService.register(registrationData,userType).subscribe(
-      (result)=>{
+    this.registrationService.register(registrationData,userType).subscribe({
+      next: (data)=>{
         this.notificationService.success("Uspješno ste kreirali korisnika !");
-        this.router.navigate(["/restaurant"]);
+        this.router.navigate(["/"]);
       },
-      (error)=>{
+      error: (error)=>{
         if(error.status === 401 || error.status === 403){
           this.notificationService.error("Greška pri kreiranju korisnika");
           this.router.navigate(["/auth/login"]);
         }
       }
-    )
+    })
   }
 
   public errorHandling = (control: string, error: string) => {

@@ -5,7 +5,7 @@ import { RootLayoutComponent } from './pages/root-layout/root-layout.component';
 
 const routes: Routes = [
   {
-    path: "restaurant",
+    path: "",
     component: RootLayoutComponent,
     children: [
       {
@@ -14,14 +14,9 @@ const routes: Routes = [
           import("./../menu/menu.module").then((m) => m.MenuModule),
       },
       {
-        path: "users",
-        children: [
-          {
-            path:"",
-            loadChildren: () =>
-              import("./../user/user.module").then((m)=> m.UserModule)
-          }
-        ]
+        path: "",
+        loadChildren: () =>
+          import("./../user/user.module").then((m)=> m.UserModule),
       },
     ],
   },
