@@ -1,0 +1,19 @@
+<div class="row page-titles mx-0">
+    <div class="col-sm-6 p-md-0">
+        <div class="welcome-text">
+            <h4>Izaberite aktivan meni</h4>
+            <select class="form-control form-white" (ngModelChange)="changeMenu($event)" [(ngModel)]="menu" data-placeholder="Izaberite aktivan meni.."
+                name="category-color">
+                <option *ngFor="let prf of types" [value]="prf.prId">
+                    {{ prf.prName }}
+                </option>
+            </select>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <app-menu-item-card *ngFor="let menuItem of menuItems" [menuItem]="menuItem"></app-menu-item-card>
+</div>
+<div class="col-sm-10">
+    <button type="submit" class="btn btn-primary" style="margin-bottom: 2em;" (click)="changePage()">Učitaj jos</button>
+</div>

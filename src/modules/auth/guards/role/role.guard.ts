@@ -14,7 +14,6 @@ export class RoleGuard implements CanActivate {
       const expectedRoles: string = route.data['expectedRoles'];
       const token = localStorage.getItem("user");
       const jwt: JwtHelperService = new JwtHelperService();
-
       if (!token) {
         this.router.navigate(["/auth/login"]);
         return false;
@@ -27,7 +26,7 @@ export class RoleGuard implements CanActivate {
         this.router.navigate(["/auth/login"]);
         return false;
       }
-
+      
       const roles: string[] = expectedRoles.split("|", 5);
       if (roles.indexOf(info.role) === -1) {
         this.router.navigate(["/"]);

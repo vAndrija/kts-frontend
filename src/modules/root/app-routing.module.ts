@@ -9,14 +9,14 @@ const routes: Routes = [
     component: RootLayoutComponent,
     children: [
       {
+        path: "menu",
+        loadChildren: () =>
+          import("./../menu/menu.module").then((m) => m.MenuModule),
+      },
+      {
         path: "",
-        children: [
-          {
-            path:"",
-            loadChildren: () =>
-              import("./../user/user.module").then((m)=> m.UserModule)
-          }
-        ]
+        loadChildren: () =>
+          import("./../user/user.module").then((m)=> m.UserModule),
       },
     ],
   },
@@ -32,7 +32,7 @@ const routes: Routes = [
   },
   {
     path: "",
-    redirectTo: "/auth/login",
+    redirectTo: "/restaurant",
     pathMatch: "full",
   },
   { path: "**", component: NotFoundPageComponent }
