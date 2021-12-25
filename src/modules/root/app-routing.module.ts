@@ -5,11 +5,11 @@ import { RootLayoutComponent } from './pages/root-layout/root-layout.component';
 
 const routes: Routes = [
   {
-    path: "restaurant",
+    path: "",
     component: RootLayoutComponent,
     children: [
       {
-        path: "users",
+        path: "",
         children: [
           {
             path:"",

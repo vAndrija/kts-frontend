@@ -30,7 +30,7 @@ export class RoleGuard implements CanActivate {
 
       const roles: string[] = expectedRoles.split("|", 5);
       if (roles.indexOf(info.role) === -1) {
-        this.router.navigate(["/restaurant"]);
+        this.router.navigate(["/"]);
         return false;
       }
       return true;

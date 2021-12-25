@@ -12,7 +12,8 @@ export interface User {
   lastName: string,
   emailAddress: string,
   phoneNumber: string,
-  accountNumber: string
+  accountNumber: string,
+  role: string
 }
 
 
