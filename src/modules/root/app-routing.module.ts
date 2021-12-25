@@ -9,6 +9,11 @@ const routes: Routes = [
     component: RootLayoutComponent,
     children: [
       {
+        path: "menu",
+        loadChildren: () =>
+          import("./../menu/menu.module").then((m) => m.MenuModule),
+      },
+      {
         path: "users",
         children: [
           {
@@ -32,7 +37,7 @@ const routes: Routes = [
   },
   {
     path: "",
-    redirectTo: "/auth/login",
+    redirectTo: "/restaurant",
     pathMatch: "full",
   },
   { path: "**", component: NotFoundPageComponent }
