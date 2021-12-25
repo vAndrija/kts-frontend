@@ -8,11 +8,11 @@ const routes: Routes = [
     path: "restaurant",
     component: RootLayoutComponent,
     children: [
-      // {
-      //   path: "auth",
-      //   loadChildren: () =>
-      //     import("./../auth/auth.module").then((m) => m.AuthModule),
-      // },
+      {
+        path: "menu",
+        loadChildren: () =>
+          import("./../menu/menu.module").then((m) => m.MenuModule),
+      },
     ],
   },
   {
@@ -27,7 +27,7 @@ const routes: Routes = [
   },
   {
     path: "",
-    redirectTo: "/auth/login",
+    redirectTo: "/restaurant",
     pathMatch: "full",
   },
   { path: "**", component: NotFoundPageComponent }
