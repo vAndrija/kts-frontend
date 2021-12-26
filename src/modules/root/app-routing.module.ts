@@ -5,18 +5,23 @@ import { RootLayoutComponent } from './pages/root-layout/root-layout.component';
 
 const routes: Routes = [
   {
-    path: "restaurant",
+    path: "",
     component: RootLayoutComponent,
     children: [
-      // {
-      //   path: "auth",
-      //   loadChildren: () =>
-      //     import("./../auth/auth.module").then((m) => m.AuthModule),
-      // },
       {
         path: "order",
         loadChildren: () =>
           import("./../order/order.module").then((m) => m.OrderModule),
+      },
+      {
+        path: "menu",
+        loadChildren: () =>
+          import("./../menu/menu.module").then((m) => m.MenuModule),
+      },
+      {
+        path: "",
+        loadChildren: () =>
+          import("./../user/user.module").then((m)=> m.UserModule),
       },
     ],
   },
@@ -32,7 +37,7 @@ const routes: Routes = [
   },
   {
     path: "",
-    redirectTo: "/auth/login",
+    redirectTo: "/restaurant",
     pathMatch: "full",
   },
   { path: "**", component: NotFoundPageComponent }
