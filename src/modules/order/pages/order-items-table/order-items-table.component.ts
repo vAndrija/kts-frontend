@@ -48,7 +48,6 @@ export class OrderItemsTableComponent implements OnInit {
       .getOrderItemsById(this.currentPage - 1, this.pageSize,  this.id)
       .subscribe((res) => {
         this.orderItems = res.body as OrderItem[];
-        console.log(this.orderItems);
         this.totalSize = Number(res.headers.get("Total-items"));
       });
 
