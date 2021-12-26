@@ -9,15 +9,21 @@ const routes: Routes = [
     component: RootLayoutComponent,
     children: [
       {
+        path: "order",
+        loadChildren: () =>
+          import("./../order/order.module").then((m) => m.OrderModule),
+      },
+      {
         path: "menu",
         loadChildren: () =>
           import("./../menu/menu.module").then((m) => m.MenuModule),
       },
+
       {
         path: "",
         loadChildren: () =>
-          import("./../user/user.module").then((m)=> m.UserModule),
-      },
+          import("./../user/user.module").then((m) => m.UserModule)
+      }
     ],
   },
   {
