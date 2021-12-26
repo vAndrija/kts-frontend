@@ -32,7 +32,7 @@ const routes: Routes = [
   },
   {
     path: "",
-    redirectTo: "/restaurant",
+    redirectTo: "/",
     pathMatch: "full",
   },
   { path: "**", component: NotFoundPageComponent }

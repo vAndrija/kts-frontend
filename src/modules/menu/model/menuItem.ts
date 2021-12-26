@@ -1,10 +1,11 @@
 import { PriceItem } from "./priceItem";
 
 export interface MenuItem {
+    id: string,
     name: string,
     description: string,
-    type: Number,
-    category: Number,
+    type: string,
+    category: string,
     preparationTime: Number,
     priceItemDto: PriceItem
   }

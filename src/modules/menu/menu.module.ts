@@ -6,18 +6,21 @@ import { MenuItemsReviewComponent } from './pages/menu-items-review/menu-items-r
 import { MenuItemCardComponent } from './components/menu-item-card/menu-item-card.component';
 import { MenuService } from './services/menu-service/menu.service';
 import { FormsModule } from '@angular/forms';
+import { MenuItemDetailsComponent } from './pages/menu-item-details/menu-item-details.component';
+import { MenuItemService } from './services/menu-item-service/menu-item.service';
 
 
 @NgModule({
   declarations: [
     MenuItemsReviewComponent,
-    MenuItemCardComponent
+    MenuItemCardComponent,
+    MenuItemDetailsComponent
   ],
   imports: [
     CommonModule,
     MenuRoutingModule,
     FormsModule
   ],
-  providers: [MenuService]
+  providers: [MenuService, MenuItemService]
 })
 export class MenuModule { }

@@ -9,16 +9,17 @@ import { MenuItem } from '../../model/menuItem';
 export class MenuItemCardComponent implements OnInit {
   @Input()
   public menuItem: MenuItem = {
-    category: 0,
+    id: "",
+    category: "",
     description: "",
     name: "",
     preparationTime: 0,
-    type: 0,
+    type: "",
     priceItemDto: {
       value: 0,
       startDate: new Date,
       endDate: new Date,
-      menuItemId: 0,
+      menuItemId: "",
       isCurrent: false,
       preparationValue: 0
     }
