@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>Frontend</title>
@@ -16,27 +17,68 @@
   <link href="./assets/css/style.css" rel="stylesheet">
   <link href="https://cdn.lineicons.com/2.0/LineIcons.css" rel="stylesheet">
 
+  <!-- Daterange picker -->
+  <link href="./assets/vendor/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+  <!-- Clockpicker -->
+  <link href="./assets/vendor/clockpicker/css/bootstrap-clockpicker.min.css" rel="stylesheet">
+  <!-- Pick date -->
+  <link rel="stylesheet" href="./assets/vendor/pickadate/themes/default.css">
+  <link rel="stylesheet" href="./assets/vendor/pickadate/themes/default.date.css">
+
 </head>
+
 <body>
   <app-root></app-root>
+  <script src="./assets/js/jquery.min.js"></script>
 
   <script src="./assets/vendor/global/global.min.js"></script>
   <script src="./assets/vendor/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
   <script src="./assets/vendor/chart.js/Chart.bundle.min.js"></script>
   <script src="./assets/js/custom.min.js"></script>
   <script src="./assets/js/deznav-init.js"></script>
-  
+
   <!-- Counter Up -->
   <script src="./assets/vendor/waypoints/jquery.waypoints.min.js"></script>
   <script src="./assets/vendor/jquery.counterup/jquery.counterup.min.js"></script>
-  
+
   <!-- Apex Chart -->
   <script src="./assets/vendor/apexchart/apexchart.js"></script>
-  
+
   <!-- Chart piety plugin files -->
   <script src="./assets/vendor/peity/jquery.peity.min.js"></script>
-  
+
   <!-- Dashboard 1 -->
   <script src="./assets/js/dashboard/dashboard-1.js"></script>
+
+  <!-- Daterangepicker -->
+  <!-- momment js is must -->
+  <script src="./assets/vendor/moment/moment.min.js"></script>
+  <script src="./assets/vendor/bootstrap-daterangepicker/daterangepicker.js"></script>
+  <!-- clockpicker -->
+  <script src="./assets/vendor/clockpicker/js/bootstrap-clockpicker.min.js"></script>
+  <!-- pickdate -->
+  <script src="./assets/vendor/pickadate/picker.js"></script>
+  <script src="./assets/vendor/pickadate/picker.time.js"></script>
+  <script src="./assets/vendor/pickadate/picker.date.js"></script>
+  
+  <!-- dodati brisanje,, dodati classname ili atribut ili bilo sta i prije ucitavanja vidjeti da li postoji pa brisati ako da-->
+  <script type="text/javascript">
+    function addScript(script) {
+      var headID = document.getElementsByTagName("head")[0];
+      var newScript = document.createElement('script');
+      newScript.type = 'text/javascript';
+      newScript.src = script;
+      headID.appendChild(newScript);
+    };
+
+    window.loadScript = function () {
+      addScript('./assets/js/plugins-init/bs-daterange-picker-init.js');
+      addScript('./assets/js/plugins-init/clock-picker-init.js');
+      addScript('./assets/js/plugins-init/pickadate-init.js');
+    };
+
+    window.$ = $;
+  </script>
 </body>
+
 </html>

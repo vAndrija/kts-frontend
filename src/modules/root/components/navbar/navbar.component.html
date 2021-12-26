@@ -91,6 +91,7 @@
                     <div *ngIf="role === 'ROLE_MANAGER'">
                         <li><a [routerLink]="['/restaurant']">Zaposleni</a></li>
                         <li><a [routerLink]="['/restaurant']">Izvestaji</a></li>
+                        <li><a [routerLink]="['/menu/create-menu']">Meni</a></li>
                     </div>
                     <div *ngIf="role === 'ROLE_COOK' || role === 'ROLE_BARTENDER' || role === 'ROLE_WAITER'">
                         <li><a [routerLink]="['/restaurant']">Meni</a></li>
