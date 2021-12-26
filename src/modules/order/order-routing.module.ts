@@ -9,7 +9,7 @@ const routes: Routes = [
     pathMatch:'full',
     component: OrderItemsTableComponent,
     canActivate: [RoleGuard],
-    data: { expectedRoles: "ROLE_BARTENDER|ROLE_COOK|ROLE_WAITER" },
+    data: {expectedRoles: "ROLE_MANAGER|ROLE_COOK|ROLE_BARTENDER|ROLE_WAITER|ROLE_SYSTEM_ADMIN"}
   }
 ];
 
