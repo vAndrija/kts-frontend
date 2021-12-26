@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { RootLayoutComponent } from './pages/root-layout/root-layout.component';
-
+import { RoleGuard} from 'src/modules/auth/guards/role/role.guard'
 const routes: Routes = [
   {
     path: "",
     component: RootLayoutComponent,
+    canActivate: [RoleGuard],
+    data: { expectedRoles: "ROLE_SYSTEM_ADMIN|ROLE_BARTENDER|ROLE_COOK|ROLE_MANAGER|ROLE_WAITER"},
     children: [
       {
         path: "order",
@@ -38,7 +40,7 @@ const routes: Routes = [
   },
   {
     path: "",
-    redirectTo: "/restaurant",
+    redirectTo: "/",
     pathMatch: "full",
   },
   { path: "**", component: NotFoundPageComponent }
