@@ -18,11 +18,12 @@ const routes: Routes = [
         loadChildren: () =>
           import("./../menu/menu.module").then((m) => m.MenuModule),
       },
+
       {
-        path: "",
+        path: "users",
         loadChildren: () =>
-          import("./../user/user.module").then((m)=> m.UserModule),
-      },
+          import("./../user/user.module").then((m) => m.UserModule)
+      }
     ],
   },
   {
