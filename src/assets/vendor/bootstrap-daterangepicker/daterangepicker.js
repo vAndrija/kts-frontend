@@ -443,6 +443,7 @@
         //
 
         this.updateElement();
+        this.updateFormInputs();
 
     };
 
@@ -705,7 +706,7 @@
             }
 
             var dateHtml = this.locale.monthNames[calendar[1][1].month()] + calendar[1][1].format(" YYYY");
-
+            
             if (this.showDropdowns) {
                 var currentMonth = calendar[1][1].month();
                 var currentYear = calendar[1][1].year();
@@ -736,7 +737,7 @@
                 }
                 yearHtml += '</select>';
 
-                dateHtml = monthHtml + yearHtml;
+                dateHtml = monthHtml + yearHtml; 
             }
 
             html += '<th colspan="5" class="month">' + dateHtml + '</th>';
@@ -747,7 +748,7 @@
             }
 
             html += '</tr>';
-            html += '<tr>';
+            html += '<tr>'; 
 
             // add week number label
             if (this.showWeekNumbers || this.showISOWeekNumbers)
@@ -1008,12 +1009,15 @@
             }
 
             this.container.find('.drp-calendar.' + side + ' .calendar-time').html(html);
-
         },
 
         updateFormInputs: function() {
 
             if (this.singleDatePicker || (this.endDate && (this.startDate.isBefore(this.endDate) || this.startDate.isSame(this.endDate)))) {
+                const date = `${this.startDate.format()} ${this.endDate.format()}`;
+                $('.input-daterange-timepicker').trigger('dateSelected', date);
+                
+                this.updateElement();
                 this.container.find('button.applyBtn').removeAttr('disabled');
             } else {
                 this.container.find('button.applyBtn').attr('disabled', 'disabled');
@@ -1207,6 +1211,8 @@
 
                 if (!this.alwaysShowCalendars)
                     this.hideCalendars();
+                
+                
                 this.clickApply();
             }
         },
@@ -1349,7 +1355,6 @@
 
             //This is to cancel the blur event handler if the mouse was in one of the inputs
             e.stopPropagation();
-
         },
 
         calculateChosenLabel: function () {
@@ -1385,6 +1390,9 @@
         },
 
         clickApply: function(e) {
+            const date = `${this.startDate.format()} ${this.endDate.format()}`;
+            $('.input-daterange-timepicker').trigger('dateSelected', date);
+
             this.hide();
             this.element.trigger('apply.daterangepicker', this);
         },
@@ -1394,6 +1402,7 @@
             this.endDate = this.oldEndDate;
             this.hide();
             this.element.trigger('cancel.daterangepicker', this);
+            
         },
 
         monthOrYearChanged: function(e) {
@@ -1557,6 +1566,7 @@
                 el.data('daterangepicker').remove();
             el.data('daterangepicker', new DateRangePicker(el, implementOptions, callback));
         });
+
         return this;
     };
 
