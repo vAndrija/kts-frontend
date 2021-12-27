@@ -3,12 +3,18 @@ import { RouterModule, Routes } from '@angular/router';
 import { CreateMenuComponent } from './pages/create-menu/create-menu.component';
 import { RoleGuard } from '../auth/guards/role/role.guard';
 import { MenuItemsReviewComponent } from './pages/menu-items-review/menu-items-review.component';
+import { PendingMenuItemsComponent } from './pages/pending-menu-items/pending-menu-items.component';
 
 const routes: Routes = [
   {
     path: "create-menu",
     pathMatch: "full",
     component: CreateMenuComponent,
+  },
+  {
+    path: "pending-menu-items",
+    pathMatch: "full",
+    component: PendingMenuItemsComponent
   },
   {
     path: "menu-items",

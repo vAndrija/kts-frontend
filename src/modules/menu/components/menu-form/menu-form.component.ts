@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
-import { MenuDto } from 'src/modules/shared/models/menuDto'
-import { MenuService } from 'src/modules/menu/services/menu.service'
+import { MenuDto } from 'src/modules/menu/model/menuDto'
+import { MenuService } from 'src/modules/menu/services/menu-service/menu.service'
 import { datetimePickerValidator } from 'src/modules/shared/custom-validators/datetime-picker-validator';
 import * as moment from 'moment';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';

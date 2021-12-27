@@ -9,8 +9,8 @@ import { MenuFormComponent } from './components/menu-form/menu-form.component';
 import { MenuItemsReviewComponent } from './pages/menu-items-review/menu-items-review.component';
 import { MenuItemCardComponent } from './components/menu-item-card/menu-item-card.component';
 
-import { MenuService as MService } from './services/menu.service'; // TODO: ???
 import { MenuService } from './services/menu-service/menu.service';
+import { PendingMenuItemsComponent } from './pages/pending-menu-items/pending-menu-items.component';
 
 
 @NgModule({
@@ -18,7 +18,8 @@ import { MenuService } from './services/menu-service/menu.service';
     CreateMenuComponent,
     MenuFormComponent,
     MenuItemsReviewComponent,
-    MenuItemCardComponent
+    MenuItemCardComponent,
+    PendingMenuItemsComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +29,6 @@ import { MenuService } from './services/menu-service/menu.service';
   ],
   providers: [
     MenuService,
-    MService
   ]
 })
 export class MenuModule { }
