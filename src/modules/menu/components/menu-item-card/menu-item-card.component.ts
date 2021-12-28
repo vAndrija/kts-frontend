@@ -22,7 +22,14 @@ export class MenuItemCardComponent implements OnInit {
       menuItemId: "",
       isCurrent: false,
       preparationValue: 0
-    }
+    },
+    menu: {
+      durationEnd: new Date,
+      durationStart: new Date,
+      id: "",
+      name: ""
+    },
+    accepted: false
   }
 
   constructor() { }

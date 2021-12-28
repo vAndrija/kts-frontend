@@ -66,6 +66,5 @@ export class MenuItemsReviewComponent implements OnInit {
       this.types.push(new SelectModel(menu.id, menu.name))
     });
     this.menu = this.types[0];
-    console.log(this.menu)
   }
 }

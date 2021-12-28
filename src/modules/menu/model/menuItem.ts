@@ -1,3 +1,4 @@
+import { Menu } from "./menu";
 import { PriceItem } from "./priceItem";
 
 export interface MenuItem {
@@ -7,5 +8,7 @@ export interface MenuItem {
     type: string,
     category: string,
     preparationTime: Number,
-    priceItemDto: PriceItem
+    priceItemDto: PriceItem,
+    menu: Menu,
+    accepted: boolean
   }

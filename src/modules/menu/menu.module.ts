@@ -5,7 +5,7 @@ import { MenuRoutingModule } from './menu-routing.module';
 import { MenuItemsReviewComponent } from './pages/menu-items-review/menu-items-review.component';
 import { MenuItemCardComponent } from './components/menu-item-card/menu-item-card.component';
 import { MenuService } from './services/menu-service/menu.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MenuItemDetailsComponent } from './pages/menu-item-details/menu-item-details.component';
 import { MenuItemService } from './services/menu-item-service/menu-item.service';
 
@@ -14,12 +14,13 @@ import { MenuItemService } from './services/menu-item-service/menu-item.service'
   declarations: [
     MenuItemsReviewComponent,
     MenuItemCardComponent,
-    MenuItemDetailsComponent
+    MenuItemDetailsComponent,
   ],
   imports: [
     CommonModule,
     MenuRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [MenuService, MenuItemService]
 })
