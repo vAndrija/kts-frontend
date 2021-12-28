@@ -1,10 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CreateMenuComponent } from './pages/create-menu/create-menu.component';
 import { RoleGuard } from '../auth/guards/role/role.guard';
 import { MenuItemDetailsComponent } from './pages/menu-item-details/menu-item-details.component';
 import { MenuItemsReviewComponent } from './pages/menu-items-review/menu-items-review.component';
 
 const routes: Routes = [
+  {
+    path: "create-menu",
+    pathMatch: "full",
+    component: CreateMenuComponent,
+  },
   {
     path: "menu-items",
     pathMatch: "full",
@@ -25,4 +31,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
+
 export class MenuRoutingModule { }
