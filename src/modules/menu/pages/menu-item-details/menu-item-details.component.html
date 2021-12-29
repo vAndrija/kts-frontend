@@ -28,19 +28,38 @@
                                                 <input type="text" class="form-control col-sm-6" formControlName="price">
                                                 <div *ngIf="errorHandling('price', 'required') || errorHandling('price', 'pattern')" id="val-username-error"
                                                     class="invalid-feedback animated fadeInUp" style="display: block;">
-                                                    Cena je obavyeno polje i mora biti broj
+                                                    Cena je obavzeno polje i mora biti broj
                                                 </div>
                                             </div>
-                                            <p>Izaberite meni:</p>
-                                            <select class="form-control form-white col-sm-6" (ngModelChange)="changeMenu($event)" [(ngModel)]="menu" formControlName="menuId"
-                                                data-placeholder="Izaberite aktivan meni.." name="category-color">
-                                                <option *ngFor="let prf of types" [value]="prf.prId">
-                                                    {{ prf.prName }}
-                                                </option>
-                                            </select>
+                                            <div class="form-group">
+                                                <p>Cena pripreme:</p>
+                                                <input type="text" class="form-control col-sm-6" formControlName="preparationPrice">
+                                                <div *ngIf="errorHandling('preparationPrice', 'required') || errorHandling('preparationPrice', 'pattern')" id="val-username-error"
+                                                    class="invalid-feedback animated fadeInUp" style="display: block;">
+                                                    Cena pripreme je obavzeno polje i mora biti broj
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <p>Period trajanja cene</p>
+                                                <input formControlName="period" type="text" class="form-control input-daterange-timepicker col-sm-6" name="daterange"
+                                                    id="daterange">
+                                                <div *ngIf="errorHandling('period', 'validDateTime')" id="val-period-error" class="invalid-feedback animated fadeInUp"
+                                                    style="display: block;">
+                                                    Molimo unesite valid period važenja cene
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <p>Izaberite meni:</p>
+                                                <select class="form-control form-white col-sm-6" formControlName="menuId"
+                                                    data-placeholder="Izaberite aktivan meni.." name="category-color">
+                                                    <option *ngFor="let prf of types" [value]="prf.prId">
+                                                        {{ prf.prName }}
+                                                    </option>
+                                                </select>
+                                            </div>
                                             <div class="shopping-cart mt-3">
                                                 <button type="submit" class="btn btn-primary" [disabled]="!formAccept.valid" style="margin: 1em;">Prihvati</button>
-                                                <button type="button" class="btn btn-primary" style="margin: 1em;">Odbaci</button>
+                                                <button type="button" class="btn btn-primary" style="margin: 1em;" (click)="decline()">Odbaci</button>
                                             </div>
                                         </form>
                                     </div>

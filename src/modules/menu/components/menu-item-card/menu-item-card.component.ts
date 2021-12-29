@@ -17,8 +17,8 @@ export class MenuItemCardComponent implements OnInit {
     type: "",
     priceItemDto: {
       value: 0,
-      startDate: new Date,
-      endDate: new Date,
+      startDate: "",
+      endDate: "",
       menuItemId: "",
       isCurrent: false,
       preparationValue: 0

@@ -27,12 +27,12 @@ export class MenuItemsReviewComponent implements OnInit {
     this.getMenus();
   }
 
-  changePage() {
+  loadMore(): void {
     this.pageSize = this.pageSize + PAGE_SIZE;
     this.getMenuItems()
   }
 
-  getMenuItems() {
+  getMenuItems(): void {
     this.menuService.getMenuItems(this.selectedMenu, this.page, this.pageSize).subscribe(
       (result) => {
         this.menuItems = result.body as MenuItem[];
@@ -43,13 +43,13 @@ export class MenuItemsReviewComponent implements OnInit {
     )
   }
 
-  changeMenu(value: string) 
+  changeMenu(value: string): void
   {
      this.selectedMenu = value;
      this.getMenuItems();
   }
 
-  getMenus() {
+  getMenus(): void {
     this.menuService.getMenus().subscribe(
       (result) => {
         this.menus = result as Menu[];
@@ -61,7 +61,7 @@ export class MenuItemsReviewComponent implements OnInit {
     )
   }
 
-  setSelcetOptions() {
+  setSelcetOptions(): void {
     this.menus.forEach(menu => {
       this.types.push(new SelectModel(menu.id, menu.name))
     });

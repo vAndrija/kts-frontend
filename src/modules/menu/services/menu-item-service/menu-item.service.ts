@@ -25,4 +25,11 @@ export class MenuItemService {
       responseType: 'json'
     })
   }
+
+  deleteMenuItem(menuItemId: string): Observable<HttpResponse<any>> {
+    return this.http.delete<HttpResponse<any>>("api/v1/menu-items/" + menuItemId, {
+          headers: this.headers,
+          responseType: 'json'
+        })
+  }
 }

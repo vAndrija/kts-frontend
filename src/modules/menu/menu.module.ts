@@ -13,6 +13,7 @@ import { MenuService as MService } from './services/menu.service'; // TODO: ???
 import { MenuService } from './services/menu-service/menu.service';
 import { MenuItemDetailsComponent } from './pages/menu-item-details/menu-item-details.component';
 import { MenuItemService } from './services/menu-item-service/menu-item.service';
+import { PriceItemService } from './services/price-item-service/price-item.service';
 
 
 @NgModule({
@@ -29,6 +30,6 @@ import { MenuItemService } from './services/menu-item-service/menu-item.service'
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [MenuService, MenuItemService]
+  providers: [MenuService, MenuItemService, PriceItemService]
 })
 export class MenuModule { }

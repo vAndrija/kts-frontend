@@ -30,7 +30,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  submit() {
+  submit(): void {
     const auth: Login = this.form.value;
     this.authService.login(auth).subscribe(
       (result) => {

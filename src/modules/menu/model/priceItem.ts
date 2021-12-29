@@ -1,8 +1,8 @@
 export interface PriceItem {
     value: Number,
-    startDate: Date,
-    endDate: Date,
+    startDate: string,
+    endDate: string,
     menuItemId: string,
-    isCurrent:  Boolean,
+    isCurrent:  boolean,
     preparationValue: Number
 }
