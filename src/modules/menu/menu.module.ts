@@ -9,11 +9,11 @@ import { MenuFormComponent } from './components/menu-form/menu-form.component';
 import { MenuItemsReviewComponent } from './pages/menu-items-review/menu-items-review.component';
 import { MenuItemCardComponent } from './components/menu-item-card/menu-item-card.component';
 
-import { MenuService as MService } from './services/menu.service'; // TODO: ???
 import { MenuService } from './services/menu-service/menu.service';
 import { MenuItemDetailsComponent } from './pages/menu-item-details/menu-item-details.component';
 import { MenuItemService } from './services/menu-item-service/menu-item.service';
 import { PriceItemService } from './services/price-item-service/price-item.service';
+import { PendingMenuItemsComponent } from './pages/pending-menu-items/pending-menu-items.component';
 
 
 @NgModule({
@@ -23,6 +23,7 @@ import { PriceItemService } from './services/price-item-service/price-item.servi
     MenuItemsReviewComponent,
     MenuItemCardComponent,
     MenuItemDetailsComponent,
+    PendingMenuItemsComponent
   ],
   imports: [
     CommonModule,
