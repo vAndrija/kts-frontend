@@ -10,6 +10,9 @@ import { MenuItemsReviewComponent } from './pages/menu-items-review/menu-items-r
 import { MenuItemCardComponent } from './components/menu-item-card/menu-item-card.component';
 
 import { MenuService } from './services/menu-service/menu.service';
+import { MenuItemDetailsComponent } from './pages/menu-item-details/menu-item-details.component';
+import { MenuItemService } from './services/menu-item-service/menu-item.service';
+import { PriceItemService } from './services/price-item-service/price-item.service';
 import { PendingMenuItemsComponent } from './pages/pending-menu-items/pending-menu-items.component';
 
 
@@ -19,16 +22,15 @@ import { PendingMenuItemsComponent } from './pages/pending-menu-items/pending-me
     MenuFormComponent,
     MenuItemsReviewComponent,
     MenuItemCardComponent,
+    MenuItemDetailsComponent,
     PendingMenuItemsComponent
   ],
   imports: [
     CommonModule,
     MenuRoutingModule,
-    ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [
-    MenuService,
-  ]
+  providers: [MenuService, MenuItemService, PriceItemService]
 })
 export class MenuModule { }

@@ -14,7 +14,7 @@ export class NavbarComponent implements OnInit {
     this.checkRole();
   }
 
-  checkRole() {
+  checkRole(): void {
     const role = localStorage.getItem("role");
     if(role) {
       this.role = role;

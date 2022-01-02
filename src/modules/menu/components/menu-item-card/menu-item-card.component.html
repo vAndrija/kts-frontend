@@ -10,6 +10,9 @@
                     <span class="price" *ngIf="menuItem.priceItemDto">{{menuItem.priceItemDto.value}} RSD</span>
                     <span class="price" *ngIf="!menuItem.priceItemDto">Cena nije dostupna</span>
                 </div>
+                <div class="new-arrival-content text-center mt-3">
+                    <button type="submit" class="btn" style="margin-bottom: 2em;" [routerLink]="['/menu/menu-items/'] + menuItem.priceItemDto.menuItemId">Opširnije</button>
+                </div>
             </div>
         </div>
     </div>

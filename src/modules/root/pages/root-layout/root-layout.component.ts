@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root-layout',
@@ -7,7 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RootLayoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        (window as any).loadScript();
+      }
+    })
+  }
 
   ngOnInit(): void {
   }
