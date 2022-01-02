@@ -11,7 +11,6 @@ export class PriceItemService {
   constructor(private http: HttpClient) { }
 
   createPriceItem(priceItem: PriceItem) {
-    console.log(priceItem)
     return this.http.post<PriceItem>("api/v1/price-items", priceItem, {
       headers: this.headers,
       responseType: 'json'

@@ -105,7 +105,7 @@ export class MenuItemDetailsComponent implements OnInit {
         this.setSelectOptions();
       },
       (error) => {
-        this.notificationService.error("Doslo je do greske, pokusajte ponovo.")
+        this.notificationService.error("Došlo je do greške, pokušajte ponovo.")
       }
     )
   }
