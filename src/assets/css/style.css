@@ -13074,6 +13074,43 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
     left: 45px !important;
     top: 22px !important; }
 
+.order-create {
+    width: 340px;
+    height: 100vh;
+    position: fixed;
+    right: -500px;
+    top: 0;
+    z-index: 999;
+    background: #fff;
+    box-shadow: 0px 0px 30px 0px rgba(82, 63, 105, 0.15);
+    -webkit-transition: all 0.8s;
+    -ms-transition: all 0.8s;
+    transition: all 0.8s; }
+    [data-theme-version="dark"] .order-create {
+    background: #1e2746; }
+  .order-create .order-create-close {
+    position: absolute;
+    -webkit-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    transition: all 0.2s;
+    width: 0;
+    height: 100%;
+    right: 600px;
+    background: #000;
+    z-index: 1;
+    opacity: 0.1;
+    cursor: pointer; }
+  .order-create .card-fotter {
+    padding: 0.75rem 1rem; }
+  .order-create .card-body {
+    padding: 1rem; }
+  .order-create.active {
+    right: 0;
+    width:600px; }
+  .order-create.active .order-create-close {
+    width: 200vh; }
+
+
 .chatbox {
   width: 340px;
   height: 100vh;

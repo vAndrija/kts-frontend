@@ -4,7 +4,7 @@ export interface MenuItem {
     name: string,
     description: string,
     type: Number,
-    category: Number,
+    category: string,
     preparationTime: Number,
     priceItemDto: PriceItem
   }

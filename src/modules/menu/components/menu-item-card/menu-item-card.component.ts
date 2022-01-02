@@ -9,7 +9,7 @@ import { MenuItem } from '../../model/menuItem';
 export class MenuItemCardComponent implements OnInit {
   @Input()
   public menuItem: MenuItem = {
-    category: 0,
+    category: "",
     description: "",
     name: "",
     preparationTime: 0,

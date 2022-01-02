@@ -30,4 +30,32 @@ export class MenuService {
 
     return this.http.get<HttpResponse<MenuItem[]>>("api/v1/menu-items/by-menu/" + menuId, queryParams);
   }
+
+  getAllMenuItems(page: Number, pageSize: Number): Observable<any> {
+    let queryParams = {};
+    queryParams = {
+      observe: "response",
+      params: new HttpParams()
+        .set("page", String(page))
+        .append("size", String(pageSize)),
+    };
+
+    return this.http.get<MenuItem[]>("api/v1/menu-items/pageable", queryParams);
+  }
+
+  getMenuItemsByCategory(page: Number, pageSize: Number, category:String): Observable<HttpResponse<any>> {
+    let queryParams = {};
+    queryParams = {
+      observe: "response",
+      params: new HttpParams()
+        .set("page", String(page))
+        .append("size", String(pageSize)),
+    };
+
+    return this.http.get<HttpResponse<MenuItem[]>>("api/v1/menu-items/filter/pageable/"+ category, queryParams);
+  }
+
+  searchMenuItems(page: Number, pageSize: Number, search:String): Observable<MenuItem[]> {
+    return this.http.get<MenuItem[]>("api/v1/menu-items/search/"+ search);
+  }
 }
