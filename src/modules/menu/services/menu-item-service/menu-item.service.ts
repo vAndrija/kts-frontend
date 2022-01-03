@@ -1,16 +1,19 @@
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { RestService } from 'src/modules/shared/services/rest/rest.service';
 import { MenuItem } from '../../model/menuItem';
 import { UpdateMenuItemDto } from '../../model/updateMenuItemDto';
+import { MenuService } from '../menu-service/menu.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MenuItemService {
-  private headers = new HttpHeaders({ "Content-Type": "application/json" });
+export class MenuItemService extends RestService {
 
-  constructor(private http: HttpClient) { }
+  constructor(http: HttpClient) {
+    super(http);
+  }
 
   getMenuItem(menuItemId: string): Observable<MenuItem> {
     return this.http.get<MenuItem>("api/v1/menu-items/" + menuItemId, {

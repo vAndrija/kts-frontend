@@ -26,7 +26,7 @@
                                             <div class="form-group">
                                                 <p>Cena:</p>
                                                 <input type="text" class="form-control col-sm-6" formControlName="price">
-                                                <div *ngIf="errorHandling('price', 'required') || errorHandling('price', 'pattern')" id="val-username-error"
+                                                <div *ngIf="errorHandling('price', 'positiveNumber')" id="val-username-error"
                                                     class="invalid-feedback animated fadeInUp" style="display: block;">
                                                     Cena je obavzeno polje i mora biti broj
                                                 </div>
@@ -34,7 +34,7 @@
                                             <div class="form-group">
                                                 <p>Cena pripreme:</p>
                                                 <input type="text" class="form-control col-sm-6" formControlName="preparationPrice">
-                                                <div *ngIf="errorHandling('preparationPrice', 'required') || errorHandling('preparationPrice', 'pattern')" id="val-username-error"
+                                                <div *ngIf="errorHandling('preparationPrice', 'positiveNumber')" id="val-username-error"
                                                     class="invalid-feedback animated fadeInUp" style="display: block;">
                                                     Cena pripreme je obavezno polje i mora biti broj
                                                 </div>

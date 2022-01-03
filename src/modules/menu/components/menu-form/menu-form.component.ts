@@ -40,8 +40,7 @@ export class MenuFormComponent implements OnInit {
 
   }
 
-  submit() {
-    console.log(this.form.value);
+  submit(): void{
 
     var name = this.form.controls['name'].value;
     var stringDates = this.form.controls['period'].value;
