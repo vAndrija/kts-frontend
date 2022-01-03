@@ -11,6 +11,8 @@ import { MenuItemCardComponent } from './components/menu-item-card/menu-item-car
 
 import { MenuService as MService } from './services/menu.service'; // TODO: ???
 import { MenuService } from './services/menu-service/menu.service';
+import { MenuItemFormComponent } from './components/menu-item-form/menu-item-form.component';
+import { CreateMenuItemComponent } from './pages/create-menu-item/create-menu-item.component';
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import { MenuService } from './services/menu-service/menu.service';
     CreateMenuComponent,
     MenuFormComponent,
     MenuItemsReviewComponent,
-    MenuItemCardComponent
+    MenuItemCardComponent,
+    MenuItemFormComponent,
+    CreateMenuItemComponent
   ],
   imports: [
     CommonModule,

@@ -1,37 +1,31 @@
-<div class="card">
-  <div class="card-header">
-    <h5 class="card-title">Definicija menija</h5>
-  </div>
-  <div class="card-body">
-    <div class="basic-form">
-      <form [formGroup]="form" (ngSubmit)="submit()">
-        <div class="mb-3 row">
-          <label class="col-sm-3 col-form-label">Naziv</label>
-          <div class="col-sm-6">
-            <input type="text" class="form-control" placeholder="naziv" formControlName="name">
-          </div>
-          <div *ngIf="errorHandling('name', 'required')" id="val-naziv-error"
-            class="invalid-feedback animated fadeInUp" style="display: block;">
-            Molimo unesite naziv menija
-          </div>
-        </div>
-
-        <div class="mb-3 row">
-          <label class="col-sm-3 col-form-label">Period trajanja menija</label>
-          <div class="col-sm-6">
-            <input formControlName="period" type="text" class="form-control input-daterange-timepicker" name="daterange" id="daterange">
-          </div>
-          <div *ngIf="errorHandling('period', 'validDateTime')" id="val-period-error"
-            class="invalid-feedback animated fadeInUp" style="display: block;">
-            Molimo unesite valid period vazenja menija
-          </div>
-        </div>
-        <div class="mb-3 row">
-          <div class="col-sm-10">
-            <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Dodaj</button>
-          </div>
-        </div>
-      </form>
+<div class="basic-form">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="mb-3 row">
+      <label class="col-sm-3 col-form-label">Naziv</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" placeholder="naziv" formControlName="name">
+      </div>
+      <div *ngIf="errorHandling('name', 'required')" id="val-naziv-error" class="invalid-feedback animated fadeInUp"
+        style="display: block;">
+        Molimo unesite naziv menija
+      </div>
     </div>
-  </div>
+
+    <div class="mb-3 row">
+      <label class="col-sm-3 col-form-label">Period trajanja menija</label>
+      <div class="col-sm-6">
+        <input formControlName="period" type="text" class="form-control input-daterange-timepicker" name="daterange"
+          id="daterange">
+      </div>
+      <div *ngIf="errorHandling('period', 'validDateTime')" id="val-period-error"
+        class="invalid-feedback animated fadeInUp" style="display: block;">
+        Molimo unesite valid period vazenja menija
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <div class="col-sm-10">
+        <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Dodaj</button>
+      </div>
+    </div>
+  </form>
 </div>
