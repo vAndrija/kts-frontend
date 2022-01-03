@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-xl-3">
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane fade show active" id="first">
+                                <img class="img-fluid" src="../../../../assets/images/card/3.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-9 col-sm-12">
+                        <div class="product-detail-content">
+                            <div class="new-arrival-content pr">
+                                <h4>{{menuItem.name}}</h4>
+                                <p class="price">320.00 RSD</p>
+                                <p>Tip: <span class="item">{{menuItem.type}}</span> </p>
+                                <p>Kategorija:&nbsp;&nbsp;
+                                    <span class="badge badge-success light">{{menuItem.category}}</span>
+                                </p>
+                                <p class="text-content">{{menuItem.description}}</p>
+                                <div *ngIf="role === 'ROLE_MANAGER'">
+                                    <div *ngIf="!menuItem.accepted"> 
+                                        <form [formGroup]="formAccept" (ngSubmit)="submit()">
+                                            <div class="form-group">
+                                                <p>Cena:</p>
+                                                <input type="text" class="form-control col-sm-6" formControlName="price">
+                                                <div *ngIf="errorHandling('price', 'required') || errorHandling('price', 'pattern')" id="val-username-error"
+                                                    class="invalid-feedback animated fadeInUp" style="display: block;">
+                                                    Cena je obavzeno polje i mora biti broj
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <p>Cena pripreme:</p>
+                                                <input type="text" class="form-control col-sm-6" formControlName="preparationPrice">
+                                                <div *ngIf="errorHandling('preparationPrice', 'required') || errorHandling('preparationPrice', 'pattern')" id="val-username-error"
+                                                    class="invalid-feedback animated fadeInUp" style="display: block;">
+                                                    Cena pripreme je obavezno polje i mora biti broj
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <p>Period trajanja cene</p>
+                                                <input formControlName="period" type="text" class="form-control input-daterange-timepicker col-sm-6" name="daterange"
+                                                    id="daterange">
+                                                <div *ngIf="errorHandling('period', 'validDateTime')" id="val-period-error" class="invalid-feedback animated fadeInUp"
+                                                    style="display: block;">
+                                                    Molimo unesite valid period važenja cene
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <p>Izaberite meni:</p>
+                                                <select class="form-control form-white col-sm-6" formControlName="menuId"
+                                                    data-placeholder="Izaberite aktivan meni.." name="category-color">
+                                                    <option *ngFor="let prf of types" [value]="prf.prId">
+                                                        {{ prf.prName }}
+                                                    </option>
+                                                </select>
+                                            </div>
+                                            <div class="shopping-cart mt-3">
+                                                <button type="submit" class="btn btn-primary" [disabled]="!formAccept.valid" style="margin: 1em;">Prihvati</button>
+                                                <button type="button" class="btn btn-primary" style="margin: 1em;" (click)="decline()">Odbaci</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

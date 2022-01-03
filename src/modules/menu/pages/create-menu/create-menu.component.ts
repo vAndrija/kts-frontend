@@ -11,7 +11,6 @@ export class CreateMenuComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    (window as any).loadScript();
   }
 
 }
