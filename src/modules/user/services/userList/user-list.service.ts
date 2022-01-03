@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from "@angular/common/http";
+import { HttpHeaders,HttpResponse, HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { RegisterUser,User } from 'src/modules/shared/models/user';
 
@@ -13,6 +13,13 @@ export class UserListService {
 
   register(userType:string):Observable<User[]>{
     return this.http.get<User[]>(this.REGISTER_PATH+userType, {
+      headers: this.headers,
+      responseType: "json",
+    });
+  }
+
+  delete(id:number,userType: string): Observable<HttpResponse<any>> {
+    return this.http.delete<HttpResponse<any>>(this.REGISTER_PATH+userType+'/'+id, {
       headers: this.headers,
       responseType: "json",
     });
