@@ -43,7 +43,7 @@ export class CreateOrderComponent implements OnInit {
     this.$('.order-create').removeClass('active');
   }
 
-  delete(id:number){
+  delete(id:string){
     for(var i =0; i<this.orderItems.length;i++){
       if(this.orderItems[i].menuItemId == id){
         this.orderItems.splice(i, 1); 

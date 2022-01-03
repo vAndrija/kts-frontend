@@ -14,5 +14,5 @@ export interface CreateOrderItem {
   status:string;
   priority:number;
   orderId:number;
-  menuItemId:number;
+  menuItemId:string;
 }

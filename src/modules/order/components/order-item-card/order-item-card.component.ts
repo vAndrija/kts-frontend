@@ -10,19 +10,27 @@ import { Item } from 'src/modules/shared/models/item';
 export class OrderItemCardComponent implements OnInit {
   @Input()
   public menuItem: MenuItem = {
+    id: "",
     category: "",
     description: "",
     name: "",
     preparationTime: 0,
-    type: 0,
+    type: "",
     priceItemDto: {
       value: 0,
-      startDate: new Date,
-      endDate: new Date,
-      menuItemId: 0,
+      startDate: "",
+      endDate: "",
+      menuItemId: "",
       isCurrent: false,
       preparationValue: 0
-    }
+    },
+    menu: {
+      durationEnd: new Date,
+      durationStart: new Date,
+      id: "",
+      name: ""
+    },
+    accepted: false
   }
   priority: any;
   quantity: any;
@@ -36,7 +44,7 @@ export class OrderItemCardComponent implements OnInit {
     name:"",
     category:"",
     price:0,
-    menuItemId:0
+    menuItemId:""
   };
 
   constructor() { }
