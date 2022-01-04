@@ -3,6 +3,8 @@ import {User} from 'src/modules/shared/models/user'
 import { UserListService } from '../../services/userList/user-list.service';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
+
 
 @Component({
   selector: 'app-user-list',
@@ -11,6 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class UserListComponent implements OnInit {
   users: User[]
+  form: FormGroup
   readonly usersRolesTraslated: Map<string,string> = new Map([
     ["ADMIN","Administrator"],
     ["BARTENDER","Šanker"],
@@ -24,11 +27,15 @@ export class UserListComponent implements OnInit {
     private userListService: UserListService,
     private notificationService: NotificationService,
     private router: Router
-
   ) {
     this.users = new Array<User>()
     this.loggedUserId = parseInt((localStorage.getItem('id') || '-1').toString())
-    console.log(this.loggedUserId)
+    this.form =  new FormGroup({
+      name: new FormControl('andriaj', Validators.required),
+      emailAddress: new FormControl('',Validators.compose([Validators.required,Validators.email])),
+      priority: new FormControl(false,Validators.required),
+      salary: new FormControl('',Validators.required)
+    })
    }
 
   ngOnInit(): void {
@@ -54,5 +61,17 @@ export class UserListComponent implements OnInit {
       }
     })
   }
+  editUser(event:Event,user:User): void {
+    this.form.patchValue({
+      name : user.name + " " + user.lastName,
+      emailAddress : user.emailAddress,
+      salary : user.salaryDto.value
+    })
+    event.preventDefault();
+  }
+
+  submit(){
+    console.log(this.form.value)
+    }
 
 }

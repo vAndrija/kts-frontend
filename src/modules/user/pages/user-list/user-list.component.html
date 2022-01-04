@@ -83,9 +83,25 @@
                         class="dropdown-menu dropdown-menu-right border py-0"
                       >
                         <div class="py-2">
-                          <a *ngIf="loggedUserRole==='ROLE_MANAGER'" class="dropdown-item" href="#!">Uredi</a>
-                          <a class="dropdown-item text-danger"
-                          *ngIf="loggedUserRole==='ROLE_SYSTEM_ADMIN' && loggedUserId!==user.id"  (click)="deleteUser($event, user)">Izbriši</a>
+                          <a
+                            *ngIf="loggedUserRole === 'ROLE_SYSTEM_ADMIN'"
+                            class="dropdown-item"
+                            type="button"
+                            (click)="editUser($event, user)"
+                            data-toggle="modal"
+                            data-target="#exampleModalCenter"
+                          >
+                            Uredi
+                          </a>
+                          <a
+                            class="dropdown-item text-danger"
+                            *ngIf="
+                              loggedUserRole === 'ROLE_SYSTEM_ADMIN' &&
+                              loggedUserId !== user.id
+                            "
+                            (click)="deleteUser($event, user)"
+                            >Izbriši</a
+                          >
                         </div>
                       </div>
                     </div>
@@ -93,6 +109,56 @@
                 </tr>
               </tbody>
             </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bootstrap-modal">
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModalCenter">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Uredi korsinika</h5>
+              <button type="button" class="close" data-dismiss="modal">
+                <span>&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="basic-form">
+                <form [formGroup]="form" (ngSubmit)="submit()">
+                  <fieldset disabled>
+                    <div class="form-row">
+                      <div class="form-group col-md-12">
+                        <label>Ime i prezime</label>
+                        <input
+                          class="form-control"
+                          placeholder="Ime i prezime"
+                          formControlName="name"
+                        />
+                      </div>
+                      <div class="form-group col-md-12">
+                        <label>Email</label>
+                        <input class="form-control" placeholder="Email" formControlName="emailAddress"/>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <div class="form-row">
+                    <div class="form-group col-md-12">
+                      <label>Plata</label>
+                      <input class="form-control" placeholder="Plata" formControlName="salary"/>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <div class="form-check">
+                      <input class="form-check-input" type="checkbox" formControlName="priority"/>
+                      <label class="form-check-label"> Prioritet </label>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary" >Azuriraj korisnika</button>
+                </form>
+              </div>
+            </div>
           </div>
         </div>
       </div>
