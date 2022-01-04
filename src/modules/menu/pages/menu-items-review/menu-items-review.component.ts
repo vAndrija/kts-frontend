@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PAGE_SIZE } from 'src/modules/shared/constants/constants';
+import { Pagination } from 'src/modules/shared/models/pagination';
 import { SelectModel } from 'src/modules/shared/models/select-model';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
 import { Menu } from '../../model/menu';
@@ -16,8 +17,7 @@ export class MenuItemsReviewComponent implements OnInit {
   menus: Menu[] = [];
   menu: SelectModel = new SelectModel("", "");
   types: SelectModel[] = [];
-  page: number = 0;
-  pageSize: number = PAGE_SIZE;
+  pagination: Pagination = new Pagination;
   selectedMenu: string = "";
 
   constructor(private menuService: MenuService, private notificationService: NotificationService) { 
@@ -27,13 +27,13 @@ export class MenuItemsReviewComponent implements OnInit {
     this.getMenus();
   }
 
-  changePage() {
-    this.pageSize = this.pageSize + PAGE_SIZE;
+  loadMore(): void {
+    this.pagination.pageSize = this.pagination.pageSize + PAGE_SIZE;
     this.getMenuItems()
   }
 
-  getMenuItems() {
-    this.menuService.getMenuItems(this.selectedMenu, this.page, this.pageSize).subscribe(
+  getMenuItems(): void {
+    this.menuService.getMenuItems(this.selectedMenu, this.pagination.currentPage - 1, this.pagination.pageSize).subscribe(
       (result) => {
         this.menuItems = result.body as MenuItem[];
       },
@@ -43,13 +43,13 @@ export class MenuItemsReviewComponent implements OnInit {
     )
   }
 
-  changeMenu(value: string) 
+  changeMenu(value: string): void
   {
      this.selectedMenu = value;
      this.getMenuItems();
   }
 
-  getMenus() {
+  getMenus(): void {
     this.menuService.getMenus().subscribe(
       (result) => {
         this.menus = result as Menu[];
@@ -61,11 +61,10 @@ export class MenuItemsReviewComponent implements OnInit {
     )
   }
 
-  setSelcetOptions() {
+  setSelcetOptions(): void {
     this.menus.forEach(menu => {
       this.types.push(new SelectModel(menu.id, menu.name))
     });
     this.menu = this.types[0];
-    console.log(this.menu)
   }
 }

@@ -8,11 +8,13 @@ import { MenuFormComponent } from './components/menu-form/menu-form.component';
 
 import { MenuItemsReviewComponent } from './pages/menu-items-review/menu-items-review.component';
 import { MenuItemCardComponent } from './components/menu-item-card/menu-item-card.component';
-
-import { MenuService as MService } from './services/menu.service'; // TODO: ???
 import { MenuService } from './services/menu-service/menu.service';
 import { MenuItemFormComponent } from './components/menu-item-form/menu-item-form.component';
 import { CreateMenuItemComponent } from './pages/create-menu-item/create-menu-item.component';
+import { MenuItemDetailsComponent } from './pages/menu-item-details/menu-item-details.component';
+import { MenuItemService } from './services/menu-item-service/menu-item.service';
+import { PriceItemService } from './services/price-item-service/price-item.service';
+import { PendingMenuItemsComponent } from './pages/pending-menu-items/pending-menu-items.component';
 
 
 @NgModule({
@@ -22,17 +24,16 @@ import { CreateMenuItemComponent } from './pages/create-menu-item/create-menu-it
     MenuItemsReviewComponent,
     MenuItemCardComponent,
     MenuItemFormComponent,
-    CreateMenuItemComponent
+    CreateMenuItemComponent,
+    MenuItemDetailsComponent,
+    PendingMenuItemsComponent
   ],
   imports: [
     CommonModule,
     MenuRoutingModule,
-    ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [
-    MenuService,
-    MService
-  ]
+  providers: [MenuService, MenuItemService, PriceItemService]
 })
 export class MenuModule { }

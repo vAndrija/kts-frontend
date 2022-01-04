@@ -17,7 +17,6 @@ export class LoginComponent implements OnInit {
   form: FormGroup
 
   constructor(
-    private formBuilder: FormBuilder,
     private authService: AuthService,
     private router: Router,
     private notificationService: NotificationService
@@ -31,7 +30,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  submit() {
+  submit(): void {
     const auth: Login = this.form.value;
     this.authService.login(auth).subscribe(
       (result) => {
@@ -42,7 +41,6 @@ export class LoginComponent implements OnInit {
         const role = jwt.decodeToken(jwtUser).role;
         const id = jwt.decodeToken(jwtUser).id;
         localStorage.setItem("id", id);
- 
         localStorage.setItem("role", role);
         this.router.navigate(["/"]);
 

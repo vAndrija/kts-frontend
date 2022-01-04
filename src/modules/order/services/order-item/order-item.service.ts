@@ -4,12 +4,15 @@ import {
 } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { OrderItem } from 'src/modules/shared/models/orderitem';
+import { RestService } from 'src/modules/shared/services/rest/rest.service';
 @Injectable({
   providedIn: 'root'
 })
-export class OrderItemService {
+export class OrderItemService extends RestService {
 
-  constructor(private http: HttpClient) { }
+  constructor(http: HttpClient) {
+    super(http);
+  }
 
   getOrderItemsById(page:number, size:number, id: number): Observable<HttpResponse<OrderItem[]>> {
     // return this.http.get<HttpResponse<OrderItem[]>>("api/v1/order-items/employee/" + id, 
