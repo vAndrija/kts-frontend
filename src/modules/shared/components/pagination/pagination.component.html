@@ -10,7 +10,7 @@
                                 <i class="la la-angle-left"></i></a>
                         </li>
                         <li class="page-item" *ngFor="let i of pages" (click)="selected(i)"
-                            [ngClass]="{ active: i == activePage }">
+                            [ngClass]="{ active: i === activePage }">
                             <a class="page-link"> {{ i }}</a>
                         </li>
                         <li class="page-item" class="page-item" (click)="selected(activePage + 1)"
