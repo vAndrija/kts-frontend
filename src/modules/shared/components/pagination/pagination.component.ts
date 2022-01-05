@@ -29,7 +29,7 @@ export class PaginationComponent implements OnInit {
     }
   }
 
-  ngOnChanges(changes: any) {
+  ngOnChanges(changes: any): void {
     this.totalItems = changes.totalItems.currentValue;
     this.pages = [];
     for (
@@ -41,7 +41,7 @@ export class PaginationComponent implements OnInit {
     }
   }
 
-  selected(newPage: number) {
+  selected(newPage: number): void {
     if (
       newPage >= 1 &&
       newPage <= this.utilService.getNoPages(this.totalItems, this.pageSize)

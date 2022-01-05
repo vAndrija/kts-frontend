@@ -41,7 +41,7 @@
 
             <div class="row">
                 <div class="col">
-                    <app-pagination [totalItems]="totalSize" [pageSize]="pageSize" (pageSelected)="changePage($event)">
+                    <app-pagination [totalItems]="pagination.totalPages" [pageSize]="pagination.pageSize" (pageSelected)="changePage($event)">
                     </app-pagination>
                 </div>
             </div>

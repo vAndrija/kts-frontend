@@ -13,6 +13,7 @@ import * as moment from 'moment';
 import { PriceItem } from '../../model/priceItem';
 import { PriceItemService } from '../../services/price-item-service/price-item.service';
 import { HttpResponse } from '@angular/common/http';
+import { positiveNumberValidator } from 'src/modules/shared/custom-validators/positive-number-validator';
 
 @Component({
   selector: 'app-menu-item-details',
@@ -61,12 +62,12 @@ export class MenuItemDetailsComponent implements OnInit {
           this.getMenuItem(routeParam);
       }
       this.formAccept = new FormGroup({
-        price: new FormControl(null, Validators.compose([Validators.required, Validators.pattern("[0-9]+(\.[0-9][0-9]?)?")])),
+        price: new FormControl(null, { validators: positiveNumberValidator()}),
         menuId: new FormControl("1", Validators.required),
         period: new FormControl("", {
           validators: datetimePickerValidator(),
         }),
-        preparationPrice: new FormControl(null, Validators.compose([Validators.required, Validators.pattern("[0-9]+(\.[0-9][0-9]?)?")]))
+        preparationPrice: new FormControl(null, { validators: positiveNumberValidator()})
     });
   }
 
@@ -118,7 +119,7 @@ export class MenuItemDetailsComponent implements OnInit {
     this.menuItem.menu.id = value;
   }
 
-  updateMenuItem() {
+  updateMenuItem(): void {
     this.menuItem.accepted = true;
     const updateMenuItemDto: UpdateMenuItemDto = {
       ...this.menuItem,
@@ -140,7 +141,7 @@ export class MenuItemDetailsComponent implements OnInit {
     )
   }
 
-  createPriceItem() {
+  createPriceItem(): void {
     let stringDates = this.formAccept.value.period
     let dates = this.formatDates(stringDates);
 
