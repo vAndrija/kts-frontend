@@ -34,6 +34,7 @@ export class OrderItemCardComponent implements OnInit {
   }
   priority: any;
   quantity: any;
+  note:any;
   @Output() eventEmitter : EventEmitter<Item> = new EventEmitter();
 
   public item: Item = {
@@ -44,21 +45,24 @@ export class OrderItemCardComponent implements OnInit {
     name:"",
     category:"",
     price:0,
-    menuItemId:""
+    menuItemId:"",
+    discount:0,
+    note: ""
   };
 
   constructor() { }
 
   ngOnInit(): void { }
 
-  add(){
+  add(): void {
     this.item.priority = this.priority;
     this.item.quantity = this.quantity;
-    this.item.status = "";
     this.item.menuItemId = this.menuItem.priceItemDto.menuItemId;
     this.item.category = this.menuItem.category;
     this.item.name = this.menuItem.name;
-    this.item.price = this.menuItem.priceItemDto.value * this.quantity;
+    this.item.discount = this.menuItem.priceItemDto.value * this.quantity;
+    this.item.price = this.menuItem.priceItemDto.value;
+    this.item.note = this.note;
     this.eventEmitter.emit(this.item);
   }
 

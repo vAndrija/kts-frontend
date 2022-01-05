@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CreateOrderDto, OrderDto } from 'src/modules/shared/models/order';
 import { Item } from 'src/modules/shared/models/item';
 import { CreateOrderItem } from 'src/modules/shared/models/orderitem';
@@ -15,70 +15,67 @@ import { NotificationService } from 'src/modules/shared/services/notification/no
 export class CreateOrderComponent implements OnInit {
   @Input()
   orderItems: Item[] = [];
+  @Output() eventEmitter1: EventEmitter<Item[]> = new EventEmitter();
   $ = (window as any).$;
   @Input()
   discount: number = 0;
-  order: CreateOrderDto = { 
-    status:'Poručeno',
-    dateOfOrder: '', 
+  order: CreateOrderDto = {
+    status: 'Poručeno',
+    dateOfOrder: '',
     price: this.discount,
-    tableId:1,
+    tableId: 1,
     waiterId: Number(localStorage.getItem('id'))
   }
-  createdOrder: OrderDto = { 
-    id:0, 
-    status:'Poručeno', 
-    dateOfOrder: '', 
-    price: this.discount, 
-    tableId:1, 
+  createdOrder: OrderDto = {
+    id: 0,
+    status: 'Poručeno',
+    dateOfOrder: '',
+    price: this.discount,
+    tableId: 1,
     waiterId: Number(localStorage.getItem('id'))
   }
 
-  constructor(private orderItemservice: OrderItemService, private datePipe: DatePipe, 
-     private notificationService: NotificationService) { }
+  constructor(private orderItemservice: OrderItemService, private datePipe: DatePipe,
+    private notificationService: NotificationService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  close() {
+  close(): void {
     this.$('.order-create').removeClass('active');
   }
 
-  delete(id:string){
-    for(var i =0; i<this.orderItems.length;i++){
-      if(this.orderItems[i].menuItemId == id){
-        this.orderItems.splice(i, 1); 
-      }
-    }
+  delete(id: string): void {
+    this.orderItems = this.orderItems.filter(orderItem => orderItem.menuItemId !== id);
+    this.eventEmitter1.emit(this.orderItems);
     this.orderDiscount();
   }
 
-  fromItemToCreateOrderItem(orderItem:Item): CreateOrderItem{
-     var item = {} as CreateOrderItem;
-     item.orderId = this.createdOrder.id;
-     item.note = '';
-     item.menuItemId = orderItem.menuItemId;
-     item.status = 'Poručeno';
-     item.quantity = orderItem.quantity;
-     item.priority = orderItem.priority;
-     return item;
+  fromItemToCreateOrderItem(orderItem: Item): CreateOrderItem {
+    var item: CreateOrderItem = {
+      orderId: this.createdOrder.id,
+      note: orderItem.note,
+      menuItemId: orderItem.menuItemId,
+      status: 'Poručeno',
+      quantity: orderItem.quantity,
+      priority: orderItem.priority
+    };
+    return item;
   }
 
-  orderDiscount(): void{
+  orderDiscount(): void {
     this.discount = 0;
-    for(var i = 0; i<this.orderItems.length;i++){
-      this.discount += this.orderItems[i].price;
-    }
+    this.orderItems.forEach(orderItem => this.discount += orderItem.discount);
   }
 
-  createOrder():void {
+  createOrder(): void {
     var d = this.datePipe.transform(Date.now().toString(), 'yyyy-MM-ddTHH:mm');
-    if(d != null){
+    if (d != null) {
       this.order.dateOfOrder = d;
     }
     this.order.price = this.discount;
     this.orderItemservice.createOrder(this.order).subscribe(
       (response) => {
-        this.createdOrder  = response as OrderDto;
+        this.createdOrder = response as OrderDto;
         this.createOrderItem();
         this.notificationService.success('Uspešno kreirana porudžbina!');
       },
@@ -86,11 +83,10 @@ export class CreateOrderComponent implements OnInit {
   }
 
   createOrderItem(): void {
-    for(var i = 0; i<this.orderItems.length;i++){
-      this.orderItems[i].orderId = this.createdOrder.id;
-      this.orderItemservice.createOrderItem(this.fromItemToCreateOrderItem(this.orderItems[i])).subscribe();
-    }
+    this.orderItems.forEach(orderItem => orderItem.orderId = this.createdOrder.id);
+    this.orderItems.forEach(orderItem => this.orderItemservice.createOrderItem(this.fromItemToCreateOrderItem(orderItem)).subscribe())
     this.close();
     location.reload();
   }
+
 }

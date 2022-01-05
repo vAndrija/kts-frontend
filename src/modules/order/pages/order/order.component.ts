@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuService } from 'src/modules/menu/services/menu-service/menu.service';
 import { MenuItem } from 'src/modules/menu/model/menuItem';
 import { Item } from 'src/modules/shared/models/item';
 import { NgForm } from '@angular/forms';
+import { MenuService } from 'src/modules/menu/services/menu-service/menu.service';
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
@@ -12,13 +12,15 @@ export class OrderComponent implements OnInit {
 
   categories: String[];
   pageSize: number = 3;
+  totalPages: number = 0;
   currentPage: number = 0;
   menuItems: MenuItem[] = [];
   category: String = 'Sve';
   orderItems: Item[] = [];
   discount: number = 0;
   $ = (window as any).$;
-  searchValue: string ='';
+  searchValue: string = '';
+  quantityMap = new Map();
 
   constructor(private menuService: MenuService) {
     this.categories = ['Sve', 'Supa', 'Doručak', 'Predjelo', 'Glavno jelo', 'Dezert', 'Koktel', 'Topli napitak', 'Bezalkoholno piće'];
@@ -28,33 +30,34 @@ export class OrderComponent implements OnInit {
     this.getMenuItems();
   }
 
-  open() {
+  open(): void {
     this.$('.order-create').addClass('active');
 
   }
 
-  close() {
+  close(): void {
     this.$('.order-create').removeClass('active');
   }
 
-  loadMore() {
+  loadMore(): void {
     this.pageSize += 3;
     if (this.category == 'Sve') {
       this.getMenuItems();
-    } else if(this.searchValue == '' && this.category != 'Sve') {
+    } else if (this.searchValue == '' && this.category != 'Sve') {
       this.getByCategory();
     }
   }
 
-  getMenuItems() {
+  getMenuItems(): void {
     this.menuService.getAllMenuItems(this.currentPage, this.pageSize).subscribe(
       (response) => {
-        this.menuItems = response.body as MenuItem[];
+        this.totalPages = Number.parseInt(Object.keys(response.body as Map<number, MenuItem[]>)[0]);
+        this.menuItems = Object.values(response.body as Map<number, MenuItem[]>)[0];
       },
     )
   }
 
-  clickCategory(category: String) {
+  clickCategory(category: String): void {
     this.category = category;
     if (this.category == 'Sve') {
       this.getMenuItems();
@@ -63,7 +66,7 @@ export class OrderComponent implements OnInit {
     }
   }
 
-  getByCategory() {
+  getByCategory(): void {
     this.menuService.getMenuItemsByCategory(this.currentPage, this.pageSize, this.category).subscribe(
       (response) => {
         this.menuItems = response.body as MenuItem[];
@@ -71,28 +74,41 @@ export class OrderComponent implements OnInit {
     )
   }
 
-  addOrderItem(createOrderItem: Item) {
+  check(id: string, quantity: number): boolean {
     var value = true;
-    for(var i = 0; i< this.orderItems.length ;i++){
-      if(this.orderItems[i].menuItemId === createOrderItem.menuItemId){
-        this.orderItems[i].quantity = this.orderItems[i].quantity + createOrderItem.quantity;
-        this.orderItems[i].price = this.orderItems[i].price + createOrderItem.price;
-        value = false;
-      }
+    if (this.quantityMap.has(id)) {
+      this.quantityMap.set(id, this.quantityMap.get(id) + quantity);
+      value = false;
+    } else {
+      this.quantityMap.set(id, quantity);
     }
-    if(value === true){
-      this.orderItems.push(createOrderItem);
-    }
-    this.discount += createOrderItem.price;
-   
+    return value;
   }
 
-  search(f:NgForm){
-    this.menuService.searchMenuItems(this.currentPage, this.pageSize, f.value.searchValue).subscribe(
+  addOrderItem(createOrderItem: Item): void {
+    var quantity = createOrderItem.quantity;
+    if (this.check(createOrderItem.menuItemId, createOrderItem.quantity) === true) {
+      this.orderItems.push(createOrderItem);
+      this.discount += createOrderItem.discount;
+    } else {
+      createOrderItem.quantity = this.quantityMap.get(createOrderItem.menuItemId);
+      createOrderItem.discount = createOrderItem.price * createOrderItem.quantity;
+      this.discount += createOrderItem.price * quantity;
+    }
+
+  }
+
+  search(f: NgForm): void {
+    this.menuService.searchMenuItems(f.value.searchValue).subscribe(
       (response) => {
+        this.totalPages = 1;
         this.menuItems = response as MenuItem[];
       },
     )
   }
-  
+
+  onDelete(items: Item[]): void {
+    this.orderItems = items;
+  }
+
 }

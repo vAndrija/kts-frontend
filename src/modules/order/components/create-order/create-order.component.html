@@ -6,7 +6,7 @@
                 <div class="col-xl-10">
                     <div class="card">
                         <div class="card-body pt-2">
-                            <div class="table" style="width: 580px;">
+                            <div class="order-create-table">
                                 <div class="form-group row">
                                     <div class="col-sm-3">
                                         <label class="col-sm-13 col-form-label">Broj stola</label>
@@ -15,30 +15,30 @@
                                             <option value="2">2</option>
                                         </select>
                                     </div>
-                                    <div class="col-sm-9">
-                                        <label class="col-sm-5 col-form-label">Napomene</label>
-                                        <input type="text" style="height: 100px;" class="form-control">
-                                    </div>
                                 </div>
                                 <table class="table items-table">
                                     <tr>
                                         <th></th>
-                                        <th style="width:10%; font-size: small;"
-                                            class="my-0 text-black font-w500 fs-20">
-                                            <small style="font-size: small; text-align: center;">
+                                        <th class="order-create-th my-0 text-black font-w500 fs-20">
+                                            <small class="order-create-small">
                                                 Količina
                                             </small>
                                         </th>
                                         <th style="width:10%;" class="my-0 text-black font-w500 fs-20">
-                                            <small style="font-size: small; text-align: center;">
+                                            <small class="order-create-small">
                                                 Cena
                                             </small>
                                         </th>
-                                        <th class="my-0 text-black font-w500 fs-20"> <small
-                                                style="font-size: small; text-align: center;">
+                                        <th class="my-0 text-black font-w500 fs-20">
+                                            <small class="order-create-small">
                                                 Status
-                                            </small></th>
-
+                                            </small>
+                                        </th>
+                                        <th class="order-create-th my-0 text-black font-w500 fs-20">
+                                            <small class="order-create-small">
+                                                Napomena
+                                            </small>
+                                        </th>
                                         <th></th>
                                     </tr>
                                     <tr *ngFor="let orderItem of orderItems">
@@ -47,37 +47,45 @@
                                                 <img class="mr-3 img-fluid rounded" width="85"
                                                     src="../../../../assets/images/card/3.png" alt="">
                                                 <div class="media-body">
-                                                    <small class="mt-0 mb-1 text-primary font-w500">{{orderItem.category}}</small>
+                                                    <small
+                                                        class="mt-0 mb-1 text-primary font-w500">{{orderItem.category}}</small>
                                                     <h5 class="mt-0 mb-2 text-black mb-4" style="font-size: small;">
-                                                       {{orderItem.name}} </h5>
+                                                        {{orderItem.name}} </h5>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
-                                            <h4 class="my-0 text-secondary font-w600"
-                                                style="text-align: center; font-size: small;">{{orderItem.quantity}}</h4>
-                                        </td>
-                                        <td>
-                                            <h4 class="my-0 text-secondary font-w600"
-                                                style="text-align: center; font-size: small;">{{orderItem.price}}RSD </h4>
-                                        </td>
-                                        <td>
-                                            <h4 class="my-0 text-secondary font-w600"
-                                                style="text-align: center; font-size: small;">{{orderItem.status}}
+                                            <h4 class="my-0 text-secondary font-w600 order-create-small">
+                                                {{orderItem.quantity}}
                                             </h4>
                                         </td>
                                         <td>
-                                            <a class="ti-close fs-28 text-danger las la-times-circle" (click)="delete(orderItem.menuItemId)"></a>
+                                            <h4 class="my-0 text-secondary font-w600 order-create-small">
+                                                {{orderItem.discount}}RSD</h4>
+                                        </td>
+                                        <td>
+                                            <h4 class="my-0 text-secondary font-w600 order-create-small">
+                                                {{orderItem.status}}</h4>
+                                        </td>
+                                        <td>
+                                            <h4 class="my-0 text-secondary font-w600 order-create-small">
+                                                {{orderItem.note}}</h4>
+                                        </td>
+                                        <td>
+                                            <a class="ti-close fs-28 text-danger las la-times-circle"
+                                                (click)="delete(orderItem.menuItemId)"></a>
                                         </td>
                                     </tr>
                                 </table>
                                 <div class="form-group row col-sm-12">
                                     <label class="col-sm-3 col-form-label">Ukupno</label>
-                                    <input style="width: 200px;" type="text" class="form-control" [(ngModel)]="discount" disabled>
-                                    <label  class="col-sm-3 col-form-label">RSD</label>
+                                    <input style="width: 200px;" type="text" class="form-control" [(ngModel)]="discount"
+                                        disabled>
+                                    <label class="col-sm-3 col-form-label">RSD</label>
                                 </div>
                                 <div class="col-xxl-9">
-                                    <button class="btn btn-sm btn-success" style="align-self: center;" (click)="createOrder()"> Napravi porudžbinu</button>
+                                    <button class="btn btn-sm btn-success" style="align-self: center;"
+                                        (click)="createOrder()"> Napravi porudžbinu</button>
                                 </div>
                             </div>
                         </div>
@@ -87,4 +95,3 @@
         </div>
     </div>
 </div>
-

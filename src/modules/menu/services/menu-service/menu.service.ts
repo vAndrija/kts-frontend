@@ -76,7 +76,7 @@ export class MenuService {
     return this.http.get<MenuItem[]>("api/v1/menu-items/pageable", queryParams);
   }
 
-  searchMenuItems(page: Number, pageSize: Number, search:String): Observable<MenuItem[]> {
+  searchMenuItems(search:String): Observable<any> {
     return this.http.get<MenuItem[]>("api/v1/menu-items/search/"+ search);
     
   }

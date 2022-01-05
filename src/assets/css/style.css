@@ -13109,7 +13109,46 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
     width:600px; }
   .order-create.active .order-create-close {
     width: 200vh; }
+  .order-create .order-create-table {
+   width: 580px;
+  }
+  .order-create .order-create-th{
+    width:10%;
+    font-size: small;
+  }
+  .order-create .order-create-small{
+    font-size: small;
+     text-align: center;
+  }
+.order-item-card {
+    float:left;
+    padding: 0 10px; 
+    height: 520px; 
+    width: 280px;
+  }
+  .order-item-card .order-item-card-sc {
+    margin-left: 50px;
+  }
+  .order-item-card .order-item-card-input {
+    margin-top: 20px;
+  }
 
+  .order-item-card .order-item-card-na {
+    width: 240px;
+  }
+  .order-item-card .order-item-card-r{
+    margin-right: 63px;
+  }
+
+  .order-search {
+    margin-left: 300px; 
+    height: 50px;
+    border: 2px solid #CDCDCD;
+  }
+
+  .button-load{
+    width: 150px; float: right; margin-right: 320px;
+  }
 
 .chatbox {
   width: 340px;

@@ -6,5 +6,7 @@ export interface Item {
     name:string;
     category:string;
     price:number;
+    discount:number;
     menuItemId:string;
+    note:string;
   }
