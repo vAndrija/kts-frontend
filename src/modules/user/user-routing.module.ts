@@ -13,11 +13,11 @@ const routes: Routes = [
     data: { expectedRoles: "ROLE_SYSTEM_ADMIN" },
   },
   {
-    path: "admin/users",
+    path: "users",
     pathMatch: "full",
     component: UserListComponent,
     canActivate: [RoleGuard],
-    data: { expectedRoles: "ROLE_SYSTEM_ADMIN" },
+    data: { expectedRoles: "ROLE_SYSTEM_ADMIN|ROLE_MANAGER" },
   }
 ];
 

@@ -1,0 +1,97 @@
+<div class="order-create">
+    <div class="order-create-close" (click)="close()"></div>
+    <div class="tab-content">
+        <div class="tab-pane fade active show" id="chat" role="tabpanel">
+            <div class="row">
+                <div class="col-xl-10">
+                    <div class="card">
+                        <div class="card-body pt-2">
+                            <div class="order-create-table">
+                                <div class="form-group row">
+                                    <div class="col-sm-3">
+                                        <label class="col-sm-13 col-form-label">Broj stola</label>
+                                        <select id="single-select" class="form-select  h-100 w-100">
+                                            <option value="10">10</option>
+                                            <option value="2">2</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <table class="table items-table">
+                                    <tr>
+                                        <th></th>
+                                        <th class="order-create-th my-0 text-black font-w500 fs-20">
+                                            <small class="order-create-small">
+                                                Količina
+                                            </small>
+                                        </th>
+                                        <th style="width:10%;" class="my-0 text-black font-w500 fs-20">
+                                            <small class="order-create-small">
+                                                Cena
+                                            </small>
+                                        </th>
+                                        <th class="my-0 text-black font-w500 fs-20">
+                                            <small class="order-create-small">
+                                                Status
+                                            </small>
+                                        </th>
+                                        <th class="order-create-th my-0 text-black font-w500 fs-20">
+                                            <small class="order-create-small">
+                                                Napomena
+                                            </small>
+                                        </th>
+                                        <th></th>
+                                    </tr>
+                                    <tr *ngFor="let orderItem of orderItems">
+                                        <td>
+                                            <div class="media">
+                                                <img class="mr-3 img-fluid rounded" width="85"
+                                                    src="../../../../assets/images/card/3.png" alt="">
+                                                <div class="media-body">
+                                                    <small
+                                                        class="mt-0 mb-1 text-primary font-w500">{{orderItem.category}}</small>
+                                                    <h5 class="mt-0 mb-2 text-black mb-4" style="font-size: small;">
+                                                        {{orderItem.name}} </h5>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <h4 class="my-0 text-secondary font-w600 order-create-small">
+                                                {{orderItem.quantity}}
+                                            </h4>
+                                        </td>
+                                        <td>
+                                            <h4 class="my-0 text-secondary font-w600 order-create-small">
+                                                {{orderItem.discount}}RSD</h4>
+                                        </td>
+                                        <td>
+                                            <h4 class="my-0 text-secondary font-w600 order-create-small">
+                                                {{orderItem.status}}</h4>
+                                        </td>
+                                        <td>
+                                            <h4 class="my-0 text-secondary font-w600 order-create-small">
+                                                {{orderItem.note}}</h4>
+                                        </td>
+                                        <td>
+                                            <a class="ti-close fs-28 text-danger las la-times-circle"
+                                                (click)="delete(orderItem.menuItemId)"></a>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="form-group row col-sm-12">
+                                    <label class="col-sm-3 col-form-label">Ukupno</label>
+                                    <input style="width: 200px;" type="text" class="form-control" [(ngModel)]="discount"
+                                        disabled>
+                                    <label class="col-sm-3 col-form-label">RSD</label>
+                                </div>
+                                <div class="col-xxl-9">
+                                    <button class="btn btn-sm btn-success" style="align-self: center;"
+                                        (click)="createOrder()"> Napravi porudžbinu</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

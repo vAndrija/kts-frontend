@@ -33,6 +33,7 @@ export class MenuService extends RestService {
     };
 
     return this.http.get<HttpResponse<MenuItem[]>>("api/v1/menu-items/pending-menu-items", queryParams);
+   
   }
 
   addMenu(menu: MenuDto): Observable<MenuDto> {
@@ -41,4 +42,33 @@ export class MenuService extends RestService {
       responseType: "json",
     });
   }
+  
+  getMenuItemsByCategory(page: Number, pageSize: Number, category:String): Observable<HttpResponse<any>> {
+    let queryParams = {};
+    queryParams = {
+      observe: "response",
+      params: new HttpParams()
+        .set("page", String(page))
+        .append("size", String(pageSize)),
+    };
+
+    return this.http.get<HttpResponse<MenuItem[]>>("api/v1/menu-items/filter/pageable/"+ category, queryParams);
+  }
+
+  getAllMenuItems(page: Number, pageSize: Number): Observable<any> {
+    let queryParams = {};
+    queryParams = {
+      observe: "response",
+      params: new HttpParams()
+        .set("page", String(page))
+        .append("size", String(pageSize)),
+    };
+    return this.http.get<MenuItem[]>("api/v1/menu-items/pageable", queryParams);
+  }
+
+  searchMenuItems(search:String): Observable<any> {
+    return this.http.get<MenuItem[]>("api/v1/menu-items/search/"+ search);
+    
+  }
+
 }
