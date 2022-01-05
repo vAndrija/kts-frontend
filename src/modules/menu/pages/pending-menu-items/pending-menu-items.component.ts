@@ -3,6 +3,7 @@ import { PAGE_SIZE } from 'src/modules/shared/constants/constants';
 import { MenuItem } from '../../model/menuItem';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
 import { MenuService } from '../../services/menu-service/menu.service';
+import { Pagination } from 'src/modules/shared/models/pagination';
 
 @Component({
   selector: 'app-pending-menu-items',
@@ -11,9 +12,7 @@ import { MenuService } from '../../services/menu-service/menu.service';
 })
 export class PendingMenuItemsComponent implements OnInit {
   menuItems: MenuItem[] = [];
-  page: number = 0;
-  pageSize: number = PAGE_SIZE;
-  totalPages: number = 0;
+  pagination: Pagination = new Pagination;
 
   constructor(private menuService: MenuService, private notificationService: NotificationService) { }
 
@@ -21,16 +20,16 @@ export class PendingMenuItemsComponent implements OnInit {
     this.getPendingMenuItems();
   }
 
-  loadMore() {
-    this.pageSize += PAGE_SIZE;
+  loadMore(): void {
+    this.pagination.pageSize += PAGE_SIZE;
     this.getPendingMenuItems();
   }
 
-  getPendingMenuItems() {
-    this.menuService.getPendingMenuItems(this.page, this.pageSize).subscribe(
+  getPendingMenuItems(): void {
+    this.menuService.getPendingMenuItems(this.pagination.currentPage - 1, this.pagination.pageSize).subscribe(
       (response) => {
         this.menuItems = response.body["content"] as MenuItem[];
-        this.totalPages = response.body["totalPages"] as number;
+        this.pagination.totalPages = response.body["totalPages"] as number;
       },
       (error) => {
         this.notificationService.error("Došlo je do greške, pokušajte ponovo.");

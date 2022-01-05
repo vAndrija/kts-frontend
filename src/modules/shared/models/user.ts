@@ -1,3 +1,4 @@
+import { Salary } from "./salary";
 export interface RegisterUser {
   name: string,
   lastName: string,
@@ -13,7 +14,9 @@ export interface User {
   emailAddress: string,
   phoneNumber: string,
   accountNumber: string,
-  role: string
+  role: string,
+  priority : boolean,
+  salaryDto : Salary
 }
 
 
