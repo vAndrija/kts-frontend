@@ -7,12 +7,13 @@ import { NgApexchartsModule } from "ng-apexcharts";
 import { MealDrinkCostsComponent } from './pages/meal-drink-costs/meal-drink-costs.component';
 import { ReportService } from './services/report-service/report.service';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { CostBenefitRatioComponent } from './pages/cost-benefit-ratio/cost-benefit-ratio.component';
 
 @NgModule({
   declarations: [
     BarChartComponent,
-    MealDrinkCostsComponent
+    MealDrinkCostsComponent,
+    CostBenefitRatioComponent,
   ],
   imports: [
     CommonModule,

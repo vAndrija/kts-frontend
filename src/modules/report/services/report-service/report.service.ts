@@ -25,4 +25,18 @@ export class ReportService extends RestService {
       responseType: 'json'
     });
   }
+
+  getYearlyCostBenefitRatio(year: number): Observable<number[]> {
+    return this.http.get<number[]>("api/v1/reports/yearly/" + year + "/cost-benefit-ratio", {
+      headers: this.headers,
+      responseType: 'json'
+    });
+  }
+
+  getMonthlyCostBenefitRation(year: number, month: number): Observable<number[]> {
+    return this.http.get<number[]>("api/v1/reports/" + year + "/monthly/" + month + "/cost-benefit-ratio", {
+      headers: this.headers,
+      responseType: 'json'
+    })
+  }
 }

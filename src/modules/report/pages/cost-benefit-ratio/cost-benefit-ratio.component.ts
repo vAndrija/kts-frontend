@@ -7,19 +7,19 @@ import { ChartOptions } from '../../model/chartOptions';
 import { ReportService } from '../../services/report-service/report.service';
 
 @Component({
-  selector: 'app-meal-drink-costs',
-  templateUrl: './meal-drink-costs.component.html',
-  styleUrls: ['./meal-drink-costs.component.scss']
+  selector: 'app-cost-benefit-ratio',
+  templateUrl: './cost-benefit-ratio.component.html',
+  styleUrls: ['./cost-benefit-ratio.component.scss']
 })
-export class MealDrinkCostsComponent implements OnInit {
+export class CostBenefitRatioComponent implements OnInit {
   yearlyChartOptions!: ChartOptions;
   monthlyChartOptions!: ChartOptions;
   formYearly: FormGroup;
   formMonthly: FormGroup;
 
   constructor(private reportService: ReportService,
-    private notificationService: NotificationService) {
-      this.formYearly = new FormGroup({
+    private notificationService: NotificationService) { 
+    this.formYearly = new FormGroup({
         year: new FormControl(null, { validators: positiveNumberValidator()}),
      })
      this.formMonthly = new FormGroup({
@@ -35,7 +35,7 @@ export class MealDrinkCostsComponent implements OnInit {
         type: "bar"
       },
       title: {
-        text: "Troškovi pripreme jela i pića"
+        text: "Odnos zarade i troškova"
       },
       xaxis: {
           categories: ["Jan", "Feb",  "Mar",  "Apr",  "May",  "Jun",  "Jul",  "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -51,7 +51,7 @@ export class MealDrinkCostsComponent implements OnInit {
         type: "bar"
       },
       title: {
-        text: "Troškovi pripreme jela i pića"
+        text: "Odnos zarade i troškova"
       },
       xaxis: {
           categories: []
@@ -62,8 +62,8 @@ export class MealDrinkCostsComponent implements OnInit {
     }
   }
 
-  getYearlyMealDrinkCosts(year: number): void {
-    this.reportService.getYearlyMealDrinkCosts(year).subscribe(
+  getYearlyCostBenefitRatio(year: number): void {
+    this.reportService.getYearlyCostBenefitRatio(year).subscribe(
       (result) => {
         this.yearlyChartOptions.series = [{
           data: result as number[]
@@ -80,15 +80,15 @@ export class MealDrinkCostsComponent implements OnInit {
     )
   }
 
-  getMonthlyMealDrinkCosts(year: number, month: number): void {
-    this.reportService.getMonthlyMealDrinkCosts(year, month).subscribe(
+  getMonthlyCostBenefitRatio(year: number, month: number): void {
+    this.reportService.getMonthlyCostBenefitRation(year, month).subscribe(
       (result) => {
-        const mealDrinkCosts: number[] = result as number[];
+        const costBenefitRatio: number[] = result as number[];
         this.monthlyChartOptions.series = [{
-          data: mealDrinkCosts
+          data: costBenefitRatio
         }];
         this.monthlyChartOptions.xaxis = {
-          categories: [...mealDrinkCosts.map((cost, index) => index + 1)]
+          categories: [...costBenefitRatio.map((ratio, index) => index + 1)]
         }
       },
       (error) => {
@@ -111,10 +111,10 @@ export class MealDrinkCostsComponent implements OnInit {
   }
 
   submitYearly() {
-    this.getYearlyMealDrinkCosts(this.formYearly.value.year);
+    this.getYearlyCostBenefitRatio(this.formYearly.value.year);
   }
 
   submitMonthly() {
-    this.getMonthlyMealDrinkCosts(this.formMonthly.value.year, this.formMonthly.value.month);
+    this.getMonthlyCostBenefitRatio(this.formMonthly.value.year, this.formMonthly.value.month);
   }
 }
