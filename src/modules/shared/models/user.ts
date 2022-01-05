@@ -16,4 +16,8 @@ export interface User {
   role: string
 }
 
+export interface PreparationStaff extends User {
+  priority: boolean
+}
+
 
