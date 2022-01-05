@@ -89,7 +89,7 @@
                             *ngIf="loggedUserRole === 'ROLE_MANAGER'"
                             class="dropdown-item"
                             type="button"
-                            (click)="editUser($event, user)"
+                            (click)="editUser(user)"
                             data-toggle="modal"
                             data-target="#exampleModalCenter"
                           >
@@ -101,7 +101,7 @@
                               loggedUserRole === 'ROLE_SYSTEM_ADMIN' &&
                               loggedUserId !== user.id
                             "
-                            (click)="deleteUser($event, user)"
+                            (click)="deleteUser(user)"
                             >Izbriši</a
                           >
                         </div>

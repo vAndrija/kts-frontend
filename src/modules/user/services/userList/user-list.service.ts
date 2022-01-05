@@ -10,7 +10,6 @@ import { RestService } from 'src/modules/shared/services/rest/rest.service';
 })
 
 export class UserListService extends RestService {
-  private headers = new HttpHeaders({ "Content-Type": "application/json" });
   private readonly BASE : string = "api/v1/"
   private readonly CREATE_SALARY : string = "api/v1/salaries"
   

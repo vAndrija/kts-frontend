@@ -57,8 +57,7 @@ export class UserListComponent implements OnInit {
     })
   }
 
-  deleteUser(event:Event,user:User): void {
-    event.preventDefault();
+  deleteUser(user:User): void {
     this.userListService.delete(user.id,user.role.toLowerCase()).subscribe({
       next: ()=> {
         this.notificationService.success("Uspješno izbrisan korisnik.")
@@ -70,7 +69,7 @@ export class UserListComponent implements OnInit {
     })
   }
 
-  editUser(event:Event,user:User): void {
+  editUser(user:User): void {
     if(user.role==="COOK" || user.role==="BARTENDER"){
       this.currentRolePriority = true;
       this.currentUserPriority = user.priority;
@@ -83,11 +82,9 @@ export class UserListComponent implements OnInit {
       value : user.salaryDto.value,
       priority: user.priority
     })
-    event.preventDefault();
   }
 
   submit(): void {
-    console.log("Andrija")
     let salary: Salary  =  this.form.value;
     let currentDate =  new Date()
     let year = currentDate.getFullYear();
