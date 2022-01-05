@@ -12,6 +12,7 @@
                   <th>Broj telefona</th>
                   <th>Broj računa</th>
                   <th>Tip</th>
+                  <th>Plata</th>
                   <th></th>
                 </tr>
               </thead>
@@ -34,6 +35,7 @@
                   </td>
                   <td class="py-2 pl-5">{{ user.accountNumber }}</td>
                   <td class="py-2">{{ usersRolesTraslated.get(user.role) }}</td>
+                  <td class="py-2">{{ user.salaryDto.value}}</td>
                   <td class="py-2 text-right">
                     <div class="dropdown">
                       <button
@@ -84,7 +86,7 @@
                       >
                         <div class="py-2">
                           <a
-                            *ngIf="loggedUserRole === 'ROLE_SYSTEM_ADMIN'"
+                            *ngIf="loggedUserRole === 'ROLE_MANAGER'"
                             class="dropdown-item"
                             type="button"
                             (click)="editUser($event, user)"
@@ -139,23 +141,23 @@
                       </div>
                       <div class="form-group col-md-12">
                         <label>Email</label>
-                        <input class="form-control" placeholder="Email" formControlName="emailAddress"/>
+                        <input class="form-control" placeholder="Email" formControlName="userEmail"/>
                       </div>
                     </div>
                   </fieldset>
                   <div class="form-row">
                     <div class="form-group col-md-12">
                       <label>Plata</label>
-                      <input class="form-control" placeholder="Plata" formControlName="salary"/>
+                      <input class="form-control" placeholder="Plata" formControlName="value"/>
                     </div>
                   </div>
                   <div class="form-group">
                     <div class="form-check">
-                      <input class="form-check-input" type="checkbox" formControlName="priority"/>
+                      <input [attr.disabled]="!currentRolePriority ? true : null" class="form-check-input" type="checkbox" formControlName="priority"/>
                       <label class="form-check-label"> Prioritet </label>
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-primary" >Azuriraj korisnika</button>
+                  <button type="submit" class="btn btn-primary"  >Ažuriraj korisnika</button>
                 </form>
               </div>
             </div>

@@ -1,4 +1,6 @@
 export interface Salary {
-    id: number,
+    userEmail: string
     value: number
+    startDate: Date
+    endDate: Date
 }
