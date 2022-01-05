@@ -1,13 +1,13 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from "@angular/forms";
 
-export function positiveNumberValidator(): ValidatorFn {
+export function monthValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     const value = control.value;
 
     if (!value) {
-      return { positiveNumber: true };
+      return { month: true };
     }
 
-    return !value.toString().match("^[+]?[0-9]+([.]\[0-9]+)?$") ? { positiveNumber: true } : null;
+    return value < 1 || value > 12 ? { positiveNumber: true } : null;
   };
 }

@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   public role: String = '';
+  public reportMenuVisibility: boolean = false;
 
   constructor() { }
 
@@ -19,5 +20,10 @@ export class NavbarComponent implements OnInit {
     if(role) {
       this.role = role;
     }
+  }
+
+  changeReportMenuVisibility(): void {
+    this.reportMenuVisibility = !this.reportMenuVisibility;
+    console.log(this.reportMenuVisibility)
   }
 }

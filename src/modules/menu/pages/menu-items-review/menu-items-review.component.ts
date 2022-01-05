@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { PAGE_SIZE } from 'src/modules/shared/constants/constants';
 import { Pagination } from 'src/modules/shared/models/pagination';
 import { SelectModel } from 'src/modules/shared/models/select-model';
@@ -19,8 +20,12 @@ export class MenuItemsReviewComponent implements OnInit {
   types: SelectModel[] = [];
   pagination: Pagination = new Pagination;
   selectedMenu: string = "";
+  form: FormGroup;
 
   constructor(private menuService: MenuService, private notificationService: NotificationService) { 
+    this.form = new FormGroup({
+      menuId: new FormControl("0", Validators.required),
+    })
   }
 
   ngOnInit(): void {
@@ -33,7 +38,7 @@ export class MenuItemsReviewComponent implements OnInit {
   }
 
   getMenuItems(): void {
-    this.menuService.getMenuItems(this.selectedMenu, this.pagination.currentPage - 1, this.pagination.pageSize).subscribe(
+    this.menuService.getMenuItems(this.form.value.menuId, this.pagination.currentPage - 1, this.pagination.pageSize).subscribe(
       (result) => {
         this.menuItems = result.body as MenuItem[];
       },
@@ -43,9 +48,8 @@ export class MenuItemsReviewComponent implements OnInit {
     )
   }
 
-  changeMenu(value: string): void
+  changeMenu(): void
   {
-     this.selectedMenu = value;
      this.getMenuItems();
   }
 

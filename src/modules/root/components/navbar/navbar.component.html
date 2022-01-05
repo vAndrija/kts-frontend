@@ -90,7 +90,16 @@
                 <ul aria-expanded="false">
                     <div *ngIf="role === 'ROLE_MANAGER'">
                         <li><a [routerLink]="['/']">Zaposleni</a></li>
-                        <li><a [routerLink]="['/']">Izvestaji</a></li>
+                        <li (click)="changeReportMenuVisibility()"><a class="has-arrow ai-icon" aria-expanded="false">
+                                <span class="nav-text" [routerLink]="['/']">Izveštaji</span>
+                            </a>
+                            <ul aria-expanded="false" *ngIf="reportMenuVisibility" style="margin-left: 1em;">
+                                <li><a [routerLink]="['/report/meal-drink-costs']">Trošak za pripremu jela i pića</a></li>
+                                <li><a [routerLink]="['/']">Zarada</a></li>
+                                <li><a [routerLink]="['/']">Odnos svih troškova i zarade</a></li>
+                                <li><a [routerLink]="['/']">Vreme pripreme jela i pića po zaposlenom</a></li>
+                            </ul>
+                        </li>
                         <li><a [routerLink]="['/menu/create-menu']">Kreiraj meni</a></li>
                         <li><a [routerLink]="['/menu/pending-menu-items']">Neodobrene stavke menija</a></li>
                     </div>

@@ -20,11 +20,15 @@ const routes: Routes = [
         loadChildren: () =>
           import("./../menu/menu.module").then((m) => m.MenuModule),
       },
-
       {
         path: "",
         loadChildren: () =>
           import("./../user/user.module").then((m) => m.UserModule)
+      },
+      {
+        path: "report",
+        loadChildren: () => 
+          import("./../report/report.module").then((m) => m.ReportModule)
       }
     ],
   },
