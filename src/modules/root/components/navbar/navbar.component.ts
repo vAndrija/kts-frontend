@@ -24,6 +24,5 @@ export class NavbarComponent implements OnInit {
 
   changeReportMenuVisibility(): void {
     this.reportMenuVisibility = !this.reportMenuVisibility;
-    console.log(this.reportMenuVisibility)
   }
 }

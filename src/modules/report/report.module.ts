@@ -9,6 +9,7 @@ import { ReportService } from './services/report-service/report.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CostBenefitRatioComponent } from './pages/cost-benefit-ratio/cost-benefit-ratio.component';
 import { MealDrinkSalesComponent } from './pages/meal-drink-sales/meal-drink-sales.component';
+import { PreparingTimeReportComponent } from './pages/preparing-time-report/preparing-time-report.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { MealDrinkSalesComponent } from './pages/meal-drink-sales/meal-drink-sal
     MealDrinkCostsComponent,
     CostBenefitRatioComponent,
     MealDrinkSalesComponent,
+    PreparingTimeReportComponent,
   ],
   imports: [
     CommonModule,

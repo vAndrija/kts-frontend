@@ -53,4 +53,18 @@ export class ReportService extends RestService {
       responseType: 'json'
     });
   }
+
+  getYearlyPreparingTimeFor(year: number, employeId: string): Observable<number[]> {
+    return this.http.get<number[]>("api/v1/reports/yearly/" + year + "/time-preparing/" + employeId, {
+      headers: this.headers,
+      responseType: 'json'
+    });
+  }
+
+  getMonthlyPreparingTimeFor(year: number, month: number, employeId: string): Observable<number[]> {
+    return this.http.get<number[]>("api/v1/reports/" + year + "/monthly/" + month + "/time-preparing" + employeId, {
+      headers: this.headers,
+      responseType: 'json'
+    });
+  }
 }

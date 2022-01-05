@@ -97,7 +97,7 @@
                                 <li><a [routerLink]="['/report/meal-drink-costs']">Trošak za pripremu jela i pića</a></li>
                                 <li><a [routerLink]="['/report/meal-drink-sales']">Zarada</a></li>
                                 <li><a [routerLink]="['/report/cost-benefit-ratio']">Odnos svih troškova i zarade</a></li>
-                                <li><a [routerLink]="['/']">Vreme pripreme jela i pića po zaposlenom</a></li>
+                                <li><a [routerLink]="['/report/preparing-time']">Vreme pripreme jela i pića po zaposlenom</a></li>
                             </ul>
                         </li>
                         <li><a [routerLink]="['/menu/create-menu']">Kreiraj meni</a></li>
@@ -118,32 +118,3 @@
         </ul>
     </div>
 </div>
-<!-- <mat-toolbar>
-    <mat-toolbar-row class="header">
-    </mat-toolbar-row>
-    <mat-toolbar-row *ngIf="role === 'ROLE_MANAGER'">
-        <button [routerLink]="['/cao']" mat-button>Meni</button>
-        <button mat-button>Zaposleni</button>
-        <button mat-button>Izvestaji</button>
-        <span class="example-spacer"></span>
-        <button mat-button>Profil</button>
-        <button mat-button>Odjava</button>
-    </mat-toolbar-row>
-    <mat-toolbar-row *ngIf="role === 'ROLE_COOK' || role === 'ROLE_BARTENDER' || role === 'ROLE_WAITER'">
-        <button mat-button>Meni</button>
-        <button mat-button>Restoran</button>
-        <button mat-button>Porudzbine</button>
-        <button mat-button>Obavestenja</button>
-        <span class="example-spacer"></span>
-        <button mat-button>Profil</button>
-        <button mat-button>Odjava</button>
-    </mat-toolbar-row>
-    <mat-toolbar-row *ngIf="role === 'ROLE_SYSTEM_ADMIN'">
-        <button mat-button>Meni</button>
-        <button mat-button>Restoran</button>
-        <button mat-button>Korisnici</button>
-        <span class="example-spacer"></span>
-        <button mat-button>Profil</button>
-        <button mat-button>Odjava</button>
-    </mat-toolbar-row>
-</mat-toolbar>   -->

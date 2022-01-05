@@ -1,38 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MenuItem } from 'src/modules/menu/model/menuItem';
-import { MenuItemService } from 'src/modules/menu/services/menu-item-service/menu-item.service';
 import { monthValidator } from 'src/modules/shared/custom-validators/month-validator';
 import { positiveNumberValidator } from 'src/modules/shared/custom-validators/positive-number-validator';
 import { SelectModel } from 'src/modules/shared/models/select-model';
+import { User } from 'src/modules/shared/models/user';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
+import { UserListService } from 'src/modules/user/services/userList/user-list.service';
 import { ChartOptions } from '../../model/chartOptions';
 import { ReportService } from '../../services/report-service/report.service';
 
 @Component({
-  selector: 'app-meal-drink-sales',
-  templateUrl: './meal-drink-sales.component.html',
-  styleUrls: ['./meal-drink-sales.component.scss']
+  selector: 'app-preparing-time-report',
+  templateUrl: './preparing-time-report.component.html',
+  styleUrls: ['./preparing-time-report.component.scss']
 })
-export class MealDrinkSalesComponent implements OnInit {
+export class PreparingTimeReportComponent implements OnInit {
   yearlyChartOptions!: ChartOptions;
   monthlyChartOptions!: ChartOptions;
   formYearly: FormGroup;
   formMonthly: FormGroup;
-  menuItems: MenuItem[] = [];
-  menuItemsSelect: SelectModel[] = [];
+  cooksAndBartendersSelect: SelectModel[] = [];
 
   constructor(private reportService: ReportService,
     private notificationService: NotificationService,
-    private menuItemService: MenuItemService) { 
+    private userService: UserListService) { 
     this.formYearly = new FormGroup({
         year: new FormControl(null, { validators: positiveNumberValidator()}),
-        menuItemId: new FormControl(null, Validators.required)
+        employeId: new FormControl(null, Validators.required)
      })
      this.formMonthly = new FormGroup({
         year: new FormControl(null, { validators: positiveNumberValidator()}),
         month: new FormControl(null, { validators: monthValidator()}),
-        menuItemId: new FormControl(null, Validators.required)
+        employeId: new FormControl(null, Validators.required)
      })
   }
 
@@ -43,7 +42,7 @@ export class MealDrinkSalesComponent implements OnInit {
         type: "bar"
       },
       title: {
-        text: "Broj prodatih artikala"
+        text: "Broj minuta provedenih u pripremi artikala za izabranog zaposlenog"
       },
       xaxis: {
           categories: ["Jan", "Feb",  "Mar",  "Apr",  "May",  "Jun",  "Jul",  "Aug", "Sep", "Oct", "Nov", "Dec"]
@@ -59,7 +58,7 @@ export class MealDrinkSalesComponent implements OnInit {
         type: "bar"
       },
       title: {
-        text: "Broj prodatih artikala"
+        text: "Broj minuta provedenih u pripremi artikala za izabranog zaposlenog"
       },
       xaxis: {
           categories: []
@@ -69,15 +68,15 @@ export class MealDrinkSalesComponent implements OnInit {
       }]
     }
 
-    this.getMenuItems();
+    this.getCooks();
+    this.getBartenders();
   }
 
-
-  getMenuItems(): void {
-    this.menuItemService.getAllMenuItems().subscribe(
+  getCooks(): void {
+    this.userService.getCooks().subscribe(
       (result) => {
-        this.menuItems = result as MenuItem[];
-        this.menuItemsSelect = [...this.menuItems.map(menuItem => new SelectModel(menuItem.id, menuItem.name))];
+        const cooks = result as User[];
+        cooks.forEach(cook => this.cooksAndBartendersSelect.push(new SelectModel(cook.id.toString(), cook.name)));
       },
       (error) => {
         this.notificationService.error("Došlo je do greške, pokušajte ponovo.");
@@ -85,8 +84,17 @@ export class MealDrinkSalesComponent implements OnInit {
     )
   }
 
-  getYearlyMealDrinkSales(year: number, menuItemId: string): void {
-    this.reportService.getYearlyMealDrinkSalesFor(year, menuItemId).subscribe(
+  getBartenders(): void {
+    this.userService.getBartenders().subscribe(
+      (result) => {
+        const bartenders = result as User[];
+        bartenders.forEach(bartender => this.cooksAndBartendersSelect.push(new SelectModel(bartender.id.toString(), bartender.name)));
+      }
+    )
+  }
+
+  getYearlyPreparingTimeFor(year: number, employeId: string): void {
+    this.reportService.getYearlyPreparingTimeFor(year, employeId).subscribe(
       (result) => {
         this.yearlyChartOptions.series = [{
           data: result as number[]
@@ -103,8 +111,8 @@ export class MealDrinkSalesComponent implements OnInit {
     )
   }
 
-  getMonthlyMealDrinkSales(year: number, month: number, menuItemId: string): void {
-    this.reportService.getMonthlyMealDrinlSalesFor(year, month, menuItemId).subscribe(
+  getMonthlyPreparingTimeFor(year: number, month: number, employeId: string): void {
+    this.reportService.getMonthlyPreparingTimeFor(year, month, employeId).subscribe(
       (result) => {
         const costBenefitRatio: number[] = result as number[];
         this.monthlyChartOptions.series = [{
@@ -134,10 +142,10 @@ export class MealDrinkSalesComponent implements OnInit {
   }
 
   submitYearly() {
-    this.getYearlyMealDrinkSales(this.formYearly.value.year, this.formYearly.value.menuItemId);
+    this.getYearlyPreparingTimeFor(this.formYearly.value.year, this.formYearly.value.employeId);
   }
 
   submitMonthly() {
-    this.getMonthlyMealDrinkSales(this.formMonthly.value.year, this.formMonthly.value.month, this.formMonthly.value.menuItemId);
+    this.getMonthlyPreparingTimeFor(this.formMonthly.value.year, this.formMonthly.value.month, this.formMonthly.value.employeId);
   }
 }
