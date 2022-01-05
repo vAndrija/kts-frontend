@@ -1,0 +1,41 @@
+<div class="order-item-card" *ngIf="menuItem.priceItemDto !=null">
+    <div class="card">
+        <div class="card-body">
+            <div class="row m-b-30">
+                <div class="col-md-5 col-xxl-12">
+                    <div class="new-arrival-product mb-4 mb-xxl-4 mb-md-0">
+                        <div class="new-arrivals-img-contnent">
+                            <img class="img-fluid" src="../../../../assets/images/card/3.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7 col-xxl-10">
+                    <div class="new-arrival-content order-item-card-na">
+                        <h4>{{menuItem.name}}</h4>
+                        <p class="price" style="text-align: center;">{{menuItem.priceItemDto.value}}RSD</p>
+                    </div>
+                    <div class="row">
+                        <div class="col-4 px-0 order-item-card-r">
+                            <label>Količina</label>
+                            <input type="number" class="form-control input-btn input-number" min="1"
+                                [(ngModel)]="quantity" [value]="1">
+                        </div>
+                        <div class="col-4 px-0">
+                            <label>Prioritet</label>
+                            <input type="number" class="form-control input-btn input-number" min="1" max="3"
+                                [(ngModel)]="priority" [value]="1">
+                        </div>
+                    </div>
+                    <div class="input-group order-item-card-input">
+                        <input class="form-control" placeholder="Napomena" [(ngModel)]="note" />
+                    </div>
+                    <div class="shopping-cart mt-3 order-item-card-sc">
+                        <button class="btn btn-success btn-sm" (click)="add()"><i
+                                class="fa fa-shopping-basket mr-2"></i>
+                            Dodaj</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

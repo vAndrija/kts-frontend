@@ -3,7 +3,8 @@ import {
   HttpClient, HttpParams, HttpResponse,
 } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { OrderItem } from 'src/modules/shared/models/orderitem';
+import { CreateOrderItem, OrderItem } from 'src/modules/shared/models/orderitem';
+import { CreateOrderDto, OrderDto } from 'src/modules/shared/models/order';
 import { RestService } from 'src/modules/shared/services/rest/rest.service';
 @Injectable({
   providedIn: 'root'
@@ -15,14 +16,6 @@ export class OrderItemService extends RestService {
   }
 
   getOrderItemsById(page:number, size:number, id: number): Observable<HttpResponse<OrderItem[]>> {
-    // return this.http.get<HttpResponse<OrderItem[]>>("api/v1/order-items/employee/" + id, 
-    // {
-    //   params: {
-    //     appid: 'id1234',
-    //     cnt: '5'
-    //   },
-    //   observe: 'response'
-    // }));
     let queryParams = {};
 
     queryParams = {
@@ -39,4 +32,13 @@ export class OrderItemService extends RestService {
   changeStatusOrderItem(id: number, status: string): Observable<OrderItem> {
     return this.http.post<any>("api/v1/order-items/status/" + id, status);
   };
+
+  createOrder(order:CreateOrderDto): Observable<OrderDto>{
+    return this.http.post<any>("api/v1/orders/" ,order);
+  }
+
+  createOrderItem(orderItem:CreateOrderItem) : Observable<CreateOrderItem>{
+    return this.http.post<any>("api/v1/order-items/", orderItem);
+
+  }
 }
