@@ -8,18 +8,20 @@ import { MealDrinkCostsComponent } from './pages/meal-drink-costs/meal-drink-cos
 import { ReportService } from './services/report-service/report.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CostBenefitRatioComponent } from './pages/cost-benefit-ratio/cost-benefit-ratio.component';
+import { MealDrinkSalesComponent } from './pages/meal-drink-sales/meal-drink-sales.component';
 
 @NgModule({
   declarations: [
     BarChartComponent,
     MealDrinkCostsComponent,
     CostBenefitRatioComponent,
+    MealDrinkSalesComponent,
   ],
   imports: [
     CommonModule,
     ReportRoutingModule,
     NgApexchartsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [ReportService]
 })

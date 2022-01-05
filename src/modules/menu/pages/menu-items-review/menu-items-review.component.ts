@@ -6,6 +6,7 @@ import { SelectModel } from 'src/modules/shared/models/select-model';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
 import { Menu } from '../../model/menu';
 import { MenuItem } from '../../model/menuItem';
+import { MenuItemService } from '../../services/menu-item-service/menu-item.service';
 import { MenuService } from '../../services/menu-service/menu.service';
 
 @Component({
@@ -22,7 +23,8 @@ export class MenuItemsReviewComponent implements OnInit {
   selectedMenu: string = "";
   form: FormGroup;
 
-  constructor(private menuService: MenuService, private notificationService: NotificationService) { 
+  constructor(private menuService: MenuService, private notificationService: NotificationService,
+    private menuItemService: MenuItemService) { 
     this.form = new FormGroup({
       menuId: new FormControl("0", Validators.required),
     })
@@ -38,7 +40,7 @@ export class MenuItemsReviewComponent implements OnInit {
   }
 
   getMenuItems(): void {
-    this.menuService.getMenuItems(this.form.value.menuId, this.pagination.currentPage - 1, this.pagination.pageSize).subscribe(
+    this.menuItemService.getMenuItemsByMenu(this.form.value.menuId, this.pagination.currentPage - 1, this.pagination.pageSize).subscribe(
       (result) => {
         this.menuItems = result.body as MenuItem[];
       },

@@ -23,18 +23,6 @@ export class MenuService extends RestService {
     });
   }
 
-  getMenuItems(menuId: string, page: Number, pageSize: Number): Observable<HttpResponse<MenuItem[]>> {
-    let queryParams = {};
-    queryParams = {
-      observe: "response",
-      params: new HttpParams()
-        .set("page", String(page))
-        .append("size", String(pageSize)),
-    };
-
-    return this.http.get<HttpResponse<MenuItem[]>>("api/v1/menu-items/by-menu/" + menuId, queryParams);
-  }
-
   getPendingMenuItems(page: Number, pageSize: Number): Observable<HttpResponse<any>> {
     let queryParams = {};
     queryParams = {

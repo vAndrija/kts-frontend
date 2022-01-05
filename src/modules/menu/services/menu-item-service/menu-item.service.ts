@@ -35,4 +35,23 @@ export class MenuItemService extends RestService {
           responseType: 'json'
         })
   }
+
+  getMenuItemsByMenu(menuId: string, page: Number, pageSize: Number): Observable<HttpResponse<MenuItem[]>> {
+    let queryParams = {};
+    queryParams = {
+      observe: "response",
+      params: new HttpParams()
+        .set("page", String(page))
+        .append("size", String(pageSize)),
+    };
+
+    return this.http.get<HttpResponse<MenuItem[]>>("api/v1/menu-items/by-menu/" + menuId, queryParams);
+  }
+
+  getAllMenuItems(): Observable<MenuItem[]> {
+    return this.http.get<MenuItem[]>("api/v1/menu-items", {
+          headers: this.headers,
+          responseType: 'json'
+    });
+  }
 }

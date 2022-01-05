@@ -37,6 +37,20 @@ export class ReportService extends RestService {
     return this.http.get<number[]>("api/v1/reports/" + year + "/monthly/" + month + "/cost-benefit-ratio", {
       headers: this.headers,
       responseType: 'json'
-    })
+    });
+  }
+
+  getYearlyMealDrinkSalesFor(year: number, menuItemId: string): Observable<number[]> {
+    return this.http.get<number[]>("api/v1/reports/yearly/" + year + "/meal-drink-sales/" + menuItemId, {
+      headers: this.headers,
+      responseType: 'json'
+    });
+  }
+
+  getMonthlyMealDrinlSalesFor(year: number, month: number, menuItemId: string): Observable<number[]> {
+    return this.http.get<number[]>("api/v1/reports/" + year + "/monthly/" + month + "/meal-drink-sales/" + menuItemId, {
+      headers: this.headers,
+      responseType: 'json'
+    });
   }
 }
