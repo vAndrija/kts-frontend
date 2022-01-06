@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import {SelectModel} from "src/modules/shared/models/select-model"
 import {RegistrationService} from "../../services/registration/registration.service"
@@ -11,7 +11,7 @@ import { Router } from "@angular/router";
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.scss']
 })
-export class RegistrationComponent implements OnInit {
+export class RegistrationComponent {
   form: FormGroup
   types: SelectModel[]
   constructor(
@@ -36,9 +36,6 @@ export class RegistrationComponent implements OnInit {
       new SelectModel('waiter','Konobar')
     ]
    }
-
-  ngOnInit(): void {
-  }
 
   submit(): void {
     const userType: string = this.form.value.userType

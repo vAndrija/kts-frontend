@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {User} from 'src/modules/shared/models/user'
 import { UserListService } from '../../services/userList/user-list.service';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
+import { Router } from '@angular/router';
+import { FormGroup, Validators, FormControl } from "@angular/forms";
 import { Salary } from 'src/modules/shared/models/salary';
 
 @Component({
@@ -39,7 +39,7 @@ export class UserListComponent implements OnInit {
     this.currentUserEditingId = -1
     this.currentUserEditingType = ""
     this.form =  new FormGroup({
-      name: new FormControl('andriaj', Validators.required),
+      name: new FormControl('', Validators.required),
       userEmail: new FormControl('',Validators.compose([Validators.required,Validators.email])),
       priority: new FormControl(false,Validators.required),
       value: new FormControl('',Validators.required)
