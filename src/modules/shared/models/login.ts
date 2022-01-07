@@ -8,3 +8,8 @@ export interface ResetPasswordModel {
   token?: string | undefined,
   password?: string
 }
+
+export interface ChangePasswordModel {
+  oldPassword: string,
+  password: string
+}
