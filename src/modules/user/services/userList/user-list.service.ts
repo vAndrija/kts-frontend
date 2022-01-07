@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders,HttpResponse, HttpClient } from "@angular/common/http";
+import { HttpResponse, HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { User} from 'src/modules/shared/models/user';
 import { Salary } from 'src/modules/shared/models/salary';
-import { ChangePasswordModel } from 'src/modules/shared/models/login';
 import { RestService } from 'src/modules/shared/services/rest/rest.service';
 
 @Injectable({
@@ -12,7 +11,6 @@ import { RestService } from 'src/modules/shared/services/rest/rest.service';
 
 export class UserListService extends RestService {
   private readonly BASE : string = "api/v1/"
-  private readonly CHANGE_PASSWORD: string  = "api/v1/auth/change-password"
   private readonly CREATE_SALARY : string = "api/v1/salaries"
   
   constructor(http: HttpClient) {
@@ -41,12 +39,6 @@ export class UserListService extends RestService {
   }
   updatePriority(id: number,userType: string): Observable<HttpResponse<any>>{
     return this.http.put<HttpResponse<any>>(this.BASE+userType+"/updatePriority/"+id,{},{
-      headers: this.headers,
-      responseType: "json",
-    })
-  }
-  changePassword(data:ChangePasswordModel): Observable<HttpResponse<any>>{
-    return this.http.post<HttpResponse<any>>(this.CHANGE_PASSWORD,data,{
       headers: this.headers,
       responseType: "json",
     })

@@ -4,7 +4,7 @@ import { Router,ActivatedRoute } from '@angular/router';
 import { FormGroup, Validators, FormControl } from "@angular/forms";
 import { ChangePasswordModel } from 'src/modules/shared/models/login';
 import { samePasswordValidator } from 'src/modules/shared/custom-validators/same-password-validator';
-import { UserListService } from '../../services/userList/user-list.service';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-change-password',
@@ -17,7 +17,7 @@ export class ChangePasswordComponent {
   constructor(
     private notificationService: NotificationService,
     private router: Router,
-    private userListService: UserListService
+    private userService: UserService
   ) {
     this.form =  new FormGroup({
       oldPassword: new FormControl('',Validators.required),
@@ -28,7 +28,7 @@ export class ChangePasswordComponent {
 
   submit(): void {
     let data: ChangePasswordModel =  this.form.value;
-    this.userListService.changePassword(data).subscribe({
+    this.userService.changePassword(data).subscribe({
       next: ()=>{
         this.notificationService.success("Uspješno promjenjena lozinka.")
         this.router.navigate(["/"]);
