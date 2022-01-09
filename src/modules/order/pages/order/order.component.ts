@@ -51,8 +51,8 @@ export class OrderComponent implements OnInit {
   getMenuItems(): void {
     this.menuService.getAllMenuItems(this.currentPage, this.pageSize).subscribe(
       (response) => {
-        this.totalPages = Number.parseInt(Object.keys(response.body as Map<number, MenuItem[]>)[0]);
-        this.menuItems = Object.values(response.body as Map<number, MenuItem[]>)[0];
+        this.menuItems = response.body["content"] as MenuItem[];
+        this.totalPages = response.body["totalPages"] as number;
       },
     )
   }
@@ -69,7 +69,8 @@ export class OrderComponent implements OnInit {
   getByCategory(): void {
     this.menuService.getMenuItemsByCategory(this.currentPage, this.pageSize, this.category).subscribe(
       (response) => {
-        this.menuItems = response.body as MenuItem[];
+        this.menuItems = response.body["content"] as MenuItem[];
+        this.totalPages = response.body["totalPages"] as number;
       },
     )
   }

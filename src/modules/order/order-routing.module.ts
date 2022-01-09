@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RoleGuard } from '../auth/guards/role/role.guard';
 import { OrderItemsTableComponent } from './pages/order-items-table/order-items-table.component';
+import { OrderTableComponent } from './pages/order-table/order-table.component';
 import { OrderComponent } from './pages/order/order.component';
 
 const routes: Routes = [
@@ -16,6 +17,13 @@ const routes: Routes = [
     path:'order',
     pathMatch:'full',
     component: OrderComponent,
+    canActivate: [RoleGuard],
+    data: {expectedRoles: "ROLE_WAITER"}
+  },
+  {
+    path:'orders',
+    pathMatch:'full',
+    component: OrderTableComponent,
     canActivate: [RoleGuard],
     data: {expectedRoles: "ROLE_WAITER"}
   }

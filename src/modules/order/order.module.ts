@@ -8,6 +8,7 @@ import { OrderComponent } from './pages/order/order.component';
 import { OrderItemCardComponent } from './components/order-item-card/order-item-card.component';
 import { FormsModule } from '@angular/forms';
 import { CreateOrderComponent } from './components/create-order/create-order.component';
+import { OrderTableComponent } from './pages/order-table/order-table.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { CreateOrderComponent } from './components/create-order/create-order.com
     OrderItemsTableComponent,
     OrderComponent,
     OrderItemCardComponent,
-    CreateOrderComponent
+    CreateOrderComponent,
+    OrderTableComponent
   ],
   imports: [
     CommonModule,

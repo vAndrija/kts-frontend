@@ -15,7 +15,7 @@ export class OrderItemService extends RestService {
     super(http);
   }
 
-  getOrderItemsById(page:number, size:number, id: number): Observable<HttpResponse<OrderItem[]>> {
+  getOrderItemsById(page: number, size: number, id: number): Observable<HttpResponse<any>> {
     let queryParams = {};
 
     queryParams = {
@@ -25,19 +25,19 @@ export class OrderItemService extends RestService {
         .append("size", String(size)),
     };
 
-    return this.http.get<HttpResponse<OrderItem[]>>("api/v1/order-items/employee/" + id, queryParams);
+    return this.http.get<HttpResponse<any>>("api/v1/order-items/employee/" + id, queryParams);
   }
-  
+
 
   changeStatusOrderItem(id: number, status: string): Observable<OrderItem> {
     return this.http.post<any>("api/v1/order-items/status/" + id, status);
   };
 
-  createOrder(order:CreateOrderDto): Observable<OrderDto>{
-    return this.http.post<any>("api/v1/orders/" ,order);
+  createOrder(order: CreateOrderDto): Observable<OrderDto> {
+    return this.http.post<any>("api/v1/orders/", order);
   }
 
-  createOrderItem(orderItem:CreateOrderItem) : Observable<CreateOrderItem>{
+  createOrderItem(orderItem: CreateOrderItem): Observable<CreateOrderItem> {
     return this.http.post<any>("api/v1/order-items/", orderItem);
 
   }
