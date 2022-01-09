@@ -4,7 +4,9 @@ import { CreateMenuComponent } from './pages/create-menu/create-menu.component';
 import { RoleGuard } from '../auth/guards/role/role.guard';
 import { MenuItemDetailsComponent } from './pages/menu-item-details/menu-item-details.component';
 import { MenuItemsReviewComponent } from './pages/menu-items-review/menu-items-review.component';
+import { CreateMenuItemComponent } from './pages/create-menu-item/create-menu-item.component';
 import { PendingMenuItemsComponent } from './pages/pending-menu-items/pending-menu-items.component';
+import { MainPositionGuard } from '../auth/guards/main-position/main-position.guard';
 
 const routes: Routes = [
   {
@@ -23,6 +25,13 @@ const routes: Routes = [
     component: MenuItemsReviewComponent,
     canActivate: [RoleGuard],
     data: {expectedRoles: "ROLE_MANAGER|ROLE_COOK|ROLE_BARTENDER|ROLE_WAITER|ROLE_SYSTEM_ADMIN"}
+  },
+  {
+    path: "create-menu-item",
+    pathMatch: "full",
+    component: CreateMenuItemComponent,
+    canActivate: [RoleGuard, MainPositionGuard],
+    data: {expectedRoles: "ROLE_COOK|ROLE_BARTENDER"}
   },
   {
     path: "menu-items/:menuItemId",

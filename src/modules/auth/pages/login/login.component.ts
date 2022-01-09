@@ -41,7 +41,6 @@ export class LoginComponent implements OnInit {
         const role = jwt.decodeToken(jwtUser).role;
         const id = jwt.decodeToken(jwtUser).id;
         localStorage.setItem("id", id);
- 
         localStorage.setItem("role", role);
         this.router.navigate(["/"]);
 

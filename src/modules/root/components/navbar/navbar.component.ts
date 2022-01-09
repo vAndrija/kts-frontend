@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/modules/auth/services/auth/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,11 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NavbarComponent implements OnInit {
   public role: String = '';
+  public show: boolean = false;
 
-  constructor() { }
+  constructor(private auth: AuthService) { }
 
   ngOnInit(): void {
     this.checkRole();
+    this.show = this.checkForPreparationStaff();
   }
 
   checkRole(): void {
@@ -19,5 +22,9 @@ export class NavbarComponent implements OnInit {
     if(role) {
       this.role = role;
     }
+  }
+
+  checkForPreparationStaff(): boolean {
+    return this.auth.isUserOnMainPosition();
   }
 }

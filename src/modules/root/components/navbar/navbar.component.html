@@ -97,10 +97,12 @@
                     <div *ngIf="role === 'ROLE_COOK' || role === 'ROLE_BARTENDER' || role === 'ROLE_WAITER'">
                         <li><a [routerLink]="['/']">Meni</a></li>
                         <li><a [routerLink]="['/']">Restoran</a></li>
+                        <li *ngIf="show"><a [routerLink]="['/menu/create-menu-item']">Kreiraj stavku menija</a></li>
                         <li *ngIf="role === 'ROLE_COOK' || role === 'ROLE_BARTENDER'"><a [routerLink]="['/order/order-items']">Stavke porudžbine</a></li>
                         <li *ngIf="role === 'ROLE_WAITER'"><a [routerLink]="['/order/order']"> Kreiranje porudžbine</a></li>
                         <li *ngIf="role === 'ROLE_WAITER'"><a [routerLink]="['/order/orders']"> Porudžbine</a></li>
                     </div>
+                    
                     <div *ngIf="role === 'ROLE_SYSTEM_ADMIN'">
                         <li><a [routerLink]="['/']">Meni</a></li>
                         <li><a [routerLink]="['/']">Restoran</a></li>
