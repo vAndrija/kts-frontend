@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RegistrationComponent} from './pages/registration/registration.component'
 import { UserListComponent} from "./pages/user-list/user-list.component"
+import { ChangePasswordComponent } from './pages/change-password/change-password.component';
 import { RoleGuard } from "../auth/guards/role/role.guard";
 
 const routes: Routes = [
@@ -13,12 +14,20 @@ const routes: Routes = [
     data: { expectedRoles: "ROLE_SYSTEM_ADMIN" },
   },
   {
-    path: "admin/users",
+    path: "users",
     pathMatch: "full",
     component: UserListComponent,
     canActivate: [RoleGuard],
-    data: { expectedRoles: "ROLE_SYSTEM_ADMIN" },
+    data: { expectedRoles: "ROLE_SYSTEM_ADMIN|ROLE_MANAGER" },
+  },
+  {
+    path: "change-password",
+    pathMatch: "full",
+    component: ChangePasswordComponent,
+    canActivate: [RoleGuard],
+    data: { expectedRoles: "ROLE_SYSTEM_ADMIN|ROLE_BARTENDER|ROLE_COOK|ROLE_MANAGER|ROLE_WAITER"},
   }
+
 ];
 
 @NgModule({

@@ -1,5 +1,5 @@
 export interface PriceItem {
-    value: Number,
+    value: number,
     startDate: string,
     endDate: string,
     menuItemId: string,
