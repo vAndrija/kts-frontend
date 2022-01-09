@@ -1,3 +1,5 @@
+
+import { MenuItemDto } from 'src/modules/menu/model/MenuItemDto';
 import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
@@ -6,6 +8,7 @@ import { MenuItem } from '../../model/menuItem';
 import { UpdateMenuItemDto } from '../../model/updateMenuItemDto';
 import { MenuService } from '../menu-service/menu.service';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,6 +16,13 @@ export class MenuItemService extends RestService {
 
   constructor(http: HttpClient) {
     super(http);
+  }
+
+  addMenuItem(menuItem: MenuItemDto): Observable<MenuItemDto> {
+    return this.http.post<MenuItemDto>("api/v1/menu-items", menuItem, {
+      headers: this.headers,
+      responseType: "json",
+    });
   }
 
   getMenuItem(menuItemId: string): Observable<MenuItem> {

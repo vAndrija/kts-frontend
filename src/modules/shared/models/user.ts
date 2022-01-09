@@ -19,4 +19,8 @@ export interface User {
   salaryDto : Salary
 }
 
+export interface PreparationStaff extends User {
+  priority: boolean
+}
+
 
