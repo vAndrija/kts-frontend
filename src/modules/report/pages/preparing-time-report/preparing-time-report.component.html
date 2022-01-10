@@ -1,0 +1,80 @@
+<div class="col-lg-12 col-sm-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Godišnji izveštaj</h4>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="formYearly" (ngSubmit)="submitYearly()">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Unesite godinu:</label>
+                    <input type="text" class="form-control col-sm-3" formControlName="year">
+                    <div *ngIf="errorHandlingYearly('year', 'positiveNumber')" id="val-username-error"
+                        class="invalid-feedback animated fadeInUp col-sm-3 col-form-label" style="display: block;">
+                        Godina je obavezno polje i mora biti pozitivan broj
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Izaberite zaposlenog:</label>
+                    <select class="default-select form-control col-sm-3" formControlName="employeId"
+                        name="category-color">
+                        <option *ngFor="let prf of cooksAndBartendersSelect" [value]="prf.prId">
+                            {{prf.prName}}
+                        </option>
+                    </select>
+                    <div *ngIf="errorHandlingYearly('employeId', 'required')" id="val-username-error"
+                        class="invalid-feedback animated fadeInUp col-sm-3 col-form-label" style="display: block;">
+                        Morate izabrati zaposlenog
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em;">
+                    <button type="submit" class="btn btn-primary" [disabled]="!formYearly.valid">Generiši
+                        izveštaj</button>
+                </div>
+            </form>
+            <app-bar-chart [chartOptions]="yearlyChartOptions"></app-bar-chart>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Mesečni izveštaj</h4>
+        </div>
+        <div class="card-body">
+            <form [formGroup]="formMonthly" (ngSubmit)="submitMonthly()">
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Unesite godinu:</label>
+                    <input type="text" class="form-control col-sm-3" formControlName="year">
+                    <div *ngIf="errorHandlingMonthly('year', 'positiveNumber')" id="val-username-error"
+                        class="invalid-feedback animated fadeInUp col-sm-3 col-form-label" style="display: block;">
+                        Godina je obavezno polje i mora biti pozitivan broj
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Unesite mesec:</label>
+                    <input type="text" class="form-control col-sm-3" formControlName="month">
+                    <div *ngIf="errorHandlingMonthly('month', 'month')" id="val-username-error"
+                        class="invalid-feedback animated fadeInUp col-sm-3 col-form-label" style="display: block;">
+                        Mesec je obavezno polje i mora biti broj izmedju 1 i 12
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Izaberite zaposlenog:</label>
+                    <select id="menuItems" class="default-select form-control col-sm-3" formControlName="employeId"
+                        name="category-color">
+                        <option *ngFor="let prf of cooksAndBartendersSelect" [value]="prf.prId">
+                            {{prf.prName}}
+                        </option>
+                    </select>
+                    <div *ngIf="errorHandlingYearly('employeId', 'required')" id="val-username-error"
+                        class="invalid-feedback animated fadeInUp col-sm-3 col-form-label" style="display: block;">
+                        Morate izabrati zaposlenog
+                    </div>
+                </div>
+                <div style="margin-bottom: 1em;">
+                    <button type="submit" class="btn btn-primary" [disabled]="!formMonthly.valid">Generiši
+                        izveštaj</button>
+                </div>
+            </form>
+            <app-bar-chart [chartOptions]="monthlyChartOptions"></app-bar-chart>
+        </div>
+    </div>
+</div>

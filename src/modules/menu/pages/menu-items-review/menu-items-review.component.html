@@ -1,13 +1,15 @@
 <div class="row page-titles mx-0">
     <div class="col-sm-6 p-md-0">
         <div class="welcome-text">
-            <h4>Izaberite aktivan meni</h4>
-            <select class="form-control form-white" (ngModelChange)="changeMenu($event)" [(ngModel)]="menu" data-placeholder="Izaberite aktivan meni.."
-                name="category-color">
-                <option *ngFor="let prf of types" [value]="prf.prId">
-                    {{ prf.prName }}
-                </option>
-            </select>
+            <form [formGroup]="form">
+                <h4>Izaberite aktivan meni</h4>
+                <select class="default-select form-control" formControlName="menuId" (change)="changeMenu()" data-placeholder="Izaberite aktivan meni.."
+                    name="category-color">
+                    <option *ngFor="let prf of types" [value]="prf.prId">
+                        {{ prf.prName }}
+                    </option>
+                </select>
+            </form>
         </div>
     </div>
 </div>

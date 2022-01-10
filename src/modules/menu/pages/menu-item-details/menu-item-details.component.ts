@@ -89,7 +89,6 @@ export class MenuItemDetailsComponent implements OnInit {
       },
       (error) => {
         if(error.status === 404){
-          console.log(error)
           this.notificationService.error(error.error.message);
         }
         else {

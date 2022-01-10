@@ -30,6 +30,21 @@ export class UserListService extends RestService {
       responseType: "json",
     });
   }
+
+  getCooks(): Observable<User[]> {
+    return this.http.get<User[]>("api/v1/cook", {
+      headers: this.headers,
+      responseType: "json",
+    })
+  }
+
+  getBartenders(): Observable<User[]> {
+    return this.http.get<User[]>("api/v1/bartender", {
+      headers: this.headers,
+      responseType: "json",
+    })
+  }
+
   updateSalary(data:Salary): Observable<HttpResponse<any>>{
     return this.http.post<HttpResponse<any>>(this.CREATE_SALARY,data,{
       headers: this.headers,

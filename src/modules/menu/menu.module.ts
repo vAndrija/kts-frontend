@@ -15,6 +15,7 @@ import { MenuItemDetailsComponent } from './pages/menu-item-details/menu-item-de
 import { MenuItemService } from './services/menu-item-service/menu-item.service';
 import { PriceItemService } from './services/price-item-service/price-item.service';
 import { PendingMenuItemsComponent } from './pages/pending-menu-items/pending-menu-items.component';
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { PendingMenuItemsComponent } from './pages/pending-menu-items/pending-me
     CommonModule,
     MenuRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgApexchartsModule
   ],
   providers: [MenuService, MenuItemService, PriceItemService]
 })

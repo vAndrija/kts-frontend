@@ -8,6 +8,7 @@ import { AuthService } from 'src/modules/auth/services/auth/auth.service';
 })
 export class NavbarComponent implements OnInit {
   public role: String = '';
+  public reportMenuVisibility: boolean = false;
   public show: boolean = false;
 
   constructor(private auth: AuthService) { }
@@ -22,6 +23,10 @@ export class NavbarComponent implements OnInit {
     if(role) {
       this.role = role;
     }
+  }
+
+  changeReportMenuVisibility(): void {
+    this.reportMenuVisibility = !this.reportMenuVisibility;
   }
 
   checkForPreparationStaff(): boolean {
