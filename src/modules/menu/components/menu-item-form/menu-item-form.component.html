@@ -1,0 +1,56 @@
+<div class="basic-form">
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <div class="mb-3 row">
+      <label class="col-sm-3 col-form-label">Naziv</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" placeholder="naziv" formControlName="name">
+      </div>
+      <div *ngIf="errorHandling('name', 'required')" id="val-naziv-error" class="invalid-feedback animated fadeInUp"
+        style="display: block;">
+        Molimo unesite naziv.
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label class="col-sm-3 col-form-label">Opis</label>
+      <div class="col-sm-6">
+        <input type="text" class="form-control" placeholder="opis" formControlName="description">
+      </div>
+      <div *ngIf="errorHandling('description', 'required')" id="val-naziv-error"
+        class="invalid-feedback animated fadeInUp" style="display: block;">
+        Molimo unesite opis.
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label class="col-sm-3 col-form-label">Vreme pripreme</label>
+      <div class="col-sm-6">
+        <input type="number" min="1" max="60" class="form-control" placeholder="naziv" formControlName="preparationTime">
+      </div>
+      <div *ngIf="errorHandling('preparationTime', 'required')" id="val-naziv-error"
+        class="invalid-feedback animated fadeInUp" style="display: block;">
+        Molimo unesite vreme pripreme stavke menija.
+      </div>
+    </div>
+
+    <div class="mb-3 row">
+      <label class="col-sm-3 col-form-label">Kategorija</label>
+      <div class="dropdown default-select col-sm-6">
+        <select class="default-select form-control"  formControlName="category">
+          <option value="0">Supa</option>
+          <option value="1">Doručak</option>
+          <option value="2">Predjelo</option>
+          <option value="3">Glavno jelo</option>
+          <option value="4">Dezert</option>
+          <option value="5">Koktel</option>
+          <option value="6">Topli napitak</option>
+          <option value="7">Bezalkoholno piće</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mb-3 row">
+      <div class="col-sm-10">
+        <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Dodaj</button>
+      </div>
+    </div>
+  </form>
+</div>

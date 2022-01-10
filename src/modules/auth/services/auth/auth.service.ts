@@ -4,6 +4,7 @@ import { Observable } from "rxjs";
 import { Login } from "src/modules/shared/models/login";
 import { Token } from "src/modules/shared/models/token";
 import { RestService } from 'src/modules/shared/services/rest/rest.service';
+import { PreparationStaff } from 'src/modules/shared/models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -26,5 +27,33 @@ export class AuthService extends RestService {
       return false;
     }
     return true;
+  }
+
+  isUserOnMainPosition(): boolean {
+    const role = localStorage.getItem("role");
+
+    if (role === "ROLE_BARTENDER") {
+      this.getUser("api/v1/bartender").subscribe(
+        (result) => {
+          return result.priority;
+        }
+      )
+    }
+    if (role === "ROLE_COOK") {
+      this.getUser("api/v1/cook").subscribe(
+        (result) => {
+          return result.priority;
+        }
+      )
+    }
+    
+    return false;
+  }
+
+  getUser(path: string): Observable<PreparationStaff> {
+    return this.http.get<PreparationStaff>(path, {
+      headers: this.headers,
+      responseType: "json"
+    })
   }
 }

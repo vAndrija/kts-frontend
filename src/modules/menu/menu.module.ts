@@ -8,8 +8,9 @@ import { MenuFormComponent } from './components/menu-form/menu-form.component';
 
 import { MenuItemsReviewComponent } from './pages/menu-items-review/menu-items-review.component';
 import { MenuItemCardComponent } from './components/menu-item-card/menu-item-card.component';
-
 import { MenuService } from './services/menu-service/menu.service';
+import { MenuItemFormComponent } from './components/menu-item-form/menu-item-form.component';
+import { CreateMenuItemComponent } from './pages/create-menu-item/create-menu-item.component';
 import { MenuItemDetailsComponent } from './pages/menu-item-details/menu-item-details.component';
 import { MenuItemService } from './services/menu-item-service/menu-item.service';
 import { PriceItemService } from './services/price-item-service/price-item.service';
@@ -23,6 +24,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     MenuFormComponent,
     MenuItemsReviewComponent,
     MenuItemCardComponent,
+    MenuItemFormComponent,
+    CreateMenuItemComponent,
     MenuItemDetailsComponent,
     PendingMenuItemsComponent
   ],

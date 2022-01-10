@@ -8,11 +8,16 @@ import { MatFormFieldModule } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from "@angular/forms";
 import { AuthService } from './services/auth/auth.service';
+import { PasswordResetHomeService } from './services/password-reset-home/password-reset-home.service';
+import { PasswordResetHomeComponent } from './pages/password-reset-home/password-reset-home.component';
+import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
 
 
 @NgModule({
   declarations: [
-    LoginComponent
+    LoginComponent,
+    PasswordResetHomeComponent,
+    PasswordResetComponent
   ],
   imports: [
     CommonModule,
@@ -23,7 +28,8 @@ import { AuthService } from './services/auth/auth.service';
     ReactiveFormsModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    PasswordResetHomeService
   ]
 })
 export class AuthModule { }
