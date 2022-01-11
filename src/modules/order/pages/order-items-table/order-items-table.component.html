@@ -1,50 +1,6 @@
-<div class="col-lg-12">
-    <div class="card">
-        <div class="card-body">
-            <div class="table-responsive">
-                <table class="table table-responsive-md">
-                    <thead>
-                        <tr>
-                            <th style="text-align: center;"><strong>Id porudzbine</strong></th>
-                            <th style="text-align: center;"><strong>Datum i vreme porudzbine</strong></th>
-                            <th style="text-align: center;"><strong>Kolicina</strong></th>
-                            <th style="text-align: center;"><strong>Prioritet</strong></th>
-                            <th style="text-align: center;"><strong>Status</strong></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let orderitem of orderItems">
-                            <td style="text-align: center;">{{orderitem.orderId}}</td>
-                            <td style="text-align: center;">{{orderitem.dateOfOrder | customDateTime}}</td>
-                            <td style="text-align: center;">{{orderitem.quantity}}</td>
-                            <td style="text-align: center;">{{orderitem.priority}}</td>
-                            <td>
-                                <div class="dropdown">
-                                    <button *ngIf="orderitem.status === 'U pripremi'" type="button"
-                                        class="btn btn-warning light sharp btn-block" data-toggle="dropdown" value="">
-                                        {{orderitem.status}}
-                                    </button>
-                                    <button *ngIf="orderitem.status === 'Pripremljeno'" type="button"
-                                        class="btn btn-success light sharp btn-block" value="">
-                                        {{orderitem.status}}
-                                    </button>
-                                    <div class="dropdown-menu">
-                                        <a class="dropdown-item" (click)="changeStatus($event, 'Pripremljeno')"
-                                            id="{{orderitem.id}}">Pripremljeno</a>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    <app-pagination [totalItems]="pagination.totalPages" [pageSize]="pagination.pageSize" (pageSelected)="changePage($event)">
-                    </app-pagination>
-                </div>
-            </div>
-        </div>
-    </div>
+<div>
+    <app-table [tableDataSrc]="tableData" [tableColumns]="tableColumns" (eventEmitter)="changeStatus($event)"></app-table>
+    <app-pagination [totalItems]="pagination.totalPages" [pageSize]="pagination.pageSize"
+        (pageSelected)="changePage($event)">
+    </app-pagination>
 </div>
