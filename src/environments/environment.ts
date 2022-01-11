@@ -3,7 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  sas_token: "sp=racwdli&st=2022-01-11T13:37:19Z&se=2022-03-01T21:37:19Z&sv=2020-08-04&sr=c&sig=N9yNDYfwhoxjwxDxQdM2aQK8Rddb98DcKFoZj%2F6ljYc%3D",
+  storage_name: "ktsproject"
+
 };
 
 /*
