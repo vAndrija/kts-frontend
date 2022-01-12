@@ -29,6 +29,14 @@ export class PendingMenuItemsComponent implements OnInit {
     this.menuService.getPendingMenuItems(this.pagination.currentPage - 1, this.pagination.pageSize).subscribe(
       (response) => {
         this.menuItems = response.body["content"] as MenuItem[];
+        this.menuItems.map(menuItem => {menuItem.priceItemDto = {
+              menuItemId: "",
+              endDate: "",
+              current: false,
+              preparationValue: 0,  
+              startDate: "",
+              value: 0
+            }; return menuItem; })
         this.pagination.totalPages = response.body["totalPages"] as number;
       },
       (error) => {
