@@ -83,43 +83,39 @@
 <div class="deznav">
     <div class="deznav-scroll">
         <ul class="metismenu" id="menu">
-            <li><a href="javascript:void()" aria-expanded="false">
-                    <i class="flaticon-381-networking"></i>
-                    <span class="nav-text">Dashboard</span>
-                </a>
-                <ul aria-expanded="false">
+                <li aria-expanded="false" >
                     <div *ngIf="role === 'ROLE_MANAGER'">
-                        <li><a [routerLink]="['/menu/menu-items']">Meni</a></li>
-                        <li><a [routerLink]="['/']">Zaposleni</a></li>
+                        <li><a [routerLink]="['/menu/menu-items']"><i class="flaticon-381-menu-2"></i>Meni</a></li>
+                        <li><a [routerLink]="['/']"><i class="flaticon-381-user-2"></i>Zaposleni</a></li>
                         <li (click)="changeReportMenuVisibility()"><a class="has-arrow ai-icon" aria-expanded="false">
+                                <i class="flaticon-381-calendar"></i>
                                 <span class="nav-text">Izveštaji</span>
                             </a>
-                            <ul aria-expanded="false" *ngIf="reportMenuVisibility" style="margin-left: 1em;">
-                                <li><a [routerLink]="['/report/meal-drink-costs']">Trošak za pripremu jela i pića</a></li>
-                                <li><a [routerLink]="['/report/meal-drink-sales']">Zarada</a></li>
-                                <li><a [routerLink]="['/report/cost-benefit-ratio']">Odnos svih troškova i zarade</a></li>
-                                <li><a [routerLink]="['/report/preparing-time']">Vreme pripreme jela i pića po zaposlenom</a></li>
+                            <ul aria-expanded="false" *ngIf="reportMenuVisibility">
+                                <li><a [routerLink]="['/report/meal-drink-costs']" style="padding-left: 4em;">Trošak za pripremu jela i pića</a></li>
+                                <li><a [routerLink]="['/report/meal-drink-sales']" style="padding-left: 4em;">Zarada</a></li>
+                                <li><a [routerLink]="['/report/cost-benefit-ratio']" style="padding-left: 4em;">Odnos svih troškova i zarade</a></li>
+                                <li><a [routerLink]="['/report/preparing-time']" style="padding-left: 4em;">Vreme pripreme jela i pića po zaposlenom</a></li>
                             </ul>
                         </li>
-                        <li><a [routerLink]="['/menu/create-menu']">Kreiraj meni</a></li>
-                        <li><a [routerLink]="['/menu/pending-menu-items']">Neodobrene stavke menija</a></li>
+                        <li><a [routerLink]="['/menu/create-menu']"><i class="flaticon-381-add-2"></i>Kreiraj meni</a></li>
+                        <li><a [routerLink]="['/menu/pending-menu-items']"><i class="flaticon-381-menu-2"></i>Neodobrene stavke menija</a></li>
                     </div>
                     <div *ngIf="role === 'ROLE_COOK' || role === 'ROLE_BARTENDER' || role === 'ROLE_WAITER'">
-                        <li><a [routerLink]="['/menu/menu-items']">Meni</a></li>
-                        <li><a [routerLink]="['/']">Restoran</a></li>
-                        <li *ngIf="show"><a [routerLink]="['/menu/create-menu-item']">Kreiraj stavku menija</a></li>
-                        <li *ngIf="role === 'ROLE_COOK' || role === 'ROLE_BARTENDER'"><a [routerLink]="['/order/order-items']">Stavke porudžbine</a></li>
-                        <li *ngIf="role === 'ROLE_WAITER'"><a [routerLink]="['/order/order']"> Kreiranje porudžbine</a></li>
-                        <li *ngIf="role === 'ROLE_WAITER'"><a [routerLink]="['/order/orders']"> Porudžbine</a></li>
+                        <li><a [routerLink]="['/menu/menu-items']"><i class="flaticon-381-menu-2"></i>Meni</a></li>
+                        <li><a [routerLink]="['/']"><i class="flaticon-381-home"></i>Restoran</a></li>
+                        <li *ngIf="show"><a [routerLink]="['/menu/create-menu-item']"><i class="flaticon-381-add-2"></i>Kreiraj stavku menija</a></li>
+                        <li *ngIf="role === 'ROLE_COOK' || role === 'ROLE_BARTENDER'"><a [routerLink]="['/order/order-items']"><i class="flaticon-381-diploma"></i>Stavke porudžbine</a></li>
+                        <li *ngIf="role === 'ROLE_WAITER'"><a [routerLink]="['/order/order']"><i class="flaticon-381-add-2"></i>Kreiranje porudžbine</a></li>
+                        <li *ngIf="role === 'ROLE_WAITER'"><a [routerLink]="['/order/orders']"><i class="flaticon-381-diploma"></i>Porudžbine</a></li>
                     </div>
                     
                     <div *ngIf="role === 'ROLE_SYSTEM_ADMIN'">
-                        <li><a [routerLink]="['/menu/menu-items']">Meni</a></li>
-                        <li><a [routerLink]="['/']">Restoran</a></li>
-                        <li><a [routerLink]="['/']">Korisnici</a></li>
+                        <li><a [routerLink]="['/menu/menu-items']"><i class="flaticon-381-menu-2"></i>Meni</a></li>
+                        <li><a [routerLink]="['/']"><i class="flaticon-381-home"></i>Restoran</a></li>
+                        <li><a [routerLink]="['/']"><i class="flaticon-381-user-2"></i>Korisnici</a></li>
                     </div>
-                </ul>
-            </li>
+                </li>
         </ul>
     </div>
 </div>
