@@ -56,4 +56,10 @@ export class AuthService extends RestService {
       responseType: "json"
     })
   }
+
+  logout() {
+    localStorage.removeItem("role");
+    localStorage.removeItem("user");
+    localStorage.removeItem("id");
+  }
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/modules/auth/services/auth/auth.service';
 
 @Component({
@@ -11,7 +12,8 @@ export class NavbarComponent implements OnInit {
   public reportMenuVisibility: boolean = false;
   public show: boolean = false;
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.checkRole();
@@ -31,5 +33,10 @@ export class NavbarComponent implements OnInit {
 
   checkForPreparationStaff(): boolean {
     return this.auth.isUserOnMainPosition();
+  }
+
+  logout() {
+    this.auth.logout();
+    this.router.navigate(["/auth/login"]);
   }
 }

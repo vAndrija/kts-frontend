@@ -20,7 +20,7 @@ export class MenuItemCardComponent implements OnInit {
       startDate: "",
       endDate: "",
       menuItemId: "",
-      isCurrent: false,
+      current: false,
       preparationValue: 0
     },
     menu: {

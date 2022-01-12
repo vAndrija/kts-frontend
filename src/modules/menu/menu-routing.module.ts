@@ -39,7 +39,9 @@ const routes: Routes = [
     component: MenuItemDetailsComponent,
     canActivate: [RoleGuard],
     data: {expectedRoles: "ROLE_MANAGER|ROLE_COOK|ROLE_BARTENDER|ROLE_WAITER|ROLE_SYSTEM_ADMIN"}
-  }
+  },
+  //ili dodati da se prikaze 404 ali bice prikazan i side bar
+  { path: "**", redirectTo: "/menu/menu-items" }
 ];
 
 @NgModule({
