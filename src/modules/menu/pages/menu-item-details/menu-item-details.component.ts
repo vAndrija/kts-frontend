@@ -179,7 +179,7 @@ export class MenuItemDetailsComponent implements OnInit {
   decline(): void {
     this.menuItemService.deleteMenuItem(this.menuItem.id).subscribe(
       (result) => {
-        this.router.navigate(["/menu/menu-items"]);
+        this.router.navigate(["/menu/pending-menu-items"]);
       },
       (error) => {
         if(error.status === 400) {
