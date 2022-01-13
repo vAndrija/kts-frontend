@@ -9,12 +9,14 @@ import { UserListService } from "./services/userList/user-list.service";
 import { UserService } from './services/user/user.service';
 import { UserListComponent } from './pages/user-list/user-list.component';
 import { ChangePasswordComponent } from './pages/change-password/change-password.component';
+import { UserUpdateComponent } from './pages/user-update/user-update.component';
 
 @NgModule({
   declarations: [
     RegistrationComponent,
     UserListComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    UserUpdateComponent
   ],
   imports: [
     CommonModule,
