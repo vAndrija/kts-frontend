@@ -7,11 +7,20 @@
                 </div>
                 <div class="new-arrival-content text-center mt-3">
                     <h4>{{menuItem.name}}</h4>
-                    <span class="price" *ngIf="menuItem.priceItemDto">{{menuItem.priceItemDto.value}} RSD</span>
-                    <span class="price" *ngIf="!menuItem.priceItemDto">Cena nije dostupna</span>
-                </div>
-                <div class="new-arrival-content text-center mt-3">
-                    <button type="submit" class="btn" style="margin-bottom: 2em;" [routerLink]="['/menu/menu-items/'] + menuItem.priceItemDto.menuItemId">Opširnije</button>
+                    <div *ngIf="menuItem.priceItemDto.current">
+                        <span class="price">{{menuItem.priceItemDto.value}} RSD</span>
+                        <div class="new-arrival-content text-center mt-3">
+                            <button type="submit" class="btn" style="margin-bottom: 2em;"
+                                [routerLink]="['/menu/menu-items/'] + menuItem.priceItemDto.menuItemId">Opširnije</button>
+                        </div>
+                    </div>
+                    <div *ngIf="!menuItem.priceItemDto.current">
+                        <span class="price">Cena nije dostupna</span>
+                        <div class="new-arrival-content text-center mt-3">
+                            <button type="submit" class="btn" style="margin-bottom: 2em;"
+                                [routerLink]="['/menu/menu-items/'] + menuItem.id">Opširnije</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -29,7 +29,7 @@ export class MenuItemDetailsComponent implements OnInit {
     preparationTime: 0,
     priceItemDto: {
       endDate: "",
-      isCurrent: false,
+      current: false,
       menuItemId: "",
       preparationValue: 0,
       startDate: "",
@@ -148,7 +148,7 @@ export class MenuItemDetailsComponent implements OnInit {
     let endDate = dates.endDate;
 
     let priceItem: PriceItem = {
-      isCurrent: true,
+      current: true,
       menuItemId: this.menuItem.id,
       value: this.formAccept.value.price,
       preparationValue: this.formAccept.value.preparationPrice,
@@ -179,7 +179,7 @@ export class MenuItemDetailsComponent implements OnInit {
   decline(): void {
     this.menuItemService.deleteMenuItem(this.menuItem.id).subscribe(
       (result) => {
-        this.router.navigate(["/menu/menu-items"]);
+        this.router.navigate(["/menu/pending-menu-items"]);
       },
       (error) => {
         if(error.status === 400) {

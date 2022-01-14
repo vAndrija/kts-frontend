@@ -47,11 +47,6 @@ const routes: Routes = [
       },
     ],
   },
-  {
-    path: "",
-    redirectTo: "/",
-    pathMatch: "full",
-  },
   { path: "**", component: NotFoundPageComponent }
 ];
 
