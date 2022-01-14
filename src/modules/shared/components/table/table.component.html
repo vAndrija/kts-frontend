@@ -49,7 +49,8 @@
                                 </div>
                                 </ng-template>
                                 <ng-template #other> <ng-container *ngIf="col.key === 'dateOfOrder';else other_"> {{element[col.key] | customDateTime}}</ng-container></ng-template>
-                                <ng-template #other_> {{element[col.key]}}</ng-template>
+                                <ng-template #other_> <ng-container *ngIf="col.key === 'edit';else other__"><button class="btn btn-success light sharp btn-block" style="margin-left: 20px;" (click)="viewOrder(element['tableId'])">Vidi porudžbinu</button></ng-container></ng-template>
+                                <ng-template #other__> {{element[col.key]}}</ng-template>
                             </td>
                         </ng-container>
                     </ng-container>

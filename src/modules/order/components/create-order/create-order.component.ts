@@ -19,6 +19,8 @@ export class CreateOrderComponent implements OnInit {
   $ = (window as any).$;
   @Input()
   discount: number = 0;
+  @Input()
+  tableId: number = 0;
   order: CreateOrderDto = {
     status: 'Poručeno',
     dateOfOrder: '',
@@ -73,6 +75,7 @@ export class CreateOrderComponent implements OnInit {
       this.order.dateOfOrder = d;
     }
     this.order.price = this.discount;
+    this.order.tableId = this.tableId;
     this.orderItemservice.createOrder(this.order).subscribe(
       (response) => {
         this.createdOrder = response as OrderDto;

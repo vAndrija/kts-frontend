@@ -9,7 +9,7 @@ import { OrderItemCardComponent } from './components/order-item-card/order-item-
 import { FormsModule } from '@angular/forms';
 import { CreateOrderComponent } from './components/create-order/create-order.component';
 import { OrderTableComponent } from './pages/order-table/order-table.component';
-
+import { OrderReviewComponent } from './pages/order-review/order-review.component';
 
 @NgModule({
   declarations: [
@@ -17,13 +17,14 @@ import { OrderTableComponent } from './pages/order-table/order-table.component';
     OrderComponent,
     OrderItemCardComponent,
     CreateOrderComponent,
-    OrderTableComponent
+    OrderTableComponent,
+    OrderReviewComponent,
   ],
   imports: [
     CommonModule,
     OrderRoutingModule,
     SharedModule,
-    FormsModule 
+    FormsModule
   ]
 })
 export class OrderModule { }
