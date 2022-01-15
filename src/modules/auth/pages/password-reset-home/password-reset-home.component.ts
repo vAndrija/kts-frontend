@@ -31,7 +31,7 @@ export class PasswordResetHomeComponent{
     this.passwordResetHomeService.sendResetToken(data).subscribe({
       next: ()=>{
         this.notificationService.success("Link za resetovanje je poslat na vašu email adresu")
-        
+        this.router.navigate(["/auth/login"]);
       },
       error: ()=>{
         this.notificationService.error("Greška. Pokušajte ponovo")
