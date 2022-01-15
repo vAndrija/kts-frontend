@@ -11,6 +11,7 @@ export class TableComponent implements OnInit {
   @Input() tableDataSrc: any[] = [];
   displayedColumns: any[] = [];
   @Output() eventEmitter : EventEmitter<any> = new EventEmitter();
+  @Output() eventEmitter1 : EventEmitter<any> = new EventEmitter();
 
   constructor() { }
 
@@ -20,6 +21,10 @@ export class TableComponent implements OnInit {
 
   changeStatus(event:Event, status:string): void { 
     this.eventEmitter.emit({event:event, status:status});
+  }
+
+  viewOrder(id:number): void {
+    this.eventEmitter1.emit(id);
   }
 
 }

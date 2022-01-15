@@ -12,7 +12,7 @@
             </div>
         </div>
     </div>
-    <app-table [tableDataSrc]="tableData" [tableColumns]="tableColumns" (eventEmitter)="changeStatus($event)">
+    <app-table [tableDataSrc]="tableData" [tableColumns]="tableColumns" (eventEmitter)="changeStatus($event)" (eventEmitter1)="viewOrder($event)">
     </app-table>
     <app-pagination [totalItems]="pagination.totalPages" [pageSize]="pagination.pageSize" (pageSelected)="changePage($event)"></app-pagination>
 </div>
