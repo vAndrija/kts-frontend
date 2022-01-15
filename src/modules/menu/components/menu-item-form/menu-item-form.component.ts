@@ -29,7 +29,7 @@ export class MenuItemFormComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    (window as any).loadScript();
+    //(window as any).loadScript();
   }
 
   public errorHandling = (control: string, error: string) => {
@@ -37,8 +37,6 @@ export class MenuItemFormComponent implements OnInit {
   }
 
   public submit(): void {
-    console.log(this.form.value);
-
     const menuItem: MenuItemDto = this.form.value;
 
     this.menuItemService.addMenuItem(menuItem).subscribe(

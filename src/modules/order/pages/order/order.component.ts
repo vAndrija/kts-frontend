@@ -3,6 +3,7 @@ import { MenuItem } from 'src/modules/menu/model/menuItem';
 import { Item } from 'src/modules/shared/models/item';
 import { NgForm } from '@angular/forms';
 import { MenuService } from 'src/modules/menu/services/menu-service/menu.service';
+import { WebsocketService } from 'src/modules/shared/services/websocket/websocket.service';
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
@@ -22,12 +23,18 @@ export class OrderComponent implements OnInit {
   searchValue: string = '';
   quantityMap = new Map();
 
-  constructor(private menuService: MenuService) {
+  constructor(
+    private menuService: MenuService,
+    private socketService: WebsocketService
+    ) {
     this.categories = ['Sve', 'Supa', 'Doručak', 'Predjelo', 'Glavno jelo', 'Dezert', 'Koktel', 'Topli napitak', 'Bezalkoholno piće'];
   }
 
   ngOnInit(): void {
     this.getMenuItems();
+
+    const userId = localStorage.getItem("id");
+    this.socketService.connect(userId);    
   }
 
   open(): void {
@@ -110,6 +117,11 @@ export class OrderComponent implements OnInit {
 
   onDelete(items: Item[]): void {
     this.orderItems = items;
+  }
+
+  sendMessage(message: string): void {
+    console.log("Kreirali smooo");
+    this.socketService.sendOrderCreatedMessage({"message": message});
   }
 
 }

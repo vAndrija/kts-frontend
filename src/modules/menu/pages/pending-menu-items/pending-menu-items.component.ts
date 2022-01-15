@@ -14,7 +14,10 @@ export class PendingMenuItemsComponent implements OnInit {
   menuItems: MenuItem[] = [];
   pagination: Pagination = new Pagination;
 
-  constructor(private menuService: MenuService, private notificationService: NotificationService) { }
+  constructor(
+    private menuService: MenuService, 
+    private notificationService: NotificationService
+    ) { }
 
   ngOnInit(): void {
     this.getPendingMenuItems();

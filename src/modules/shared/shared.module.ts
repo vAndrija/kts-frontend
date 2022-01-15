@@ -22,7 +22,7 @@ import { TableComponent } from './components/table/table.component';
   exports:[
     CustomDateTimePipe,
     PaginationComponent,
-     TableComponent
+    TableComponent
   ],
   providers: [NotificationService]
 })

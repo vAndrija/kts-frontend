@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.checkRole();
-    this.show = this.checkForPreparationStaff();
+    this.checkForPreparationStaff();
   }
 
   checkRole(): void {
@@ -31,9 +31,28 @@ export class NavbarComponent implements OnInit {
     this.reportMenuVisibility = !this.reportMenuVisibility;
   }
 
-  checkForPreparationStaff(): boolean {
-    return this.auth.isUserOnMainPosition();
+  checkForPreparationStaff(): void {
+      const role = localStorage.getItem("role");
+      const userId = localStorage.getItem("id");
+
+      if (role === "ROLE_BARTENDER") {
+        this.auth.getUser("api/v1/bartender/" + userId).subscribe(
+          (result) => {
+            this.show = result.priority;
+          }
+        )
+      }
+      if (role === "ROLE_COOK") {
+        this.auth.getUser("api/v1/cook/" + userId).subscribe(
+          (result) => {
+            this.show = result.priority;
+          }
+        )
+      }
+
+      this.show = false;
   }
+
 
   logout() {
     this.auth.logout();
