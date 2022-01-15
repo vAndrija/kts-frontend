@@ -11,13 +11,16 @@ import { AuthService } from './services/auth/auth.service';
 import { PasswordResetHomeService } from './services/password-reset-home/password-reset-home.service';
 import { PasswordResetHomeComponent } from './pages/password-reset-home/password-reset-home.component';
 import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
+import { TestPictureUploadComponent } from './pages/test-picture-upload/test-picture-upload.component';
+import { AzureBlogStorageService } from '../shared/services/azure-blog-storage/azure-blog-storage.service';
 
 
 @NgModule({
   declarations: [
     LoginComponent,
     PasswordResetHomeComponent,
-    PasswordResetComponent
+    PasswordResetComponent,
+    TestPictureUploadComponent
   ],
   imports: [
     CommonModule,
@@ -29,7 +32,8 @@ import { PasswordResetComponent } from './pages/password-reset/password-reset.co
   ],
   providers: [
     AuthService,
-    PasswordResetHomeService
+    PasswordResetHomeService,
+    AzureBlogStorageService
   ]
 })
 export class AuthModule { }
