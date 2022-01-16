@@ -40,7 +40,6 @@ export class LoginComponent {
         const id = jwt.decodeToken(jwtUser).id;
         localStorage.setItem("id", id);
         localStorage.setItem("role", role);
-        localStorage.setItem("priority", "false");
         if (role === "ROLE_BARTENDER") {
           this.authService.getUser("api/v1/bartender/" + id).subscribe(
             (result) => {
