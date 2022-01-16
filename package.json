@@ -22,18 +22,9 @@
     "@angular/platform-browser-dynamic": "~13.1.0",
     "@angular/router": "~13.1.0",
     "@auth0/angular-jwt": "^5.0.2",
-<<<<<<< HEAD
-<<<<<<< HEAD
-    "@stomp/stompjs": "^6.1.2",
-=======
-    "@azure/identity": "^2.0.1",
-    "@azure/storage-blob": "^12.8.0",
->>>>>>> develop
-=======
     "@stomp/stompjs": "^6.1.2",
     "@azure/identity": "^2.0.1",
     "@azure/storage-blob": "^12.8.0",
->>>>>>> ce30bf007fe462574d96337404605631dda593a4
     "apexcharts": "^3.32.1",
     "konva": "^8.3.2",
     "moment": "^2.29.1",

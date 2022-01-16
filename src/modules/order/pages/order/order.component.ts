@@ -132,7 +132,6 @@ export class OrderComponent implements OnInit {
   }
 
   sendMessage(message: string): void {
-    console.log("Kreirali smooo");
     this.socketService.sendOrderCreatedMessage({"message": message});
   }
 
