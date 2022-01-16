@@ -4,6 +4,7 @@ import { Item } from 'src/modules/shared/models/item';
 import { NgForm } from '@angular/forms';
 import { MenuService } from 'src/modules/menu/services/menu-service/menu.service';
 import { WebsocketService } from 'src/modules/shared/services/websocket/websocket.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
@@ -22,12 +23,21 @@ export class OrderComponent implements OnInit {
   $ = (window as any).$;
   searchValue: string = '';
   quantityMap = new Map();
-
+  routeState: any;
+  tableId: number = 0;
   constructor(
-    private menuService: MenuService,
+    private menuService: MenuService, 
+    private router: Router, 
     private socketService: WebsocketService
     ) {
     this.categories = ['Sve', 'Supa', 'Doručak', 'Predjelo', 'Glavno jelo', 'Dezert', 'Koktel', 'Topli napitak', 'Bezalkoholno piće'];
+    if (this.router.getCurrentNavigation()?.extras.state) {
+      this.routeState = this.router.getCurrentNavigation()?.extras.state;
+      if (this.routeState) {
+        this.tableId = this.routeState.tableId;
+      }
+    }
+
   }
 
   ngOnInit(): void {

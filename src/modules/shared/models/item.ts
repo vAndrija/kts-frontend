@@ -1,4 +1,5 @@
 export interface Item {
+    id:number;
     quantity: number;
     status:string;
     priority:number;

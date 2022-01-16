@@ -38,6 +38,7 @@ export class OrderItemCardComponent implements OnInit {
   @Output() eventEmitter : EventEmitter<Item> = new EventEmitter();
 
   public item: Item = {
+    id:0,
     priority:0,
     quantity: 0,
     orderId: 0,

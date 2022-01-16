@@ -29,7 +29,12 @@ const routes: Routes = [
         path: "report",
         loadChildren: () => 
           import("./../report/report.module").then((m) => m.ReportModule)
-      }
+      },
+      {
+        path: "restaurant",
+        loadChildren: () =>
+          import("./../restaurant/restaurant.module").then((m) => m.RestaurantModule),
+      },
     ],
   },
   {

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { RestaurantTableService } from 'src/modules/restaurant/services/restaurant-table.service';
 import { OrderDto } from 'src/modules/shared/models/order';
 import { Pagination } from 'src/modules/shared/models/pagination';
+import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
 import { OrderService } from '../../services/order/order.service';
 
 @Component({
@@ -17,12 +20,13 @@ export class OrderTableComponent implements OnInit {
     { key: 'dateOfOrder', header: 'Datum i vreme porudžbine' },
     { key: 'price', header: 'Cena (RSD)' },
     { key: 'status', header: 'Status' },
-    { key: 'edit', header: 'Uredi' }
+    { key: 'edit', header: '' }
   ];
   tableData: any[];
   status: string = 'Sve';
 
-  constructor(private orderService: OrderService) { this.tableData = []; }
+  constructor(private orderService: OrderService, private router: Router,
+    private restaurantTableService: RestaurantTableService, private notificationService: NotificationService) { this.tableData = []; }
 
   ngOnInit(): void {
     this.load(this.pagination.currentPage - 1);
@@ -49,9 +53,14 @@ export class OrderTableComponent implements OnInit {
 
   changeStatus(object: any): void {
     let orderId: number = Number((object.event.target as Element).id);
-    this.orderService.changeStatusOrder(orderId, object.status).subscribe(res => {
-      this.load(this.pagination.currentPage - 1);
-    });
+    this.orderService.changeStatusOrder(orderId, object.status).subscribe(
+      (res) => {
+        this.load(this.pagination.currentPage - 1);
+      },
+      (error) => {
+        this.notificationService.error("Nisu sve stavke porudžbine servirane!");
+      }
+    );
 
   }
   filterPageable(page: number, status: string): void {
@@ -67,6 +76,15 @@ export class OrderTableComponent implements OnInit {
     } else {
       this.filterPageable(this.pagination.currentPage, status);
     }
+  }
+
+  viewOrder(id: number): void {
+    this.restaurantTableService.findTableWithOrder(id).subscribe(
+      (response) => {
+        this.router.navigate(['/order/review'], { state: { orders: response, tableId: id } });
+      },
+    );
+
   }
 
 }

@@ -41,4 +41,16 @@ export class OrderItemService extends RestService {
     return this.http.post<any>("api/v1/order-items/", orderItem);
 
   }
+
+  findOrderItemsByOrder(id: number): Observable<OrderItem[]> {
+    return this.http.get<any>("api/v1/order-items/order/" + id);
+  }
+
+  deleteOrderItem(orderItemId: number): Observable<any> {
+    return this.http.delete<HttpResponse<any>>("api/v1/order-items/" + orderItemId, {
+      headers: this.headers,
+      responseType: 'json'
+    })
+
+  }
 }
