@@ -6,7 +6,6 @@ import { MenuItemDetailsComponent } from './pages/menu-item-details/menu-item-de
 import { MenuItemsReviewComponent } from './pages/menu-items-review/menu-items-review.component';
 import { CreateMenuItemComponent } from './pages/create-menu-item/create-menu-item.component';
 import { PendingMenuItemsComponent } from './pages/pending-menu-items/pending-menu-items.component';
-import { MainPositionGuard } from '../auth/guards/main-position/main-position.guard';
 
 const routes: Routes = [
   {
@@ -30,7 +29,7 @@ const routes: Routes = [
     path: "create-menu-item",
     pathMatch: "full",
     component: CreateMenuItemComponent,
-    canActivate: [RoleGuard, MainPositionGuard],
+    canActivate: [RoleGuard],
     data: {expectedRoles: "ROLE_COOK|ROLE_BARTENDER"}
   },
   {
