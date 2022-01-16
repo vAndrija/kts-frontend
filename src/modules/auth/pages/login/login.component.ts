@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import { Router } from "@angular/router";
 import { ToastrService } from "ngx-toastr";
@@ -13,7 +13,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   form: FormGroup
 
   constructor(
@@ -27,8 +27,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-  }
 
   submit(): void {
     const auth: Login = this.form.value;
@@ -42,6 +40,21 @@ export class LoginComponent implements OnInit {
         const id = jwt.decodeToken(jwtUser).id;
         localStorage.setItem("id", id);
         localStorage.setItem("role", role);
+        localStorage.setItem("priority", "false");
+        if (role === "ROLE_BARTENDER") {
+          this.authService.getUser("api/v1/bartender/" + id).subscribe(
+            (result) => {
+              localStorage.setItem("priority",String(result.priority));
+            }
+          )
+        }
+        if (role === "ROLE_COOK") {
+          this.authService.getUser("api/v1/cook/" + id).subscribe(
+            (result) => {
+              localStorage.setItem("priority",String(result.priority));
+            }
+          )
+        }
         this.router.navigate(["/menu/menu-items"]);
 
       },

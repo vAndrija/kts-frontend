@@ -30,7 +30,7 @@ const routes: Routes = [
     pathMatch: "full",
     component: CreateMenuItemComponent,
     canActivate: [RoleGuard],
-    data: {expectedRoles: "ROLE_COOK|ROLE_BARTENDER"}
+    data: {expectedRoles: "ROLE_COOK|ROLE_BARTENDER",isPriorityRoute: 'true'}
   },
   {
     path: "menu-items/:menuItemId",
