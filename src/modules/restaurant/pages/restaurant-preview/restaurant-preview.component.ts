@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import Konva from 'konva';
 import { Layer } from 'konva/lib/Layer';
 import { Stage } from 'konva/lib/Stage';
-import { OrderDto } from 'src/modules/shared/models/order';
 import { RestaurantTable } from 'src/modules/shared/models/restaurant-table';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
 import { RestaurantTableService } from '../../services/restaurant-table.service';
@@ -179,12 +178,22 @@ export class RestaurantPreviewComponent implements OnInit {
     } else {
       var id = this.find(this.selectedItem.getAttr("x"), this.selectedItem.getAttr("y"));
       this.close.nativeElement.click();
-      this.restaurantTableService.deleteRestaurantTable(id).subscribe(
-        () => {
-          this.notificationService.success("Sto je obrisan!");
-          this.selectedItem.destroy();
-          this.load();
-        });
+      this.restaurantTableService.findTableWithOrder(id).subscribe(
+        (response) => {
+          if (response === null) {
+            this.restaurantTableService.deleteRestaurantTable(id).subscribe(
+              () => {
+                this.notificationService.success("Sto je obrisan!");
+                this.selectedItem.destroy();
+                this.load();
+              });
+           
+          } else {
+            this.notificationService.error("Nije moguće obrisati sto!");
+          }
+        },
+      );
+      
 
     }
   }

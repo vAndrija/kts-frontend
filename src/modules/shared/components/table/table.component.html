@@ -2,26 +2,30 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
-                <table mat-table [dataSource]="tableDataSrc" class="mat-elevation-z8" style="width:100%">
+                <table mat-table [dataSource]="tableData" class="mat-elevation-z8" style="width:100%">
                     <ng-container *ngFor="let col of tableColumns">
                         <ng-container matColumnDef="{{ col.key }}">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center; font-size: medium;">
                                 {{ col.header }}
                             </th>
                             <td mat-cell *matCellDef="let element" style="text-align: center;">
-                                <div *ngIf="col.key === 'status' && (element[col.key]=='U pripremi' || element[col.key]=='Pripremljeno'); else first">
+                                <div *ngIf="col.key === 'status' && (element[col.key]=='U pripremi' || element[col.key]=='Pripremljeno' || element[col.key] == 'Servirano'); else first">
                                     <div class="dropdown">
                                         <button *ngIf="element[col.key]=== 'U pripremi'" type="button"
                                             class="btn btn-warning light sharp btn-block" data-toggle="dropdown"
-                                            value="">
+                                            name="U pripremi">
                                             {{element[col.key]}}
                                         </button>
                                         <button *ngIf="element[col.key] === 'Pripremljeno'" type="button"
-                                            class="btn btn-success light sharp btn-block" value="">
+                                            class="btn btn-primary light sharp btn-block" name="Pripremljeno">
+                                            {{element[col.key]}}
+                                        </button>
+                                        <button *ngIf="element[col.key] === 'Servirano'" type="button"
+                                            class="btn btn-success light sharp btn-block" name="Servirano">
                                             {{element[col.key]}}
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a class="dropdown-item" id="{{element['id']}}" (click)="changeStatus($event, 'Pripremljeno')">Pripremljeno</a>
+                                            <button *ngIf="element[col.key]=='U pripremi'" class="dropdown-item" id="{{element['id']}}" (click)="changeStatus($event, 'Pripremljeno')">Pripremljeno</button>
                                         </div>
                                     </div>
                                 </div>
@@ -30,20 +34,20 @@
                                     <div class="dropdown">
                                         <button *ngIf="element[col.key]=== 'Poručeno'" type="button"
                                             class="btn btn-warning light sharp btn-block" data-toggle="dropdown"
-                                            value="">
+                                            name="Poručeno">
                                             {{element[col.key]}}
                                         </button>
                                         <button *ngIf="element[col.key] === 'Završeno'" type="button"
-                                            class="btn btn-primary light sharp btn-block" value="" data-toggle="dropdown">
+                                            class="btn btn-primary light sharp btn-block"  data-toggle="dropdown" name="Završeno">
                                             {{element[col.key]}}
                                         </button>
                                         <button *ngIf="element[col.key] === 'Plaćeno'" type="button"
-                                            class="btn btn-success light sharp btn-block" value="">
+                                            class="btn btn-success light sharp btn-block" name="Plaćeno">
                                             {{element[col.key]}}
                                         </button>
                                         <div class="dropdown-menu">
-                                            <a *ngIf="element[col.key]=='Poručeno'" class="dropdown-item" id="{{element['id']}}" (click)="changeStatus($event, 'Završeno')">Završeno</a>
-                                            <a *ngIf="element[col.key]=='Završeno'" class="dropdown-item" id="{{element['id']}}" (click)="changeStatus($event, 'Plaćeno')">Plaćeno</a>
+                                            <button *ngIf="element[col.key]=='Poručeno'" class="dropdown-item" id="{{element['id']}}" (click)="changeStatus($event, 'Završeno')">Završeno</button>
+                                            <button *ngIf="element[col.key]=='Završeno'" class="dropdown-item" id="{{element['id']}}" (click)="changeStatus($event, 'Plaćeno')">Plaćeno</button>
                                         </div>
                                     </div>
                                 </div>
@@ -60,4 +64,5 @@
             </div>
         </div>
     </div>
+    <app-pagination [totalPages]="totalPages" [pageSize]="pageSize" (pageSelected)="changePage($event)"></app-pagination>
 </div>
