@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RestaurantTableService } from 'src/modules/restaurant/services/restaurant-table.service';
 import { OrderDto } from 'src/modules/shared/models/order';
@@ -23,20 +24,27 @@ export class OrderTableComponent implements OnInit {
     { key: 'edit', header: '' }
   ];
   tableData: any[];
-  status: string = 'Sve';
+  filters: string[] = ['Poručeno', 'Završeno', 'Plaćeno', 'Sve'];
+  form: FormGroup;
 
   constructor(private orderService: OrderService, private router: Router,
-    private restaurantTableService: RestaurantTableService, private notificationService: NotificationService) { this.tableData = []; }
+    private restaurantTableService: RestaurantTableService, private notificationService: NotificationService) {
+    this.tableData = [];
+    this.form = new FormGroup({
+      filterName: new FormControl("", Validators.required),
+    })
+
+  }
 
   ngOnInit(): void {
     this.load(this.pagination.currentPage - 1);
   }
 
   changePage(newPage: number): void {
-    if (this.status != 'Sve') {
-      this.filterPageable(newPage - 1, this.status);
-    } else {
+    if (this.form.value.filterName == "" || this.form.value.filterName == 'Sve') {
       this.load(newPage - 1);
+    } else {
+      this.filterPageable(newPage - 1, this.form.value.filterName);
     }
   }
 
@@ -61,8 +69,8 @@ export class OrderTableComponent implements OnInit {
         this.notificationService.error("Nisu sve stavke porudžbine servirane!");
       }
     );
-
   }
+
   filterPageable(page: number, status: string): void {
     this.orderService.filterStatus(page - 1, this.pagination.pageSize, this.id, status).subscribe(res => {
       this.tableData = res.body["content"] as OrderDto[];
@@ -70,11 +78,11 @@ export class OrderTableComponent implements OnInit {
     });
   }
 
-  filterStatus(status: string): void {
-    if (status == 'Sve') {
+  filterStatus(): void {
+    if (this.form.value.filterName == 'Sve') {
       this.load(this.pagination.currentPage - 1);
     } else {
-      this.filterPageable(this.pagination.currentPage, status);
+      this.filterPageable(this.pagination.currentPage, this.form.value.filterName);
     }
   }
 
@@ -86,5 +94,4 @@ export class OrderTableComponent implements OnInit {
     );
 
   }
-
 }

@@ -1,18 +1,14 @@
 <div>
-    <div class="basic-dropdown col-lg-12" style="margin-bottom: 20px;">
-        <div class="dropdown">
-            <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown">
-                Filter
-            </button>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" (click)="filterStatus('Poručeno')">Poručeno</a>
-                <a class="dropdown-item" (click)="filterStatus('Završeno')">Završeno</a>
-                <a class="dropdown-item" (click)="filterStatus('Plaćeno')">Plaćeno</a>
-                <a class="dropdown-item" (click)="filterStatus('Sve')">Sve</a>
-            </div>
-        </div>
-    </div>
-    <app-table [tableDataSrc]="tableData" [tableColumns]="tableColumns" (eventEmitter)="changeStatus($event)" (eventEmitter1)="viewOrder($event)">
-    </app-table>
-    <app-pagination [totalItems]="pagination.totalPages" [pageSize]="pagination.pageSize" (pageSelected)="changePage($event)"></app-pagination>
+    <form [formGroup]="form" style="width: 250px; margin-left: 20px;margin-bottom: 20px;">
+        <h4>Filter</h4>
+        <select class="default-select form-control" formControlName="filterName" data-placeholder="Filter"
+            name="category-color" (change)="filterStatus()">
+            <option *ngFor="let f of filters" [value]="f">
+                {{ f }}
+            </option>
+        </select>
+    </form>
+    <app-table [tableData]="tableData" [tableColumns]="tableColumns" (statusChanged)="changeStatus($event)"
+        [totalPages]="pagination.totalPages" [pageSize]="pagination.pageSize" (pageChanged)="changePage($event)"
+        (orderClicked)="viewOrder($event)"></app-table>
 </div>
