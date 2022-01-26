@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { OrderItem } from 'src/modules/shared/models/orderitem';
 import { Pagination } from 'src/modules/shared/models/pagination';
 import { WebsocketService } from 'src/modules/shared/services/websocket/websocket.service';
@@ -26,19 +27,41 @@ export class OrderItemsTableComponent implements OnInit {
   orderItemId: number = -1;
   status: any;
 
+  filters: string[] = ['Poručeno', 'U pripremi', 'Pripremljeno', 'Servirano', 'Sve'];
+  form: FormGroup;
+  
   constructor(
     private orderItemService: OrderItemService,
     private socketService: WebsocketService
     ) {
-    this.tableData = [];
+      this.tableData = [];
+      this.load(this.pagination.currentPage - 1);
+      this.form = new FormGroup({
+        filterName: new FormControl("", Validators.required),
+      })
   }
 
   ngOnInit(): void {
     const userId = localStorage.getItem("id");
     this.socketService.connect(userId);
-    
     this.load(this.pagination.currentPage - 1);
   }
+
+  filterPageable(page: number, status: string): void {
+    this.orderItemService.filterStatus(page - 1, this.pagination.pageSize, this.id, status).subscribe(res => {
+      this.tableData = res.body["content"] as OrderItem[];
+      this.pagination.totalPages = res.body["totalPages"] as number;
+    });
+  }
+
+  filterStatus(): void {
+    if (this.form.value.filterName == 'Sve') {
+      this.load(this.pagination.currentPage - 1);
+    } else {
+      this.filterPageable(this.pagination.currentPage, this.form.value.filterName);
+    }
+  }
+
 
   changeStatus(object: any): void {
     this.orderItemId = Number((object.event.target as Element).id);
@@ -61,6 +84,7 @@ export class OrderItemsTableComponent implements OnInit {
       .subscribe((res) => {
         this.tableData = res.body["content"] as OrderItem[];
         this.pagination.totalPages = res.body["totalPages"] as number;
+
       });
 
       if(this.orderItemStatusChanged) {
@@ -73,8 +97,6 @@ export class OrderItemsTableComponent implements OnInit {
         this.socketService.sendOrderItemStatusChangedMessage(message);
       }
   }
-
-
 }
 
 

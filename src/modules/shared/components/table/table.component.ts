@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-table',
@@ -8,23 +8,33 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 export class TableComponent implements OnInit {
 
   @Input() tableColumns: any[] = [];
-  @Input() tableDataSrc: any[] = [];
+  @Input() tableData: any[] = [];
+  @Input() totalPages: number = 0;
+  @Input() pageSize: number = 0;
   displayedColumns: any[] = [];
-  @Output() eventEmitter : EventEmitter<any> = new EventEmitter();
-  @Output() eventEmitter1 : EventEmitter<any> = new EventEmitter();
+  @Output() statusChanged : EventEmitter<any> = new EventEmitter();
+  @Output() orderClicked : EventEmitter<any> = new EventEmitter();
+  @Output() pageChanged : EventEmitter<any> = new EventEmitter();
 
-  constructor() { }
+  constructor() { 
+  }
+
 
   ngOnInit(): void {
     this.displayedColumns = this.tableColumns.map(col => col.key);
   }
 
   changeStatus(event:Event, status:string): void { 
-    this.eventEmitter.emit({event:event, status:status});
+    console.log(status);
+    this.statusChanged.emit({event:event, status:status});
   }
 
   viewOrder(id:number): void {
-    this.eventEmitter1.emit(id);
+    this.orderClicked.emit(id);
+  }
+
+  changePage(newPage: number): void {
+    this.pageChanged.emit(newPage);
   }
 
 }

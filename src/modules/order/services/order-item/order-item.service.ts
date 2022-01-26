@@ -53,4 +53,17 @@ export class OrderItemService extends RestService {
     })
 
   }
+
+  filterStatus(page: number, size: number, id: number, status: string): Observable<any> {
+    let queryParams = {};
+
+    queryParams = {
+      observe: "response",
+      params: new HttpParams()
+        .set("page", String(page))
+        .append("size", String(size)),
+    };
+
+    return this.http.get<any>("api/v1/order-items/filter/" + id + "/" + status, queryParams);
+  };
 }
