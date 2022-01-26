@@ -15,4 +15,8 @@ export class NotificationService {
   error(message: string): void {
     this.toastr.error(message);
   }
+
+  websocketSuccess(message: string): void {
+    this.toastr.success(message, '', {closeButton: true})
+  }
 }

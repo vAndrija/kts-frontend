@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import { WebsocketService } from 'src/modules/shared/services/websocket/websocket.service';
 
 @Component({
   selector: 'app-root-layout',
@@ -8,7 +9,8 @@ import { NavigationEnd, Router } from '@angular/router';
 })
 export class RootLayoutComponent implements OnInit {
 
-  constructor(private router: Router) {
+  
+  constructor(private router: Router, private socketService: WebsocketService) {
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         (window as any).loadScript();
@@ -17,6 +19,9 @@ export class RootLayoutComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    const userId = localStorage.getItem("id");
+    this.socketService.connect(userId);
   }
 
+  
 }

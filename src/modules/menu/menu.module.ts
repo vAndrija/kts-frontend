@@ -16,6 +16,7 @@ import { MenuItemService } from './services/menu-item-service/menu-item.service'
 import { PriceItemService } from './services/price-item-service/price-item.service';
 import { PendingMenuItemsComponent } from './pages/pending-menu-items/pending-menu-items.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { NgApexchartsModule } from 'ng-apexcharts';
   ],
   imports: [
     CommonModule,
+    SharedModule,
     MenuRoutingModule,
     FormsModule,
     ReactiveFormsModule,
