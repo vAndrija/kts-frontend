@@ -17,6 +17,7 @@ import { InterceptorInterceptor } from "../shared/interceptors/interceptor.inter
 import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from '../shared/shared.module';
 import { OrderModule } from '../order/order.module';
+import { WebsocketService } from '../shared/services/websocket/websocket.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,6 @@ import { OrderModule } from '../order/order.module';
     RootLayoutComponent,
     NotFoundPageComponent,
     NavbarComponent,
-    
   ],
   imports: [
     CommonModule,
@@ -41,7 +41,7 @@ import { OrderModule } from '../order/order.module';
     OrderModule,
     SharedModule
   ],
-  providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorInterceptor, multi: true },],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorInterceptor, multi: true }, WebsocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
