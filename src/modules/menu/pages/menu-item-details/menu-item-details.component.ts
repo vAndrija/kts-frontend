@@ -64,9 +64,6 @@ export class MenuItemDetailsComponent implements OnInit {
       this.formAccept = new FormGroup({
         price: new FormControl(null, { validators: positiveNumberValidator()}),
         menuId: new FormControl("1", Validators.required),
-        period: new FormControl("", {
-          validators: datetimePickerValidator(),
-        }),
         preparationPrice: new FormControl(null, { validators: positiveNumberValidator()})
     });
   }
@@ -86,6 +83,7 @@ export class MenuItemDetailsComponent implements OnInit {
     this.menuItemService.getMenuItem(id).subscribe(
       (result) => {
         this.menuItem = result as MenuItem;
+        console.log(this.menuItem)
       },
       (error) => {
         if(error.status === 404){
@@ -141,24 +139,18 @@ export class MenuItemDetailsComponent implements OnInit {
   }
 
   createPriceItem(): void {
-    let stringDates = this.formAccept.value.period
-    let dates = this.formatDates(stringDates);
-
-    let startDate = dates.startDate;
-    let endDate = dates.endDate;
-
     let priceItem: PriceItem = {
       current: true,
       menuItemId: this.menuItem.id,
       value: this.formAccept.value.price,
       preparationValue: this.formAccept.value.preparationPrice,
-      startDate: startDate,
-      endDate: endDate
+      startDate: "",
+      endDate: ""
     }
 
     this.priceItemService.createPriceItem(priceItem).subscribe(
       (result) => {
-        priceItem = result as PriceItem
+        this.menuItem.priceItemDto = result as PriceItem;
       },
       (error) => {
         if(error.status === 400) {
@@ -194,17 +186,5 @@ export class MenuItemDetailsComponent implements OnInit {
 
   public errorHandling = (control: string, error: string) => {
     return this.formAccept.controls[control].hasError(error) && this.formAccept.get(control)?.touched;
-  }
-
-  private formatDates = (dates: string): any => {
-    const tokens = dates.split(" ");
-
-    const validStartDate = moment(tokens[0]).format("YYYY-MM-DD");
-    const validEndDate = moment(tokens[1]).format("YYYY-MM-DD");
-
-    return {
-      startDate: validStartDate,
-      endDate: validEndDate
-    }
   }
 }

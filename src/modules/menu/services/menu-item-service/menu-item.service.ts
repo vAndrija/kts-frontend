@@ -46,7 +46,7 @@ export class MenuItemService extends RestService {
         })
   }
 
-  getMenuItemsByMenu(menuId: string, page: Number, pageSize: Number): Observable<HttpResponse<MenuItem[]>> {
+  getMenuItemsByMenu(menuId: string, page: Number, pageSize: Number): Observable<HttpResponse<any>> {
     let queryParams = {};
     queryParams = {
       observe: "response",
@@ -63,5 +63,19 @@ export class MenuItemService extends RestService {
           headers: this.headers,
           responseType: 'json'
     });
+  }
+
+  getMenuItemsByMenuAndSearchFilterParams(menuId: string, searchParam: string, filter: string, page: Number, pageSize: Number): Observable<HttpResponse<any>> {
+    let queryParams = {};
+    queryParams = {
+      observe: "response",
+      params: new HttpParams()
+        .set("page", String(page))
+        .append("size", String(pageSize))
+        .append("searchParam", String(searchParam))
+        .append("filter", String(filter)),
+    };
+
+    return this.http.get<HttpResponse<MenuItem[]>>("api/v1/menu-items/by-menu/" + menuId + "/search", queryParams);
   }
 }

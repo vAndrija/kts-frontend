@@ -14,7 +14,7 @@
                         <div class="product-detail-content">
                             <div class="new-arrival-content pr">
                                 <h4>{{menuItem.name}}</h4>
-                                <p class="price">320.00 RSD</p>
+                                <p *ngIf="menuItem.accepted && menuItem.priceItemDto" class="price">{{menuItem.priceItemDto.value}} RSD</p>
                                 <p>Tip: <span class="item">{{menuItem.type}}</span> </p>
                                 <p>Kategorija:&nbsp;&nbsp;
                                     <span class="badge badge-success light">{{menuItem.category}}</span>
@@ -37,15 +37,6 @@
                                                 <div *ngIf="errorHandling('preparationPrice', 'positiveNumber')" id="val-username-error"
                                                     class="invalid-feedback animated fadeInUp" style="display: block;">
                                                     Cena pripreme je obavezno polje i mora biti broj
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                                <p>Period trajanja cene</p>
-                                                <input formControlName="period" type="text" class="form-control input-daterange-timepicker col-sm-6" name="daterange"
-                                                    id="daterange">
-                                                <div *ngIf="errorHandling('period', 'validDateTime')" id="val-period-error" class="invalid-feedback animated fadeInUp"
-                                                    style="display: block;">
-                                                    Molimo unesite valid period važenja cene
                                                 </div>
                                             </div>
                                             <div class="form-group">
