@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RoleGuard } from '../auth/guards/role/role.guard';
+import { AcceptOrderItemComponent } from './pages/accept-order-item/accept-order-item.component';
 import { OrderItemsTableComponent } from './pages/order-items-table/order-items-table.component';
 import { OrderReviewComponent } from './pages/order-review/order-review.component';
 import { OrderTableComponent } from './pages/order-table/order-table.component';
@@ -13,6 +14,13 @@ const routes: Routes = [
     component: OrderItemsTableComponent,
     canActivate: [RoleGuard],
     data: { expectedRoles: "ROLE_MANAGER|ROLE_COOK|ROLE_BARTENDER|ROLE_WAITER|ROLE_SYSTEM_ADMIN" }
+  },
+  {
+    path: 'unaccepted-order-items',
+    pathMatch: 'full',
+    component: AcceptOrderItemComponent,
+    canActivate: [RoleGuard],
+    data: { expectedRoles: "ROLE_COOK|ROLE_BARTENDER"}
   },
   {
     path: 'order',

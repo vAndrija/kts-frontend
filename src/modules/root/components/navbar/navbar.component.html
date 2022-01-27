@@ -106,6 +106,7 @@
                         <li><a [routerLink]="['/restaurant/preview']"><i class="flaticon-381-home"></i>Restoran</a></li>
                         <li *ngIf="show"><a [routerLink]="['/menu/create-menu-item']"><i class="flaticon-381-add-2"></i>Kreiraj stavku menija</a></li>
                         <li *ngIf="role === 'ROLE_COOK' || role === 'ROLE_BARTENDER'"><a [routerLink]="['/order/order-items']"><i class="flaticon-381-diploma"></i>Stavke porudžbine</a></li>
+                        <li *ngIf="role === 'ROLE_COOK' || role === 'ROLE_BARTENDER'"><a [routerLink]="['/order/unaccepted-order-items']"><i class="flaticon-381-diploma"></i>Preuzmite stavku porudžbine</a></li>
                         <li *ngIf="role === 'ROLE_WAITER'"><a [routerLink]="['/order/orders']"><i class="flaticon-381-diploma"></i>Porudžbine</a></li>
                     </div>
                     

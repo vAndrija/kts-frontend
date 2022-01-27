@@ -37,8 +37,6 @@ export class MenuItemFormComponent implements OnInit {
   }
 
   public submit(): void {
-    console.log(this.form.value);
-
     const menuItem: MenuItemDto = this.form.value;
 
     this.menuItemService.addMenuItem(menuItem).subscribe(
