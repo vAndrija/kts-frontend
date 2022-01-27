@@ -4,6 +4,7 @@ import { PAGE_SIZE } from 'src/modules/shared/constants/constants';
 import { Pagination } from 'src/modules/shared/models/pagination';
 import { SelectModel } from 'src/modules/shared/models/select-model';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
+import { WebsocketService } from 'src/modules/shared/services/websocket/websocket.service';
 import { Menu } from '../../model/menu';
 import { MenuItem } from '../../model/menuItem';
 import { MenuItemService } from '../../services/menu-item-service/menu-item.service';
@@ -29,15 +30,19 @@ export class MenuItemsReviewComponent implements OnInit {
   searchForm: FormGroup;
   category: String = "";
 
-  constructor(private menuService: MenuService, private notificationService: NotificationService,
-    private menuItemService: MenuItemService) { 
-      this.form = new FormGroup({
-        menuId: new FormControl("0", Validators.required),
-      })
-      this.searchForm = new FormGroup({
-        searchParam: new FormControl(""),
-        category: new FormControl("")
-      })
+  constructor(
+    private menuService: MenuService, 
+    private notificationService: NotificationService,
+    private menuItemService: MenuItemService,
+    private socketService: WebsocketService
+    ) { 
+    this.form = new FormGroup({
+      menuId: new FormControl("0", Validators.required),
+    })
+    this.searchForm = new FormGroup({
+      searchParam: new FormControl(""),
+      category: new FormControl("")
+    })
   }
 
   ngOnInit(): void {

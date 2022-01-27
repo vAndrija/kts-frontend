@@ -1,5 +1,4 @@
-<app-create-order [tableId]="tableId" [discount]="discount" (eventEmitter1)="onDelete($event)"
-    [orderItems]="orderItems"></app-create-order>
+<app-create-order [tableId]="tableId" [discount]="discount" (triggerOrderItemsChanged)="onDelete($event)" (triggerSendNotification)="sendMessage($event)" [orderItems]="orderItems"></app-create-order>
 <div class="row">
     <div class="col-xxl-3 col-xxl-12 col-xxlg-12 col-xld-12" style="padding-bottom: 20px;">
         <div class="header-left">
