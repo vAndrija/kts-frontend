@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AzureBlogStorageService {
   
-  private readonly accountName: string = "ktsproject"
+  private readonly accountName: string = "storagekts"
   private readonly containerName: string = "pictures"
   constructor() { }
 
