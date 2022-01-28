@@ -24,13 +24,14 @@ export class OrderItemCardComponent implements OnInit {
       current: false,
       preparationValue: 0
     },
-    menu: {
+    menuDto: {
       durationEnd: new Date,
       durationStart: new Date,
       id: "",
       name: ""
     },
-    accepted: false
+    accepted: false,
+    imageName: ""
   }
   priority: any;
   quantity: any;

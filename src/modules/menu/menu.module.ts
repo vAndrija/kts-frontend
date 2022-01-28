@@ -11,12 +11,14 @@ import { MenuItemCardComponent } from './components/menu-item-card/menu-item-car
 import { MenuService } from './services/menu-service/menu.service';
 import { MenuItemFormComponent } from './components/menu-item-form/menu-item-form.component';
 import { CreateMenuItemComponent } from './pages/create-menu-item/create-menu-item.component';
-import { MenuItemDetailsComponent } from './pages/menu-item-details/menu-item-details.component';
+import { MenuItemDetailsComponent } from './components/menu-item-details/menu-item-details.component';
 import { MenuItemService } from './services/menu-item-service/menu-item.service';
 import { PriceItemService } from './services/price-item-service/price-item.service';
 import { PendingMenuItemsComponent } from './pages/pending-menu-items/pending-menu-items.component';
 import { NgApexchartsModule } from 'ng-apexcharts';
 import { SharedModule } from '../shared/shared.module';
+import { UpdateMenuItemComponent } from './components/update-menu-item/update-menu-item.component';
+import { MenuItemReviewComponent } from './pages/menu-item-review/menu-item-review.component';
 
 
 @NgModule({
@@ -28,7 +30,9 @@ import { SharedModule } from '../shared/shared.module';
     MenuItemFormComponent,
     CreateMenuItemComponent,
     MenuItemDetailsComponent,
-    PendingMenuItemsComponent
+    PendingMenuItemsComponent,
+    UpdateMenuItemComponent,
+    MenuItemReviewComponent
   ],
   imports: [
     CommonModule,
