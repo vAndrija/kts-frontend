@@ -15,10 +15,14 @@ import { RestaurantTableService } from 'src/modules/restaurant/services/restaura
   providers: [DatePipe]
 })
 export class CreateOrderComponent implements OnInit {
+  
+  @Output() triggerOrderItemsChanged: EventEmitter<Item[]> = new EventEmitter();
+  @Output() triggerSendNotification: EventEmitter<any> = new EventEmitter();
+
+  $ = (window as any).$;
+
   @Input()
   orderItems: Item[] = [];
-  @Output() eventEmitter1: EventEmitter<Item[]> = new EventEmitter();
-  $ = (window as any).$;
   @Input()
   discount: number = 0;
   @Input()
@@ -38,11 +42,17 @@ export class CreateOrderComponent implements OnInit {
     tableId: 1,
     waiterId: Number(localStorage.getItem('id'))
   }
+  
+  constructor(
+    private orderItemservice: OrderItemService, 
+    private datePipe: DatePipe,
+    private notificationService: NotificationService,
+    private router: Router, 
+    private restaurantTableService: RestaurantTableService
+   ) { }
 
-  constructor(private orderItemservice: OrderItemService, private datePipe: DatePipe,
-    private notificationService: NotificationService, private router: Router, private restaurantTableService: RestaurantTableService) { }
-
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+  }
 
   close(): void {
     this.$('.order-create').removeClass('active');
@@ -50,7 +60,7 @@ export class CreateOrderComponent implements OnInit {
 
   delete(id: string): void {
     this.orderItems = this.orderItems.filter(orderItem => orderItem.menuItemId !== id);
-    this.eventEmitter1.emit(this.orderItems);
+    this.triggerOrderItemsChanged.emit(this.orderItems);
     this.orderDiscount();
   }
 
@@ -80,6 +90,7 @@ export class CreateOrderComponent implements OnInit {
     this.order.tableId = this.tableId;
     this.orderItemservice.createOrder(this.order).subscribe(
       (response) => {
+        this.triggerSendNotification.emit("Kreirana je nova porudžbina");
         this.createdOrder = response as OrderDto;
         this.createOrderItem();
         this.notificationService.success('Uspešno kreirana porudžbina!');

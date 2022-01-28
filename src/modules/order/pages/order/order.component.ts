@@ -3,7 +3,9 @@ import { MenuItem } from 'src/modules/menu/model/menuItem';
 import { Item } from 'src/modules/shared/models/item';
 import { NgForm } from '@angular/forms';
 import { MenuService } from 'src/modules/menu/services/menu-service/menu.service';
+import { WebsocketService } from 'src/modules/shared/services/websocket/websocket.service';
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-order',
   templateUrl: './order.component.html',
@@ -24,7 +26,12 @@ export class OrderComponent implements OnInit {
   quantityMap = new Map();
   routeState: any;
   tableId: number = 0;
-  constructor(private menuService: MenuService, private router: Router) {
+
+  constructor(
+    private menuService: MenuService,
+    private socketService: WebsocketService,
+    private router: Router
+    ) {
     this.categories = ['Sve', 'Supa', 'Doručak', 'Predjelo', 'Glavno jelo', 'Dezert', 'Koktel', 'Topli napitak', 'Bezalkoholno piće'];
     if (this.router.getCurrentNavigation()?.extras.state) {
       this.routeState = this.router.getCurrentNavigation()?.extras.state;
@@ -37,6 +44,9 @@ export class OrderComponent implements OnInit {
 
   ngOnInit(): void {
     this.getMenuItems();
+
+    const userId = localStorage.getItem("id");
+    this.socketService.connect(userId);    
   }
 
   open(): void {
@@ -119,6 +129,10 @@ export class OrderComponent implements OnInit {
 
   onDelete(items: Item[]): void {
     this.orderItems = items;
+  }
+
+  sendMessage(message: string): void {
+    this.socketService.sendOrderCreatedMessage({"message": message});
   }
 
 }

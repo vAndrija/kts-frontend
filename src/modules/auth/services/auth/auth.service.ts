@@ -29,19 +29,22 @@ export class AuthService extends RestService {
     return true;
   }
 
+  //Nesto ne funkcionise dobro, kasnije moram pogledati
   isUserOnMainPosition(): boolean {
     const role = localStorage.getItem("role");
+    const userId = localStorage.getItem("id");
 
     if (role === "ROLE_BARTENDER") {
-      this.getUser("api/v1/bartender").subscribe(
+      this.getUser("api/v1/bartender/" + userId).subscribe(
         (result) => {
           return result.priority;
         }
       )
     }
     if (role === "ROLE_COOK") {
-      this.getUser("api/v1/cook").subscribe(
+      this.getUser("api/v1/cook/" + userId).subscribe(
         (result) => {
+          console.log("auth: " + result.priority);
           return result.priority;
         }
       )
