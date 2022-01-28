@@ -40,7 +40,8 @@ export class UpdateMenuItemComponent implements OnInit, OnChanges {
       id: "",
       name: ""
     },
-    accepted: false
+    accepted: false,
+    imageName: ""
   };
   types: SelectModel[] = [];
   selectedMenu: string = "";

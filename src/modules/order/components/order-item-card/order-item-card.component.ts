@@ -30,7 +30,8 @@ export class OrderItemCardComponent implements OnInit {
       id: "",
       name: ""
     },
-    accepted: false
+    accepted: false,
+    imageName: ""
   }
   priority: any;
   quantity: any;

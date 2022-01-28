@@ -29,7 +29,8 @@ export class MenuItemCardComponent implements OnInit {
       id: "",
       name: ""
     },
-    accepted: false
+    accepted: false,
+    imageName: ""
   }
 
   constructor() { }

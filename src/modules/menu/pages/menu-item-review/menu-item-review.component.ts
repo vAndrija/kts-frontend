@@ -31,7 +31,8 @@ export class MenuItemReviewComponent implements OnInit {
       id: "",
       name: ""
     },
-    accepted: false
+    accepted: false,
+    imageName: ""
   };
   role: string|null = localStorage.getItem("role");
 

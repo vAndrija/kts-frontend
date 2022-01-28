@@ -2,7 +2,7 @@
     <div class="col-xl-3">
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane fade show active" id="first">
-                <img class="img-fluid" src="../../../../assets/images/card/3.png" alt="">
+                <img class="img-fluid" src="{{ 'https://storagekts.blob.core.windows.net/pictures/' + menuItem.imageName }}" alt="">
             </div>
         </div>
     </div>
@@ -66,8 +66,9 @@
                     <div class="shopping-cart mt-3">
                         <button type="submit" class="btn btn-primary" [disabled]="!formAccept.valid"
                             style="margin: 1em;">Sačuvaj</button>
-                        <button *ngIf="!menuItem.accepted" type="button" class="btn btn-primary" style="margin: 1em;" (click)="decline('/menu/pending-menu-items')">Odbaci</button>
-                        <button *ngIf="menuItem.accepted" type="button" class="btn btn-primary" style="margin: 1em;"
+                        <button *ngIf="!menuItem.accepted" type="button" class="btn btn-primary" style="margin: 1em;" id="decline" 
+                            (click)="decline('/menu/pending-menu-items')">Odbaci</button>
+                        <button *ngIf="menuItem.accepted" type="button" class="btn btn-primary" style="margin: 1em;" id="delete"
                             (click)="decline('/menu/menu-items')">Obriši</button>
                     </div>
                 </form>

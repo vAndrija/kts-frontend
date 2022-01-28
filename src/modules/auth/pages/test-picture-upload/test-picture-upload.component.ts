@@ -12,7 +12,7 @@ export class TestPictureUploadComponent {
   imageSelected(event:Event){
     const target= event.target as HTMLInputElement;
     const file: File = (target.files as FileList)[0];
-    this.blobService.uploadImage(file,"1-"+file.name,()=>{
+    this.blobService.uploadImage(file, file.name, ()=>{
       console.log("Success")
     })
   }

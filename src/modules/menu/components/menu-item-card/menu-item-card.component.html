@@ -1,9 +1,9 @@
-<div class="col-xl-3 col-lg-6 col-md-4 col-sm-6" style="max-width: none;">
+
     <div class="card">
         <div class="card-body">
             <div class="new-arrival-product">
                 <div class="new-arrivals-img-contnent">
-                    <img class="img-fluid" src="../../../../assets/images/card/3.png" alt="">
+                    <img class="img-fluid" src="{{ 'https://storagekts.blob.core.windows.net/pictures/' + menuItem.imageName }}" alt="">
                 </div>
                 <div class="new-arrival-content text-center mt-3">
                     <h4>{{menuItem.name}}</h4>
@@ -25,4 +25,3 @@
             </div>
         </div>
     </div>
-</div>

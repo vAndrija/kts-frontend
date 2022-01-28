@@ -10,5 +10,6 @@ export interface MenuItem {
     preparationTime: Number,
     priceItemDto: PriceItem,
     menuDto: Menu,
-    accepted: boolean
+    accepted: boolean,
+    imageName: string
   }
