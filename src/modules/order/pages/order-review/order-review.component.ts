@@ -37,18 +37,14 @@ export class OrderReviewComponent implements OnInit {
 
 
   fromOrderItemToItem(orderItem: OrderItem, menuItem: MenuItem): Item {
-    var item: Item = {
-      id: orderItem.id,
-      quantity: orderItem.quantity,
-      status: orderItem.status,
-      priority: orderItem.priority,
-      orderId: orderItem.orderId,
+    const item: Item = {
+      ...orderItem,
       name: menuItem.name,
       category: menuItem.category,
       price: menuItem.priceItemDto.value,
       discount: menuItem.priceItemDto.value * orderItem.quantity,
       menuItemId: menuItem.id,
-      note: orderItem.note
+
     };
     return item;
 
@@ -62,10 +58,10 @@ export class OrderReviewComponent implements OnInit {
     this.orderItemService.deleteOrderItem(id).subscribe(
       () => {
         this.orderItems = this.orderItems.filter(orderItem => orderItem.id !== id);
-        this.notificationService.success("Uspešno otkazana stavka porudžbine!");
+        this.notificationService.success('Uspešno otkazana stavka porudžbine!');
       },
       (error) => {
-        this.notificationService.error("Greška priliko otkazivanja!");
+        this.notificationService.error('Greška priliko otkazivanja!');
       }
 
     );

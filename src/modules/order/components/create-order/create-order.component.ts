@@ -5,6 +5,8 @@ import { CreateOrderItem } from 'src/modules/shared/models/orderitem';
 import { OrderItemService } from '../../services/order-item/order-item.service';
 import { DatePipe } from '@angular/common';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
+import { Router } from '@angular/router';
+import { RestaurantTableService } from 'src/modules/restaurant/services/restaurant-table.service';
 
 @Component({
   selector: 'app-create-order',
@@ -38,7 +40,7 @@ export class CreateOrderComponent implements OnInit {
   }
 
   constructor(private orderItemservice: OrderItemService, private datePipe: DatePipe,
-    private notificationService: NotificationService) { }
+    private notificationService: NotificationService, private router: Router, private restaurantTableService: RestaurantTableService) { }
 
   ngOnInit(): void { }
 
@@ -53,7 +55,7 @@ export class CreateOrderComponent implements OnInit {
   }
 
   fromItemToCreateOrderItem(orderItem: Item): CreateOrderItem {
-    var item: CreateOrderItem = {
+    const item: CreateOrderItem = {
       orderId: this.createdOrder.id,
       note: orderItem.note,
       menuItemId: orderItem.menuItemId,
@@ -70,7 +72,7 @@ export class CreateOrderComponent implements OnInit {
   }
 
   createOrder(): void {
-    var d = this.datePipe.transform(Date.now().toString(), 'yyyy-MM-ddTHH:mm');
+    const d = this.datePipe.transform(Date.now().toString(), 'yyyy-MM-ddTHH:mm');
     if (d != null) {
       this.order.dateOfOrder = d;
     }
@@ -81,6 +83,13 @@ export class CreateOrderComponent implements OnInit {
         this.createdOrder = response as OrderDto;
         this.createOrderItem();
         this.notificationService.success('Uspešno kreirana porudžbina!');
+        this.close();
+
+        this.restaurantTableService.findTableWithOrder(this.tableId).subscribe(
+          (response) => {
+            this.router.navigate(['/order/review'], { state: { orders: response, tableId: this.tableId } });
+          },
+        );
       },
     )
   }
@@ -88,8 +97,6 @@ export class CreateOrderComponent implements OnInit {
   createOrderItem(): void {
     this.orderItems.forEach(orderItem => orderItem.orderId = this.createdOrder.id);
     this.orderItems.forEach(orderItem => this.orderItemservice.createOrderItem(this.fromItemToCreateOrderItem(orderItem)).subscribe())
-    this.close();
-    location.reload();
   }
 
 }
