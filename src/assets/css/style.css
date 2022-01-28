@@ -13122,24 +13122,28 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   }
 .order-item-card {
     float:left;
-    padding: 0 10px; 
-    height: 520px; 
-    width: 280px;
+    padding: 0 0.5em; 
+    height: 32em; 
+    width: 17em;
   }
   .order-item-card .order-item-card-sc {
-    margin-left: 50px;
+    margin-left: 2em;
   }
   .order-item-card .order-item-card-input {
-    margin-top: 20px;
+    margin-top: 1em;
   }
 
   .order-item-card .order-item-card-na {
-    width: 240px;
+    width: 15em;
   }
   .order-item-card .order-item-card-r{
-    margin-right: 63px;
+    margin-right: 2em;
+    margin-left: 0.5em;
   }
-
+  .order-item-card .order-item-card-image {
+    width: 10em;
+    height: 7em;
+  }
   .order-search {
     margin-left: 300px; 
     height: 50px;

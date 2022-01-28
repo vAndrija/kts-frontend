@@ -47,7 +47,6 @@ export class OrderItemsTableComponent implements OnInit {
         this.role = role;
       }
       this.tableData = [];
-      this.load(this.pagination.currentPage - 1);
       this.form = new FormGroup({
         filterName: new FormControl("", Validators.required),
       })

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { MenuItem } from 'src/modules/menu/model/menuItem';
 import { Item } from 'src/modules/shared/models/item';
 
@@ -7,7 +7,7 @@ import { Item } from 'src/modules/shared/models/item';
   templateUrl: './order-item-card.component.html',
   styleUrls: ['./order-item-card.component.scss']
 })
-export class OrderItemCardComponent implements OnInit {
+export class OrderItemCardComponent implements OnInit, OnChanges {
   @Input()
   public menuItem: MenuItem = {
     id: "",
@@ -67,6 +67,12 @@ export class OrderItemCardComponent implements OnInit {
     this.item.price = this.menuItem.priceItemDto.value;
     this.item.note = this.note;
     this.eventEmitter.emit(this.item);
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.menuItem.imageName === "") {
+      this.menuItem.imageName = "default.jpg"
+    }
   }
 
 }

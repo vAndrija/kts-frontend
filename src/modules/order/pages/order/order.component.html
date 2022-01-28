@@ -23,7 +23,7 @@
 
     </div>
     <div class="row">
-        <div class="col-xl-10 col-xxl-3 col-lg-6 col-md-12" style="margin-bottom: 10px;">
+        <div class="col-xl-10 col-xxl-3 col-lg-6 col-md-12" style="margin-bottom: 0.5em;">
             <div class="row">
                 <div class="col-xl-10 col-lg-6 ">
                     <div class="card h-auto">
@@ -36,12 +36,12 @@
                 </div>
             </div>
         </div>
-        <div class="col" style="width: 1000px;">
+        <div class="col" style="width: 75em;">
             <app-order-item-card *ngFor="let menuItem of menuItems" [menuItem]="menuItem"
                 (eventEmitter)="addOrderItem($event)"></app-order-item-card>
         </div>
     </div>
-    <div class="col-xxl-3 col-xxl-12 col-xxlg-12 col-xld-12" style="padding-bottom: 20px;">
+    <div class="col-xxl-3 col-xxl-12 col-xxlg-12 col-xld-12" style="padding-bottom: 1em;">
         <button type="submit" class="btn btn-sm btn-primary btn-block button-load" (click)="loadMore()"
             *ngIf="totalPages !== 1" id="load">Učitaj još</button>
     </div>
