@@ -48,7 +48,8 @@ export class OrderItemCardComponent implements OnInit {
     price:0,
     menuItemId:"",
     discount:0,
-    note: ""
+    note: "",
+    dateOfOrder:""
   };
 
   constructor() { }

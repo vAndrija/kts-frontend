@@ -77,9 +77,9 @@ export class RestaurantPreviewComponent implements OnInit {
   }
 
   add(x: number, y: number, value: boolean) {
-    var width = this.settings.blockSnapSize * 6;
-    var height = this.settings.blockSnapSize * 3;
-    let rectangle = this.newRectangle(x, y, width, height, value);
+    const width = this.settings.blockSnapSize * 6;
+    const height = this.settings.blockSnapSize * 3;
+    const rectangle = this.newRectangle(x, y, width, height, value);
     this.layer.add(rectangle);
 
   }
@@ -101,6 +101,7 @@ export class RestaurantPreviewComponent implements OnInit {
       draggable: value,
       cornerRadius: 10
     });
+   
     rectangle.on("dragend", () => {
       rectangle.draggable(false);
       this.selectedItem = rectangle;
@@ -163,7 +164,7 @@ export class RestaurantPreviewComponent implements OnInit {
   }
 
   find(xCoordinate: number, yCoordinate: number): number {
-    for (var i = 0; i < this.loadedTables.length; i++) {
+    for (let i = 0; i < this.loadedTables.length; i++) {
       if (this.loadedTables[i].xCoordinate === xCoordinate && this.loadedTables[i].yCoordinate === yCoordinate) {
         return this.loadedTables[i].id;
       }
@@ -176,7 +177,7 @@ export class RestaurantPreviewComponent implements OnInit {
       this.selectedItem.setAttr("fill", "#964B00");
       this.close.nativeElement.click();
     } else {
-      var id = this.find(this.selectedItem.getAttr("x"), this.selectedItem.getAttr("y"));
+      const id = this.find(this.selectedItem.getAttr("x"), this.selectedItem.getAttr("y"));
       this.close.nativeElement.click();
       this.restaurantTableService.findTableWithOrder(id).subscribe(
         (response) => {
@@ -187,13 +188,13 @@ export class RestaurantPreviewComponent implements OnInit {
                 this.selectedItem.destroy();
                 this.load();
               });
-           
+
           } else {
             this.notificationService.error("Nije moguće obrisati sto!");
           }
         },
       );
-      
+
 
     }
   }
