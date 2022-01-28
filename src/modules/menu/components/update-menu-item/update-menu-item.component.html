@@ -63,6 +63,13 @@
                             </option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <p>Izaberite sliku:</p>
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input col-sm-6" formControlName="imageName" (change)="imageSelected($event)">
+                            <label class="custom-file-label col-sm-6">Choose file</label>
+                        </div>
+                    </div>
                     <div class="shopping-cart mt-3">
                         <button type="submit" class="btn btn-primary" [disabled]="!formAccept.valid"
                             style="margin: 1em;">Sačuvaj</button>

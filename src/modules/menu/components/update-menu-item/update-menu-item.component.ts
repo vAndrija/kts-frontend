@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { positiveNumberValidator } from 'src/modules/shared/custom-validators/positive-number-validator';
 import { SelectModel } from 'src/modules/shared/models/select-model';
+import { AzureBlogStorageService } from 'src/modules/shared/services/azure-blog-storage/azure-blog-storage.service';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
 import { Menu } from '../../model/menu';
 import { MenuItem } from '../../model/menuItem';
@@ -48,19 +49,22 @@ export class UpdateMenuItemComponent implements OnInit, OnChanges {
   menus: Menu[] = [];
   formAccept: FormGroup;
   menu: SelectModel = new SelectModel("", "")
+  image: File = new File([], "");
 
   constructor(private menuItemService: MenuItemService,
     private notificationService: NotificationService,
     private menuService: MenuService,
     private priceItemService: PriceItemService,
-    private router: Router) {
+    private router: Router,
+    private blobService: AzureBlogStorageService) {
       this.formAccept = new FormGroup({
         name: new FormControl("", Validators.required),
         description: new FormControl("", Validators.required),
         preparationTime: new FormControl(null, { validators: positiveNumberValidator()}),
         price: new FormControl(null, { validators: positiveNumberValidator()}),
         menuId: new FormControl("1", Validators.required),
-        preparationPrice: new FormControl(null, { validators: positiveNumberValidator()})
+        preparationPrice: new FormControl(null, { validators: positiveNumberValidator()}),
+        imageName: new FormControl(""),
       });
      }
 
@@ -69,6 +73,9 @@ export class UpdateMenuItemComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
+    if(this.menuItem.imageName === "") {
+      this.menuItem.imageName = "default.jpg"
+    }
     this.formAccept.patchValue({
       name: this.menuItem.name,
       description: this.menuItem.description,
@@ -99,6 +106,11 @@ export class UpdateMenuItemComponent implements OnInit, OnChanges {
     this.menuItem.menuDto.id = value;
   }
 
+  imageSelected(event:Event){
+    const target= event.target as HTMLInputElement;
+    this.image = (target.files as FileList)[0];
+  }
+
   updateMenuItem(): void {
     this.menuItem.accepted = true;
     const updateMenuItemDto: UpdateMenuItemDto = {
@@ -107,8 +119,12 @@ export class UpdateMenuItemComponent implements OnInit, OnChanges {
       name: this.formAccept.value.name,
       preparationTime: this.formAccept.value.preparationTime,
       accepted: true,
-      menuId: this.formAccept.value.menuId
+      menuId: this.formAccept.value.menuId,
+      imageName: this.image.name
     }
+
+    this.blobService.uploadImage(this.image, this.image.name, ()=>{
+    })
 
     this.menuItemService.updateMenuItem(updateMenuItemDto, this.menuItem.id).subscribe(
       (result) => {
@@ -154,6 +170,7 @@ export class UpdateMenuItemComponent implements OnInit, OnChanges {
   submit(): void {
     this.updateMenuItem();
     this.createPriceItem();
+    this.router.navigate(["/menu/menu-items"]);
   }
  
   decline(redirectTo: string): void {
