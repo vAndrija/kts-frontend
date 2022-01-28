@@ -9,6 +9,6 @@ export interface MenuItem {
     category: string,
     preparationTime: Number,
     priceItemDto: PriceItem,
-    menu: Menu,
+    menuDto: Menu,
     accepted: boolean
   }

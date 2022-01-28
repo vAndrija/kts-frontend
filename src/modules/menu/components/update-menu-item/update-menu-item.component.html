@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="col-xl-3">
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade show active" id="first">
+                <img class="img-fluid" src="../../../../assets/images/card/3.png" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-9 col-sm-12">
+        <div class="product-detail-content">
+            <div class="new-arrival-content pr">
+                <form [formGroup]="formAccept" (ngSubmit)="submit()">
+                    <p>Kategorija:&nbsp;&nbsp;
+                        <span class="badge badge-success light">{{menuItem.category}}</span>
+                    </p>
+                    <p>Tip: <span class="badge badge-success light">{{menuItem.type}}</span> </p>
+                    <div class="form-group">
+                        <p>Naziv:</p>
+                        <input type="text" class="form-control col-sm-6" formControlName="name">
+                        <div *ngIf="errorHandling('name', 'required')" id="val-username-error"
+                            class="invalid-feedback animated fadeInUp" style="display: block;">
+                            Ime je obavezno polje
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <p>Opis:</p>
+                        <input type="text" class="form-control col-sm-6" formControlName="description">
+                        <div *ngIf="errorHandling('description', 'required')" id="val-username-error" class="invalid-feedback animated fadeInUp"
+                            style="display: block;">
+                            Opis je obavezno polje
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <p>Vreme pripreme u minutima:</p>
+                        <input type="text" class="form-control col-sm-6" formControlName="preparationTime">
+                        <div *ngIf="errorHandling('preparationTime', 'required')" id="val-username-error"
+                            class="invalid-feedback animated fadeInUp" style="display: block;">
+                            Vreme pripreme je obavezno polje i mora biti pozitivan broj
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <p>Cena (RSD):</p>
+                        <input type="text" class="form-control col-sm-6" formControlName="price">
+                        <div *ngIf="errorHandling('price', 'positiveNumber')" id="val-username-error"
+                            class="invalid-feedback animated fadeInUp" style="display: block;">
+                            Cena je obavzeno polje i mora biti broj
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <p>Cena pripreme (RSD):</p>
+                        <input type="text" class="form-control col-sm-6" formControlName="preparationPrice">
+                        <div *ngIf="errorHandling('preparationPrice', 'positiveNumber')" id="val-username-error"
+                            class="invalid-feedback animated fadeInUp" style="display: block;">
+                            Cena pripreme je obavezno polje i mora biti broj
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <p>Izaberite meni:</p>
+                        <select class="default-select form-control col-sm-6" formControlName="menuId"
+                            data-placeholder="Izaberite aktivan meni.." name="category-color">
+                            <option *ngFor="let prf of types" [value]="prf.prId">
+                                {{ prf.prName }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="shopping-cart mt-3">
+                        <button type="submit" class="btn btn-primary" [disabled]="!formAccept.valid"
+                            style="margin: 1em;">Sačuvaj</button>
+                        <button *ngIf="!menuItem.accepted" type="button" class="btn btn-primary" style="margin: 1em;" (click)="decline('/menu/pending-menu-items')">Odbaci</button>
+                        <button *ngIf="menuItem.accepted" type="button" class="btn btn-primary" style="margin: 1em;"
+                            (click)="decline('/menu/menu-items')">Obriši</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

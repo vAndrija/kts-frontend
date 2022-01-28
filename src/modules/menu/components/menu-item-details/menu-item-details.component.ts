@@ -2,27 +2,27 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MenuItem } from '../../model/menuItem';
 
 @Component({
-  selector: 'app-menu-item-card',
-  templateUrl: './menu-item-card.component.html',
-  styleUrls: ['./menu-item-card.component.scss']
+  selector: 'app-menu-item-details',
+  templateUrl: './menu-item-details.component.html',
+  styleUrls: ['./menu-item-details.component.scss']
 })
-export class MenuItemCardComponent implements OnInit {
-  @Input()
+export class MenuItemDetailsComponent implements OnInit {
+  @Input() 
   public menuItem: MenuItem = {
     id: "",
     category: "",
     description: "",
     name: "",
     preparationTime: 0,
-    type: "",
     priceItemDto: {
-      value: 0,
-      startDate: "",
       endDate: "",
-      menuItemId: "",
       current: false,
-      preparationValue: 0
+      menuItemId: "",
+      preparationValue: 0,
+      startDate: "",
+      value: 0
     },
+    type: "",
     menuDto: {
       durationEnd: new Date,
       durationStart: new Date,
@@ -30,7 +30,7 @@ export class MenuItemCardComponent implements OnInit {
       name: ""
     },
     accepted: false
-  }
+  };
 
   constructor() { }
 

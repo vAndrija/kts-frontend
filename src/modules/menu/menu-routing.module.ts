@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateMenuComponent } from './pages/create-menu/create-menu.component';
 import { RoleGuard } from '../auth/guards/role/role.guard';
-import { MenuItemDetailsComponent } from './pages/menu-item-details/menu-item-details.component';
 import { MenuItemsReviewComponent } from './pages/menu-items-review/menu-items-review.component';
 import { CreateMenuItemComponent } from './pages/create-menu-item/create-menu-item.component';
 import { PendingMenuItemsComponent } from './pages/pending-menu-items/pending-menu-items.component';
+import { MenuItemReviewComponent } from './pages/menu-item-review/menu-item-review.component';
 
 const routes: Routes = [
   {
@@ -35,7 +35,7 @@ const routes: Routes = [
   {
     path: "menu-items/:menuItemId",
     pathMatch: "full",
-    component: MenuItemDetailsComponent,
+    component: MenuItemReviewComponent,
     canActivate: [RoleGuard],
     data: {expectedRoles: "ROLE_MANAGER|ROLE_COOK|ROLE_BARTENDER|ROLE_WAITER|ROLE_SYSTEM_ADMIN"}
   },

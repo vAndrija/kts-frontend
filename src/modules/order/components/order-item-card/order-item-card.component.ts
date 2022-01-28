@@ -24,7 +24,7 @@ export class OrderItemCardComponent implements OnInit {
       current: false,
       preparationValue: 0
     },
-    menu: {
+    menuDto: {
       durationEnd: new Date,
       durationStart: new Date,
       id: "",
