@@ -10,6 +10,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateOrderComponent } from './components/create-order/create-order.component';
 import { OrderTableComponent } from './pages/order-table/order-table.component';
 import { OrderReviewComponent } from './pages/order-review/order-review.component';
+import { AcceptOrderItemTableComponent } from './components/accept-order-item-table/accept-order-item-table.component';
+import { AcceptOrderItemComponent } from './pages/accept-order-item/accept-order-item.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,8 @@ import { OrderReviewComponent } from './pages/order-review/order-review.componen
     CreateOrderComponent,
     OrderTableComponent,
     OrderReviewComponent,
+    AcceptOrderItemTableComponent,
+    AcceptOrderItemComponent,
   ],
   imports: [
     CommonModule,

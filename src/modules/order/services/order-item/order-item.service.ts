@@ -3,7 +3,7 @@ import {
   HttpClient, HttpParams, HttpResponse,
 } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { CreateOrderItem, OrderItem } from 'src/modules/shared/models/orderitem';
+import { AcceptOrderItem, CreateOrderItem, OrderItem } from 'src/modules/shared/models/orderitem';
 import { CreateOrderDto, OrderDto } from 'src/modules/shared/models/order';
 import { RestService } from 'src/modules/shared/services/rest/rest.service';
 @Injectable({
@@ -28,6 +28,19 @@ export class OrderItemService extends RestService {
     return this.http.get<HttpResponse<any>>("api/v1/order-items/employee/" + id, queryParams);
   }
 
+  getUnacceptedOrderItems(page: number, size: number): Observable<HttpResponse<any>> {
+    let queryParams = {};
+
+    queryParams = {
+      observe: "response",
+      params: new HttpParams()
+        .set("page", String(page))
+        .append("size", String(size)),
+    };
+
+    return this.http.get<HttpResponse<any>>("api/v1/order-items/unaccepted", queryParams);
+  }
+
 
   changeStatusOrderItem(id: number, status: string): Observable<OrderItem> {
     return this.http.post<any>("api/v1/order-items/status/" + id, status);
@@ -42,6 +55,9 @@ export class OrderItemService extends RestService {
 
   }
 
+  acceptOrderItem(orderItem: AcceptOrderItem, id: number): Observable<OrderItem> {
+    return this.http.put<any>("api/v1/order-items/" + id, orderItem);
+  }
   findOrderItemsByOrder(id: number): Observable<OrderItem[]> {
     return this.http.get<any>("api/v1/order-items/order/" + id);
   }
