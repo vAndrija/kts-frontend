@@ -3,7 +3,7 @@
         <div class="card-body">
             <div class="table-responsive">
                 <table mat-table [dataSource]="tableData" class="mat-elevation-z8" style="width:100%">
-                    <ng-container *ngFor="let col of tableColumns">
+                    <ng-container *ngFor="let col of tableColumns;">
                         <ng-container matColumnDef="{{ col.key }}">
                             <th mat-header-cell *matHeaderCellDef mat-sort-header style="text-align: center; font-size: medium;">
                                 {{ col.header }}
@@ -17,7 +17,7 @@
                                             {{element[col.key]}}
                                         </button>
                                         <button *ngIf="element[col.key] === 'Pripremljeno'" type="button"
-                                            class="btn btn-primary light sharp btn-block" name="Pripremljeno">
+                                            class="btn btn-primary light sharp btn-block" name="Pripremljeno" data-toggle="dropdown">
                                             {{element[col.key]}}
                                         </button>
                                         <button *ngIf="element[col.key] === 'Servirano'" type="button"
@@ -26,6 +26,7 @@
                                         </button>
                                         <div class="dropdown-menu">
                                             <button *ngIf="element[col.key]=='U pripremi'" class="dropdown-item" id="{{element['id']}}" (click)="changeStatus($event, 'Pripremljeno')">Pripremljeno</button>
+                                            <button *ngIf="element[col.key]=='Pripremljeno' && role=='ROLE_WAITER'" class="dropdown-item" id="{{element['id']}}" (click)="changeStatus($event, 'Servirano')">Servirano</button>
                                         </div>
                                     </div>
                                 </div>

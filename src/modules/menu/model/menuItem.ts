@@ -9,6 +9,7 @@ export interface MenuItem {
     category: string,
     preparationTime: Number,
     priceItemDto: PriceItem,
-    menu: Menu,
-    accepted: boolean
+    menuDto: Menu,
+    accepted: boolean,
+    imageName: string
   }

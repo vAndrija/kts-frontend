@@ -1,27 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
-import { MenuItem } from '../../model/menuItem';
-import { MenuItemService } from '../../services/menu-item-service/menu-item.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { SelectModel } from 'src/modules/shared/models/select-model';
-import { MenuService } from '../../services/menu-service/menu.service';
-import { Menu } from '../../model/menu';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { UpdateMenuItemDto } from '../../model/updateMenuItemDto';
-import { datetimePickerValidator } from 'src/modules/shared/custom-validators/datetime-picker-validator';
-import * as moment from 'moment';
-import { PriceItem } from '../../model/priceItem';
-import { PriceItemService } from '../../services/price-item-service/price-item.service';
-import { HttpResponse } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 import { positiveNumberValidator } from 'src/modules/shared/custom-validators/positive-number-validator';
+import { SelectModel } from 'src/modules/shared/models/select-model';
+import { AzureBlogStorageService } from 'src/modules/shared/services/azure-blog-storage/azure-blog-storage.service';
+import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
+import { Menu } from '../../model/menu';
+import { MenuItem } from '../../model/menuItem';
+import { PriceItem } from '../../model/priceItem';
+import { UpdateMenuItemDto } from '../../model/updateMenuItemDto';
+import { MenuItemService } from '../../services/menu-item-service/menu-item.service';
+import { MenuService } from '../../services/menu-service/menu.service';
+import { PriceItemService } from '../../services/price-item-service/price-item.service';
 
 @Component({
-  selector: 'app-menu-item-details',
-  templateUrl: './menu-item-details.component.html',
-  styleUrls: ['./menu-item-details.component.scss']
+  selector: 'app-update-menu-item',
+  templateUrl: './update-menu-item.component.html',
+  styleUrls: ['./update-menu-item.component.scss']
 })
-export class MenuItemDetailsComponent implements OnInit {
-  menuItem: MenuItem = {
+export class UpdateMenuItemComponent implements OnInit, OnChanges {
+  @Input() 
+  public menuItem: MenuItem = {
     id: "",
     category: "",
     description: "",
@@ -36,66 +35,55 @@ export class MenuItemDetailsComponent implements OnInit {
       value: 0
     },
     type: "",
-    menu: {
+    menuDto: {
       durationEnd: new Date,
       durationStart: new Date,
       id: "",
       name: ""
     },
-    accepted: false
+    accepted: false,
+    imageName: ""
   };
-  role: string|null = localStorage.getItem("role");
   types: SelectModel[] = [];
   selectedMenu: string = "";
   menus: Menu[] = [];
   formAccept: FormGroup;
   menu: SelectModel = new SelectModel("", "")
+  image: File = new File([], "");
 
   constructor(private menuItemService: MenuItemService,
     private notificationService: NotificationService,
-    private route: ActivatedRoute,
     private menuService: MenuService,
     private priceItemService: PriceItemService,
-    private router: Router) { 
-      let routeParam: string | null = this.route.snapshot.paramMap.get('menuItemId');
-      if (routeParam) {
-          this.getMenuItem(routeParam);
-      }
+    private router: Router,
+    private blobService: AzureBlogStorageService) {
       this.formAccept = new FormGroup({
+        name: new FormControl("", Validators.required),
+        description: new FormControl("", Validators.required),
+        preparationTime: new FormControl(null, { validators: positiveNumberValidator()}),
         price: new FormControl(null, { validators: positiveNumberValidator()}),
         menuId: new FormControl("1", Validators.required),
-        period: new FormControl("", {
-          validators: datetimePickerValidator(),
-        }),
-        preparationPrice: new FormControl(null, { validators: positiveNumberValidator()})
-    });
-  }
+        preparationPrice: new FormControl(null, { validators: positiveNumberValidator()}),
+        imageName: new FormControl(""),
+      });
+     }
 
   ngOnInit(): void {
     this.getMenus();
-
-    const $ = (window as any).$;
-
-    setTimeout(() => 
-      $('.input-daterange-timepicker').on('dateSelected', (event: any, date: string) => {
-        this.formAccept.get('period')?.patchValue(date);
-      }), 50);
   }
 
-  getMenuItem(id: string): void {
-    this.menuItemService.getMenuItem(id).subscribe(
-      (result) => {
-        this.menuItem = result as MenuItem;
-      },
-      (error) => {
-        if(error.status === 404){
-          this.notificationService.error(error.error.message);
-        }
-        else {
-          this.notificationService.error("Doslo je do greske, pokusajte ponovo.");
-        }
-      }
-    )
+  ngOnChanges(changes: SimpleChanges): void {
+    if(this.menuItem.imageName === "") {
+      this.menuItem.imageName = "default.jpg"
+    }
+    this.formAccept.patchValue({
+      name: this.menuItem.name,
+      description: this.menuItem.description,
+      preparationTime: this.menuItem.preparationTime,
+      price: this.menuItem.priceItemDto?.value,
+      menuId: this.menuItem.menuDto?.id,
+      preparationPrice: this.menuItem.priceItemDto?.preparationValue
+    })
   }
 
   getMenus(): void {
@@ -115,19 +103,33 @@ export class MenuItemDetailsComponent implements OnInit {
   }
 
   changeMenu(value: string): void {
-    this.menuItem.menu.id = value;
+    this.menuItem.menuDto.id = value;
+  }
+
+  imageSelected(event:Event){
+    const target= event.target as HTMLInputElement;
+    this.image = (target.files as FileList)[0];
   }
 
   updateMenuItem(): void {
     this.menuItem.accepted = true;
     const updateMenuItemDto: UpdateMenuItemDto = {
       ...this.menuItem,
-      menuId: this.formAccept.value.menuId
+      description: this.formAccept.value.description,
+      name: this.formAccept.value.name,
+      preparationTime: this.formAccept.value.preparationTime,
+      accepted: true,
+      menuId: this.formAccept.value.menuId,
+      imageName: this.image.name
     }
+
+    this.blobService.uploadImage(this.image, this.image.name, ()=>{
+    })
 
     this.menuItemService.updateMenuItem(updateMenuItemDto, this.menuItem.id).subscribe(
       (result) => {
         this.menuItem = result as MenuItem;
+        this.notificationService.success("Uspešno ste sačuvali promene.")
       },
       (error) => {
         if(error.status === 400) {
@@ -141,24 +143,18 @@ export class MenuItemDetailsComponent implements OnInit {
   }
 
   createPriceItem(): void {
-    let stringDates = this.formAccept.value.period
-    let dates = this.formatDates(stringDates);
-
-    let startDate = dates.startDate;
-    let endDate = dates.endDate;
-
     let priceItem: PriceItem = {
       current: true,
       menuItemId: this.menuItem.id,
       value: this.formAccept.value.price,
       preparationValue: this.formAccept.value.preparationPrice,
-      startDate: startDate,
-      endDate: endDate
+      startDate: "",
+      endDate: ""
     }
 
     this.priceItemService.createPriceItem(priceItem).subscribe(
       (result) => {
-        priceItem = result as PriceItem
+        this.menuItem.priceItemDto = result as PriceItem;
       },
       (error) => {
         if(error.status === 400) {
@@ -174,12 +170,13 @@ export class MenuItemDetailsComponent implements OnInit {
   submit(): void {
     this.updateMenuItem();
     this.createPriceItem();
+    this.router.navigate(["/menu/menu-items"]);
   }
  
-  decline(): void {
+  decline(redirectTo: string): void {
     this.menuItemService.deleteMenuItem(this.menuItem.id).subscribe(
       (result) => {
-        this.router.navigate(["/menu/pending-menu-items"]);
+        this.router.navigate([redirectTo]);
       },
       (error) => {
         if(error.status === 400) {
@@ -196,15 +193,4 @@ export class MenuItemDetailsComponent implements OnInit {
     return this.formAccept.controls[control].hasError(error) && this.formAccept.get(control)?.touched;
   }
 
-  private formatDates = (dates: string): any => {
-    const tokens = dates.split(" ");
-
-    const validStartDate = moment(tokens[0]).format("YYYY-MM-DD");
-    const validEndDate = moment(tokens[1]).format("YYYY-MM-DD");
-
-    return {
-      startDate: validStartDate,
-      endDate: validEndDate
-    }
-  }
 }

@@ -29,7 +29,7 @@ export class MenuItemFormComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    (window as any).loadScript();
+    //(window as any).loadScript();
   }
 
   public errorHandling = (control: string, error: string) => {

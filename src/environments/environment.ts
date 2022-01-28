@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  sas_token: "sp=racwdli&st=2022-01-11T13:37:19Z&se=2022-03-01T21:37:19Z&sv=2020-08-04&sr=c&sig=N9yNDYfwhoxjwxDxQdM2aQK8Rddb98DcKFoZj%2F6ljYc%3D",
+  sas_token: "sp=racwdli&st=2022-01-27T19:26:23Z&se=2022-03-28T02:26:23Z&sv=2020-08-04&sr=c&sig=k5V2rHvSS1q94JiPv7CXslZwQTE8vZllTz6ZNCNioaA%3D",
   storage_name: "ktsproject"
 
 };
