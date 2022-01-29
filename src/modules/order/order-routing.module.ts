@@ -43,7 +43,7 @@ const routes: Routes = [
     canActivate: [RoleGuard],
     data: { expectedRoles: "ROLE_WAITER" }
   },
-
+  { path: "**", redirectTo: "order" }
 ];
 
 @NgModule({

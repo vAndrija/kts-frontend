@@ -56,7 +56,7 @@ export class OrderItemService extends RestService {
   }
 
   acceptOrderItem(orderItem: AcceptOrderItem, id: number): Observable<OrderItem> {
-    return this.http.put<any>("api/v1/order-items/" + id, orderItem);
+    return this.http.put<any>("api/v1/order-items/" + id.toString(), orderItem);
   }
   findOrderItemsByOrder(id: number): Observable<OrderItem[]> {
     return this.http.get<any>("api/v1/order-items/order/" + id);

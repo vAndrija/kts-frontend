@@ -44,7 +44,6 @@ export class AuthService extends RestService {
     if (role === "ROLE_COOK") {
       this.getUser("api/v1/cook/" + userId).subscribe(
         (result) => {
-          console.log("auth: " + result.priority);
           return result.priority;
         }
       )

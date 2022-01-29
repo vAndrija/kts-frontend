@@ -59,13 +59,12 @@ export class MenuFormComponent implements OnInit {
     const menu: MenuDto = tempMenu;
 
     this.menuService.addMenu(menu).subscribe(
-      (result) => {
-        this.notificationService.success("Menu added!");
-        console.log(result);
+      () => {
+        this.notificationService.success("Meni je kreiran!");
       },
       (error) => {
-        if (error.status === 401) {
-          this.notificationService.error("Wrong credentials. Try again.");
+        if (error.status === 400) {
+          this.notificationService.error("Došlo je do greške, pokušajte ponovo.");
         } 
       }
     );
@@ -81,7 +80,6 @@ export class MenuFormComponent implements OnInit {
     const validStartDate = moment(tokens[0]).format("YYYY-MM-DDThh:mm");
     const validEndDate = moment(tokens[1]).format("YYYY-MM-DDThh:mm");
 
-    console.log(validStartDate+ " " + validEndDate);
     return {
       startDate: validStartDate,
       endDate: validEndDate

@@ -1,9 +1,12 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MenuItem } from 'src/modules/menu/model/menuItem';
 import { MenuItemService } from 'src/modules/menu/services/menu-item-service/menu-item.service';
+import { NotificationDto } from 'src/modules/shared/models/notification';
 import { AcceptOrderItem, OrderItem } from 'src/modules/shared/models/orderitem';
 import { Pagination } from 'src/modules/shared/models/pagination';
+import { MessageService } from 'src/modules/shared/services/messages/message.service';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
+import { WebsocketService } from 'src/modules/shared/services/websocket/websocket.service';
 import { OrderItemService } from '../../services/order-item/order-item.service';
 
 @Component({
@@ -24,7 +27,9 @@ export class AcceptOrderItemTableComponent implements OnInit {
   constructor(
     private orderItemService: OrderItemService,
     private notificationService: NotificationService,
-    private menuItemService: MenuItemService
+    private menuItemService: MenuItemService,
+    private socketService: WebsocketService,
+    private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -75,11 +80,11 @@ export class AcceptOrderItemTableComponent implements OnInit {
         cookId: -1
       }
     }
-
     this.orderItemService.acceptOrderItem(acceptedOrderItem, orderItem.id).subscribe(
       (result) => {
         this.notificationService.success("Stavka: " + result.id + " je uspešno preuzeta.");
         this.loadAllUnacceptedOrderItems(this.pagination.currentPage - 1);
+        this.sendWebsocketMessage(orderItem);
       },
       (error) => {
         if (error.status === 400) {
@@ -88,5 +93,20 @@ export class AcceptOrderItemTableComponent implements OnInit {
       }
     );
 
+  }
+
+  sendWebsocketMessage(orderItem: OrderItem): void {
+    const message = {
+      "message":"Stavke porudžbine id " + orderItem.id +" je preuzeta.",
+      "fromId": localStorage.getItem("userId"),
+      "status": "Preuzeto",
+      "orderItemId": (orderItem.id).toString()
+    };
+    this.socketService.sendOrderItemStatusChangedMessage(message);
+    const notification: NotificationDto = {
+      orderItemId: orderItem.id,
+      message: message.message
+    }
+    this.messageService.addNewNotification(notification).subscribe();
   }
 }

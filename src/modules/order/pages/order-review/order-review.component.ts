@@ -44,6 +44,7 @@ export class OrderReviewComponent implements OnInit {
       price: menuItem.priceItemDto.value,
       discount: menuItem.priceItemDto.value * orderItem.quantity,
       menuItemId: menuItem.id,
+      imageName:menuItem.imageName,
 
     };
     return item;

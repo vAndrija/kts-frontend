@@ -4,7 +4,6 @@ import { LoginGuard } from './guards/login/login.guard';
 import { LoginComponent } from './pages/login/login.component';
 import { PasswordResetHomeComponent } from './pages/password-reset-home/password-reset-home.component';
 import { PasswordResetComponent } from './pages/password-reset/password-reset.component';
-import { TestPictureUploadComponent } from './pages/test-picture-upload/test-picture-upload.component';
 const routes: Routes = [
   {
     path: "login",
@@ -24,11 +23,7 @@ const routes: Routes = [
     component: PasswordResetComponent,
     canActivate: [LoginGuard]
   },
-  {
-    path: "test",
-    pathMatch: "full",
-    component: TestPictureUploadComponent,
-  },
+  { path: "**", redirectTo: "login" }
 ];
 
 @NgModule({
