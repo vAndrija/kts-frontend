@@ -11,6 +11,8 @@ const routes: Routes = [
     canActivate: [RoleGuard],
     data: { expectedRoles: "ROLE_MANAGER|ROLE_COOK|ROLE_BARTENDER|ROLE_WAITER|ROLE_SYSTEM_ADMIN" }
   },
+  { path: "**", redirectTo: "preview" }
+
 ];
 
 @NgModule({

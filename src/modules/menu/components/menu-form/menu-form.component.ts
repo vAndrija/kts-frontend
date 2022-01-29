@@ -42,14 +42,14 @@ export class MenuFormComponent implements OnInit {
 
   submit(): void{
 
-    var name = this.form.controls['name'].value;
-    var stringDates = this.form.controls['period'].value;
-    var dates = this.formatDates(stringDates);
+    let name = this.form.controls['name'].value;
+    let stringDates = this.form.controls['period'].value;
+    let dates = this.formatDates(stringDates);
 
-    var startDate = dates.startDate;
-    var endDate = dates.endDate;
+    let startDate = dates.startDate;
+    let endDate = dates.endDate;
 
-    var tempMenu = 
+    let tempMenu = 
     {
       name: name,
       startDuration: startDate,
@@ -60,12 +60,12 @@ export class MenuFormComponent implements OnInit {
 
     this.menuService.addMenu(menu).subscribe(
       (result) => {
-        this.notificationService.success("Menu added!");
+        this.notificationService.success("Meni je kreiran!");
         console.log(result);
       },
       (error) => {
-        if (error.status === 401) {
-          this.notificationService.error("Wrong credentials. Try again.");
+        if (error.status === 400) {
+          this.notificationService.error("Došlo je do greške, pokušajte ponovo.");
         } 
       }
     );
@@ -81,7 +81,6 @@ export class MenuFormComponent implements OnInit {
     const validStartDate = moment(tokens[0]).format("YYYY-MM-DDThh:mm");
     const validEndDate = moment(tokens[1]).format("YYYY-MM-DDThh:mm");
 
-    console.log(validStartDate+ " " + validEndDate);
     return {
       startDate: validStartDate,
       endDate: validEndDate

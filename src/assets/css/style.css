@@ -13095,7 +13095,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
     transition: all 0.2s;
     width: 0;
     height: 100%;
-    right: 600px;
+    right: 37.5em;
     background: #000;
     z-index: 1;
     opacity: 0.1;
@@ -13106,14 +13106,14 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
     padding: 1rem; }
   .order-create.active {
     right: 0;
-    width:600px; }
+    width:37.5em; }
   .order-create.active .order-create-close {
     width: 200vh; }
   .order-create .order-create-table {
-   width: 580px;
+   width: 35em;
   }
   .order-create .order-create-th{
-    width:10%;
+    width:2em;
     font-size: small;
   }
   .order-create .order-create-small{
@@ -13122,32 +13122,36 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
   }
 .order-item-card {
     float:left;
-    padding: 0 10px; 
-    height: 520px; 
-    width: 280px;
+    padding: 0 0.5em; 
+    height: 32em; 
+    width: 17em;
   }
   .order-item-card .order-item-card-sc {
-    margin-left: 50px;
+    margin-left: 2em;
   }
   .order-item-card .order-item-card-input {
-    margin-top: 20px;
+    margin-top: 1em;
   }
 
   .order-item-card .order-item-card-na {
-    width: 240px;
+    width: 15em;
   }
   .order-item-card .order-item-card-r{
-    margin-right: 63px;
+    margin-right: 2em;
+    margin-left: 0.5em;
   }
-
+  .order-item-card .order-item-card-image {
+    width: 10em;
+    height: 7em;
+  }
   .order-search {
-    margin-left: 300px; 
-    height: 50px;
+    margin-left: 18em; 
+    height: 1em;
     border: 2px solid #CDCDCD;
   }
 
   .button-load{
-    width: 150px; float: right; margin-right: 320px;
+    width: 10em; float: right; margin-right: 27em;
   }
 
 .chatbox {

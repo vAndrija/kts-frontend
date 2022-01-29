@@ -38,7 +38,7 @@ export class OrderItemsTableComponent implements OnInit {
   form: FormGroup;
   role: string = "";
   data: any = [];
-  
+
   constructor(
     private orderItemService: OrderItemService,
     private socketService: WebsocketService,
@@ -50,7 +50,6 @@ export class OrderItemsTableComponent implements OnInit {
         this.role = role;
       }
       this.tableData = [];
-      //this.load(this.pagination.currentPage - 1);
       this.form = new FormGroup({
         filterName: new FormControl("", Validators.required),
       })
@@ -59,7 +58,7 @@ export class OrderItemsTableComponent implements OnInit {
   ngOnInit(): void {
     const userId = localStorage.getItem("id");
     this.socketService.connect(userId);
-     if (this.role == 'ROLE_WAITER') {
+    if (this.role == 'ROLE_WAITER') {
       this.filters = ['Pripremljeno', 'Servirano', 'Sve'];
     }
     this.load(this.pagination.currentPage - 1);
@@ -104,6 +103,7 @@ export class OrderItemsTableComponent implements OnInit {
     const item: Item = {
       ...orderItem,
       name: menuItem.name,
+      imageName:menuItem.imageName,
       category: menuItem.category,
       price: menuItem.priceItemDto.value,
       discount: menuItem.priceItemDto.value * orderItem.quantity,
@@ -126,7 +126,6 @@ export class OrderItemsTableComponent implements OnInit {
         this.pagination.totalPages = response.body['totalPages'] as number;
 
       });
-      
       if(this.orderItemStatusChanged && this.status !== "Servirano") {
         const message = {
           "message":"Status stavke porudžbine id " + this.orderItemId +" je promjenjen u " + this.status,
@@ -144,7 +143,6 @@ export class OrderItemsTableComponent implements OnInit {
       else if(this.orderItemStatusChanged && this.status === "Servirano"){
         this.messageService.deleteNotification(this.orderItemId).subscribe();
       }
-
   }
 }
 

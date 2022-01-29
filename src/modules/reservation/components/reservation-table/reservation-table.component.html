@@ -1,0 +1,153 @@
+<div class="table-responsive">
+  <table class="table table-responsive-md">
+    <thead>
+      <tr>
+        <th style="width:80px;"><strong>#</strong></th>
+        <th><strong>Ime rezervacije</strong></th>
+        <th><strong>Broj stola</strong></th>
+        <th><strong>Početak rezervacije</strong></th>
+        <th><strong>Kraj rezervacije</strong></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let reservation of reservations">
+        <td class="py-3">
+          <div class="media d-flex align-items-center">
+            <div class="media-body">
+              <h5 class="mb-0 fs--1">{{ reservation.id }}</h5>
+            </div>
+          </div>
+        </td>
+        <td class="py-3">
+          <div class="media d-flex align-items-center">
+            <div class="media-body">
+              <h5 class="mb-0 fs--1">{{ reservation.name }}</h5>
+            </div>
+          </div>
+        </td>
+        <td class="py-3">
+          <div class="media d-flex align-items-center">
+            <div class="media-body">
+              <h5 class="mb-0 fs--1">{{ reservation.tableId}}</h5>
+            </div>
+          </div>
+        </td>
+        <td class="py-3">
+          <div class="media d-flex align-items-center">
+            <div class="media-body">
+              <h5 class="mb-0 fs--1">{{ reservation.durationStart | customDateTime }}</h5>
+            </div>
+          </div>
+        </td>
+        <td class="py-3">
+          <div class="media d-flex align-items-center">
+            <div class="media-body">
+              <h5 class="mb-0 fs--1">{{ reservation.durationEnd | customDateTime }}</h5>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div>
+            <button type="button" class="btn btn-success light sharp" data-toggle="modal" data-target="#modalTable" (click)="edit(reservation)">
+              Izmeni
+            </button>
+          </div>
+        </td>
+        <td>
+          <div>
+            <button type="button" class="btn btn-warning light sharp" (click)="delete(reservation)">
+              Otkaži
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div>
+  <button class="btn btn-sm btn-success" style="align-self: center; margin-bottom: 20px; margin-right: 20px;"
+    data-toggle="modal" data-target="#modalTable" (click)="resetForm()">
+    Rezerviši sto
+  </button>
+</div>
+<div id="container" class="row"></div>
+
+<div class="bootstrap-modal">
+  <div class="modal fade" id="modalTable">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Rezervacija stola</h5>
+          <button type="button" class="close" data-dismiss="modal" #closebutton>
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="row justify-content-center">
+              <div class="col-10">
+                <div class="form-group">
+                  <label>Ime rezervacije</label>
+                  <input class="form-control" placeholder="Naziv" formControlName="name" type="text"/>
+                </div>
+                <div *ngIf="errorHandling('name', 'required')" id="val-naziv-error" class="invalid-feedback animated fadeInUp" style="display: block;">
+                  Molimo unesite ime rezervacije.
+                </div>
+              </div>
+              <div class="col-10">
+                <div class="form-group">
+                  <label>Datum rezervacije</label>
+                  <input class="form-control" formControlName="reservationDate" type="date" [min]="currentDate"/>
+                </div>
+                <div *ngIf="errorHandling('reservationDate', 'required')" id="val-naziv-error" class="invalid-feedback animated fadeInUp" style="display: block;">
+                  Molimo unesite datum rezervacije.
+                </div>
+              </div>
+              <div class="col-10">
+                <div class="form-group">
+                  <label>Početak rezervacije</label>
+                  <input class="form-control" formControlName="reservationStart" type="time" />
+                </div>
+                <div *ngIf="errorHandling('reservationStart', 'required')" id="val-naziv-error" class="invalid-feedback animated fadeInUp" style="display: block;">
+                  Molimo unesite početak rezervacije.
+                </div>
+              </div>
+              <div class="col-10">
+                <div class="form-group">
+                  <label>Kraj rezervacije</label>
+                  <input class="form-control" formControlName="reservationEnd" type="time" />
+                </div>
+                <div *ngIf="errorHandling('reservationEnd', 'validTime')" id="val-naziv-error" class="invalid-feedback animated fadeInUp" style="display: block;">
+                  Molimo unesite kraj rezervacije.
+                </div>
+
+                <div class="mb-3" *ngIf="form.hasError('validTime')">
+                  Kraj rezervacije ne smije biti prije početka rezervacije.
+                </div>
+              </div>
+              <div class="col-10">
+                <div class="form-group">
+                  <label>Broj stola</label>
+                  <div class="dropdown default-select">
+                    <select class="default-select form-control"  formControlName="tableId">
+                      <option *ngFor="let table of tables" [ngValue]="table.id">{{table.id}}</option>
+                    </select>
+                  </div>
+                </div>
+                <div *ngIf="errorHandling('reservationEnd', 'required')" id="val-naziv-error" class="invalid-feedback animated fadeInUp" style="display: block;">
+                  Molimo unesite broj stola.
+                </div>
+              </div>
+              
+              <button [disabled]="!form.valid" type="submit" class="btn btn-primary mr-5 ml-5">{{ isEdit ? 'Izmeni' : 'Rezerviši' }}</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

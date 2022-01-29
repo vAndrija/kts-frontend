@@ -38,7 +38,6 @@ import { WebsocketService } from '../shared/services/websocket/websocket.service
     ToastrModule.forRoot({
       positionClass :'toast-top-center'
     }),
-    OrderModule,
     SharedModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: InterceptorInterceptor, multi: true }, WebsocketService],

@@ -49,7 +49,7 @@ export class CreateOrderComponent implements OnInit {
     private notificationService: NotificationService,
     private router: Router, 
     private restaurantTableService: RestaurantTableService
-   ) { }
+   ) {}
 
   ngOnInit(): void { 
   }

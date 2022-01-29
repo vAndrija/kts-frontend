@@ -34,7 +34,7 @@ export class OrderComponent implements OnInit {
     private socketService: WebsocketService,
     private messageService: MessageService,
     private router: Router
-    ) {
+  ) {
     this.categories = ['Sve', 'Supa', 'Doručak', 'Predjelo', 'Glavno jelo', 'Dezert', 'Koktel', 'Topli napitak', 'Bezalkoholno piće'];
     if (this.router.getCurrentNavigation()?.extras.state) {
       this.routeState = this.router.getCurrentNavigation()?.extras.state;
@@ -48,8 +48,8 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     this.getMenuItems();
 
-    const userId = localStorage.getItem("id");
-    this.socketService.connect(userId);    
+    const userId = localStorage.getItem('id');
+    this.socketService.connect(userId);
   }
 
   open(): void {
@@ -71,10 +71,10 @@ export class OrderComponent implements OnInit {
   }
 
   getMenuItems(): void {
-    this.menuService.getAllMenuItems(this.currentPage, this.pageSize).subscribe(
+    this.menuService.getAllMenuItemsInActiveMenu(this.currentPage, this.pageSize).subscribe(
       (response) => {
-        this.menuItems = response.body["content"] as MenuItem[];
-        this.totalPages = response.body["totalPages"] as number;
+        this.menuItems = response.body['content'] as MenuItem[];
+        this.totalPages = response.body['totalPages'] as number;
       },
     )
   }
@@ -91,14 +91,14 @@ export class OrderComponent implements OnInit {
   getByCategory(): void {
     this.menuService.getMenuItemsByCategory(this.currentPage, this.pageSize, this.category).subscribe(
       (response) => {
-        this.menuItems = response.body["content"] as MenuItem[];
-        this.totalPages = response.body["totalPages"] as number;
+        this.menuItems = response.body['content'] as MenuItem[];
+        this.totalPages = response.body['totalPages'] as number;
       },
     )
   }
 
   check(id: string, quantity: number): boolean {
-    var value = true;
+    let value = true;
     if (this.quantityMap.has(id)) {
       this.quantityMap.set(id, this.quantityMap.get(id) + quantity);
       value = false;
@@ -109,7 +109,7 @@ export class OrderComponent implements OnInit {
   }
 
   addOrderItem(createOrderItem: Item): void {
-    var quantity = createOrderItem.quantity;
+    const quantity = createOrderItem.quantity;
     if (this.check(createOrderItem.menuItemId, createOrderItem.quantity) === true) {
       this.orderItems.push(createOrderItem);
       this.discount += createOrderItem.discount;

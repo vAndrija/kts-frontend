@@ -12,7 +12,8 @@ import { OrderTableComponent } from './pages/order-table/order-table.component';
 import { OrderReviewComponent } from './pages/order-review/order-review.component';
 import { AcceptOrderItemTableComponent } from './components/accept-order-item-table/accept-order-item-table.component';
 import { AcceptOrderItemComponent } from './pages/accept-order-item/accept-order-item.component';
-
+import { TableComponent } from './components/table/table.component';
+import { MatTableModule } from '@angular/material/table';
 @NgModule({
   declarations: [
     OrderItemsTableComponent,
@@ -23,13 +24,15 @@ import { AcceptOrderItemComponent } from './pages/accept-order-item/accept-order
     OrderReviewComponent,
     AcceptOrderItemTableComponent,
     AcceptOrderItemComponent,
+    TableComponent,
   ],
   imports: [
     CommonModule,
     OrderRoutingModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule
   ]
 })
 export class OrderModule { }

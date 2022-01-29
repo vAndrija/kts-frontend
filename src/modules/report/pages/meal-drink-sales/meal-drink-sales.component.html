@@ -7,7 +7,7 @@
             <form [formGroup]="formYearly" (ngSubmit)="submitYearly()">
                 <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Unesite godinu:</label>
-                    <input type="text" class="form-control col-sm-3" formControlName="year">
+                    <input type="text" class="form-control col-sm-3" formControlName="year" id="yearly">
                     <div *ngIf="errorHandlingYearly('year', 'positiveNumber')" id="val-username-error"
                         class="invalid-feedback animated fadeInUp col-sm-3 col-form-label" style="display: block;">
                         Godina je obavezno polje i mora biti pozitivan broj
@@ -15,7 +15,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Izaberite artikal:</label>
-                    <select id="menuItems" class="default-select form-control col-sm-3" formControlName="menuItemId" name="category-color">
+                    <select id="menuItemsYearly" class="default-select form-control col-sm-3" formControlName="menuItemId" name="category-color">
                         <option *ngFor="let prf of menuItemsSelect" [value]="prf.prId">
                             {{prf.prName}} 
                         </option>
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <div style="margin-bottom: 1em;">
-                    <button type="submit" class="btn btn-primary" [disabled]="!formYearly.valid">Generiši
+                    <button type="submit" class="btn btn-primary" [disabled]="!formYearly.valid" id="yearlyBtn">Generiši
                         izveštaj</button>
                 </div>
             </form>
@@ -41,7 +41,7 @@
             <form [formGroup]="formMonthly" (ngSubmit)="submitMonthly()">
                 <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Unesite godinu:</label>
-                    <input type="text" class="form-control col-sm-3" formControlName="year">
+                    <input type="text" class="form-control col-sm-3" formControlName="year" id="monthly">
                     <div *ngIf="errorHandlingMonthly('year', 'positiveNumber')" id="val-username-error"
                         class="invalid-feedback animated fadeInUp col-sm-3 col-form-label" style="display: block;">
                         Godina je obavezno polje i mora biti pozitivan broj
@@ -57,7 +57,7 @@
                 </div>
                 <div class="form-group row">
                     <label class="col-sm-3 col-form-label">Izaberite artikal:</label>
-                    <select id="menuItems" class="default-select form-control col-sm-3" formControlName="menuItemId"
+                    <select id="menuItemsMonthly" class="default-select form-control col-sm-3" formControlName="menuItemId"
                         name="category-color">
                         <option *ngFor="let prf of menuItemsSelect" [value]="prf.prId">
                             {{prf.prName}}
@@ -69,7 +69,7 @@
                     </div>
                 </div>
                 <div style="margin-bottom: 1em;">
-                    <button type="submit" class="btn btn-primary" [disabled]="!formMonthly.valid">Generiši
+                    <button type="submit" class="btn btn-primary" [disabled]="!formMonthly.valid" id="monthlyBtn">Generiši
                         izveštaj</button>
                 </div>
             </form>
