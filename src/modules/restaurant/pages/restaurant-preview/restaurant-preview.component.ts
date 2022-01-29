@@ -84,8 +84,9 @@ export class RestaurantPreviewComponent implements OnInit {
 
   }
 
+
   newRectangle(x: number, y: number, width: number, height: number, value: boolean, id: number, a: boolean) {
-    var group = new Konva.Group({
+    const group = new Konva.Group({
       x: x,
       y: y,
       width: width,
@@ -97,7 +98,7 @@ export class RestaurantPreviewComponent implements OnInit {
       color = "#eb6434";
     }
 
-    let text = new Konva.Text({
+    const text = new Konva.Text({
       x: 10,
       y: 15,
       text: id.toString(),
@@ -106,7 +107,7 @@ export class RestaurantPreviewComponent implements OnInit {
       fill: 'beige'
     });
 
-    let rectangle = new Konva.Rect({
+    const rectangle = new Konva.Rect({
       width: width,
       height: height,
       fill: color,

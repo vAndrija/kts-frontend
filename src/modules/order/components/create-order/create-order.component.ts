@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CreateOrderDto, OrderDto } from 'src/modules/shared/models/order';
 import { Item } from 'src/modules/shared/models/item';
 import { CreateOrderItem } from 'src/modules/shared/models/orderitem';
@@ -14,7 +14,7 @@ import { RestaurantTableService } from 'src/modules/restaurant/services/restaura
   styleUrls: ['./create-order.component.scss'],
   providers: [DatePipe]
 })
-export class CreateOrderComponent implements OnInit {
+export class CreateOrderComponent  {
   
   @Output() triggerOrderItemsChanged: EventEmitter<Item[]> = new EventEmitter();
   @Output() triggerSendNotification: EventEmitter<any> = new EventEmitter();
@@ -51,9 +51,7 @@ export class CreateOrderComponent implements OnInit {
     private restaurantTableService: RestaurantTableService
    ) {}
 
-  ngOnInit(): void { 
-  }
-
+  
   close(): void {
     this.$('.order-create').removeClass('active');
   }

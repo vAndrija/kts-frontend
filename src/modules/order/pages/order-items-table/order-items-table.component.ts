@@ -88,7 +88,7 @@ export class OrderItemsTableComponent implements OnInit {
   changeStatus(object: any): void {
     this.orderItemId = Number((object.event.target as Element).id);
     this.status = object.status;
-    this.orderItemService.changeStatusOrderItem(this.orderItemId, object.status).subscribe(res => {
+    this.orderItemService.changeStatusOrderItem(this.orderItemId, object.status).subscribe(() => {
       this.orderItemStatusChanged = true;
       this.load(this.pagination.currentPage - 1);
     });

@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router } from '@angular/router';
-import { Observable } from 'rxjs';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { AuthService } from '../../services/auth/auth.service';
-import { unsupported } from '@angular/compiler/src/render3/view/util';
 
 @Injectable({
   providedIn: 'root'

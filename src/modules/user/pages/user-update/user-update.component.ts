@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
+import { FormGroup, Validators, FormControl } from "@angular/forms";
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
 import { Router } from "@angular/router";
 import { RegisterUser } from 'src/modules/shared/models/user';
@@ -12,7 +12,7 @@ import { UserService } from '../../services/user/user.service';
 export class UserUpdateComponent implements OnInit {
   form: FormGroup
   loggedUserId: number
-  loggedUserRole : String = ""
+  loggedUserRole : string = ""
   constructor(
     private userService: UserService,
     private notificationService: NotificationService,
@@ -44,7 +44,7 @@ export class UserUpdateComponent implements OnInit {
   }
 
   submit(){
-    let data : RegisterUser = this.form.value
+    const data : RegisterUser = this.form.value
     this.userService.updateUser(this.loggedUserId,this.loggedUserRole,data).subscribe({
       next: (data)=>{
         this.form.patchValue(data)

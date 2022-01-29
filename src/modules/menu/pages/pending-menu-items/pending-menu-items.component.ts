@@ -42,7 +42,7 @@ export class PendingMenuItemsComponent implements OnInit {
             }; return menuItem; })
         this.pagination.totalPages = response.body["totalPages"] as number;
       },
-      (error) => {
+      () => {
         this.notificationService.error("Došlo je do greške, pokušajte ponovo.");
       }
     )

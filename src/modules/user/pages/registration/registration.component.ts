@@ -41,7 +41,7 @@ export class RegistrationComponent {
     const userType: string = this.form.value.userType
     const registrationData: RegisterUser  =  this.form.value;
     this.registrationService.register(registrationData,userType).subscribe({
-      next: (data)=>{
+      next: ()=>{
         this.notificationService.success("Uspješno ste kreirali korisnika !");
         this.router.navigate(["/"]);
       },

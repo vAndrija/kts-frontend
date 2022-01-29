@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
-import { Router,ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormGroup, Validators, FormControl } from "@angular/forms";
 import { ChangePasswordModel } from 'src/modules/shared/models/login';
 import { samePasswordValidator } from 'src/modules/shared/custom-validators/same-password-validator';
@@ -27,7 +27,7 @@ export class ChangePasswordComponent {
    }
 
   submit(): void {
-    let data: ChangePasswordModel =  this.form.value;
+    const data: ChangePasswordModel =  this.form.value;
     this.userService.changePassword(data).subscribe({
       next: ()=>{
         this.notificationService.success("Uspješno promjenjena lozinka.")

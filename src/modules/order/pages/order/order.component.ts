@@ -15,12 +15,12 @@ import { NotificationDto } from 'src/modules/shared/models/notification';
 })
 export class OrderComponent implements OnInit {
 
-  categories: String[];
+  categories: string[];
   pageSize: number = 3;
   totalPages: number = 0;
   currentPage: number = 0;
   menuItems: MenuItem[] = [];
-  category: String = 'Sve';
+  category: string = 'Sve';
   orderItems: Item[] = [];
   discount: number = 0;
   $ = (window as any).$;
@@ -79,7 +79,7 @@ export class OrderComponent implements OnInit {
     )
   }
 
-  clickCategory(category: String): void {
+  clickCategory(category: string): void {
     this.category = category;
     if (this.category == 'Sve') {
       this.getMenuItems();

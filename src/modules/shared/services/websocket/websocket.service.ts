@@ -69,7 +69,7 @@ export class WebsocketService {
   }
 
   showMessage(message: { body: any; }): void {
-    let messageResult: Message = JSON.parse(message.body);
+    const messageResult: Message = JSON.parse(message.body);
     this.notificationService.websocketSuccess(messageResult.message);
     this.pulseDiv$.next(this.increment++);
   }

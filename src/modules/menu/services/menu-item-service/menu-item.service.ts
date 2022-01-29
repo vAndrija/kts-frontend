@@ -1,12 +1,11 @@
 
 import { MenuItemDto } from 'src/modules/menu/model/MenuItemDto';
-import { HttpClient, HttpHeaders, HttpParams, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RestService } from 'src/modules/shared/services/rest/rest.service';
 import { MenuItem } from '../../model/menuItem';
 import { UpdateMenuItemDto } from '../../model/updateMenuItemDto';
-import { MenuService } from '../menu-service/menu.service';
 
 
 @Injectable({
@@ -46,7 +45,7 @@ export class MenuItemService extends RestService {
         })
   }
 
-  getMenuItemsByMenu(menuId: string, page: Number, pageSize: Number): Observable<HttpResponse<any>> {
+  getMenuItemsByMenu(menuId: string, page: number, pageSize: number): Observable<HttpResponse<any>> {
     let queryParams = {};
     queryParams = {
       observe: "response",
@@ -65,7 +64,7 @@ export class MenuItemService extends RestService {
     });
   }
 
-  getMenuItemsByMenuAndSearchFilterParams(menuId: string, searchParam: string, filter: string, page: Number, pageSize: Number): Observable<HttpResponse<any>> {
+  getMenuItemsByMenuAndSearchFilterParams(menuId: string, searchParam: string, filter: string, page: number, pageSize: number): Observable<HttpResponse<any>> {
     let queryParams = {};
     queryParams = {
       observe: "response",

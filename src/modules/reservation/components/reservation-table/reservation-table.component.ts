@@ -63,17 +63,16 @@ export class ReservationTableComponent implements OnInit {
     this.tablesService.getRestaurantTables().subscribe(
       (result) => {
         this.tables = result as RestaurantTable[];
-        console.log(this.tables);
       }
     );
   }
    
   onSubmit(): void {
-    let tableId = this.form.controls['tableId'].value;
-    let name = this.form.controls['name'].value;
-    let durationStart = this.form.controls['reservationStart'].value;
-    let durationEnd = this.form.controls['reservationEnd'].value;
-    let reservationDate = this.form.controls['reservationDate'].value;
+    const tableId = this.form.controls['tableId'].value;
+    const name = this.form.controls['name'].value;
+    const durationStart = this.form.controls['reservationStart'].value;
+    const durationEnd = this.form.controls['reservationEnd'].value;
+    const reservationDate = this.form.controls['reservationDate'].value;
 
     const reservation: ReservationDto = 
     {
@@ -97,7 +96,6 @@ export class ReservationTableComponent implements OnInit {
       );
     }
     else {
-      console.log(reservation);
       this.reservationService.editTableReservation(reservation, this.reservationId ).subscribe(
         (result) => {
           this.notificationService.success("Rezervacija na ime "+ result.name + " je izmenjena.");
@@ -126,8 +124,8 @@ export class ReservationTableComponent implements OnInit {
     const durationStart = reservation.durationStart;
     const durationEnd = reservation.durationEnd;
     const reservationDate = durationStart[0] + "-" + formatNumber(durationStart[1]) + "-" + formatNumber(durationStart[2]);
-    let reservationStart = formatNumber(durationStart[3]) + ":" + formatNumber(durationStart[4]);
-    let reservationEnd = formatNumber(durationEnd[3]) + ":" + formatNumber(durationEnd[4]);
+    const reservationStart = formatNumber(durationStart[3]) + ":" + formatNumber(durationStart[4]);
+    const reservationEnd = formatNumber(durationEnd[3]) + ":" + formatNumber(durationEnd[4]);
 
     this.form.patchValue({
       name: reservation.name,
@@ -140,9 +138,8 @@ export class ReservationTableComponent implements OnInit {
 
   delete(reservation: Reservation): void {
     this.reservationService.deleteReservation(reservation.id).subscribe(
-      (result) => {
+      () => {
         this.notificationService.success("Rezervacija pod nazivom " + reservation.name + " je otkazana.");
-        let index = this.reservations.indexOf(reservation);
         this.loadAllReservations(this.pagination.currentPage - 1);
       },
       (error) => {

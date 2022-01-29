@@ -16,7 +16,6 @@ import { HTTP_INTERCEPTORS } from "@angular/common/http";
 import { InterceptorInterceptor } from "../shared/interceptors/interceptor.interceptor";
 import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from '../shared/shared.module';
-import { OrderModule } from '../order/order.module';
 import { WebsocketService } from '../shared/services/websocket/websocket.service';
 
 @NgModule({

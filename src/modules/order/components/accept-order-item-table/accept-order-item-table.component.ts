@@ -1,5 +1,4 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ConnectableObservable } from 'rxjs';
 import { MenuItem } from 'src/modules/menu/model/menuItem';
 import { MenuItemService } from 'src/modules/menu/services/menu-item-service/menu-item.service';
 import { NotificationDto } from 'src/modules/shared/models/notification';
@@ -53,7 +52,7 @@ export class AcceptOrderItemTableComponent implements OnInit {
   }
 
   getMenuItemName(menuItemId: string): string {
-    let menuItem: any = this.menuItems.find(value => value.id === menuItemId);
+    const menuItem: any = this.menuItems.find(value => value.id === menuItemId);
     return menuItem.name;
   }
 

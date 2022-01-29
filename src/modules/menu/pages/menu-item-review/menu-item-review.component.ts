@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
 import { MenuItem } from '../../model/menuItem';
 import { MenuItemService } from '../../services/menu-item-service/menu-item.service';
@@ -9,7 +9,7 @@ import { MenuItemService } from '../../services/menu-item-service/menu-item.serv
   templateUrl: './menu-item-review.component.html',
   styleUrls: ['./menu-item-review.component.scss']
 })
-export class MenuItemReviewComponent implements OnInit {
+export class MenuItemReviewComponent {
   menuItem: MenuItem = {
     id: "",
     category: "",
@@ -41,14 +41,12 @@ export class MenuItemReviewComponent implements OnInit {
     private notificationService: NotificationService,
     private route: ActivatedRoute,
   ) { 
-    let routeParam: string | null = this.route.snapshot.paramMap.get('menuItemId');
+    const routeParam: string | null = this.route.snapshot.paramMap.get('menuItemId');
       if (routeParam) {
           this.getMenuItem(routeParam);
       }
   }
 
-  ngOnInit(): void {
-  }
 
   getMenuItem(id: string): void {
       this.menuItemService.getMenuItem(id).subscribe(

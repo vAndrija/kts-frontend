@@ -5,6 +5,6 @@ export interface UpdateMenuItemDto {
     category: string,
     menuId: string,
     accepted: boolean,
-    preparationTime: Number,
+    preparationTime: number,
     imageName: string
 }

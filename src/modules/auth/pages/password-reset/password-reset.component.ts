@@ -13,7 +13,7 @@ import { samePasswordValidator } from 'src/modules/shared/custom-validators/same
 })
 export class PasswordResetComponent {
   form: FormGroup
-  token: String | undefined
+  token: string | undefined
 
   constructor(
     private notificationService: NotificationService,
@@ -29,9 +29,9 @@ export class PasswordResetComponent {
   }
   
   submit(): void {
-    let data : ResetPasswordModel = {
+    const data : ResetPasswordModel = {
       password : this.form.value.password,
-      token: ""+this.token
+      token: "" + this.token
     };
     this.passwordResetHomeService.finishResetToken(data).subscribe({
       next: ()=>{
