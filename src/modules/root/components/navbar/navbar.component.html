@@ -123,6 +123,7 @@
                         <li><a [routerLink]="['/order/order-items']"><i class="flaticon-381-diploma"></i>Stavke porudžbine</a></li>
 
                         <li *ngIf="role === 'ROLE_WAITER'"><a [routerLink]="['/order/orders']"><i class="flaticon-381-diploma"></i>Porudžbine</a></li>
+                        <li *ngIf="role === 'ROLE_WAITER'"><a [routerLink]="['/reservation/reservation-table']"><i class="flaticon-381-diploma"></i>Rezervacije</a></li>
                     </div>
                     
                     <div *ngIf="role === 'ROLE_SYSTEM_ADMIN'">
