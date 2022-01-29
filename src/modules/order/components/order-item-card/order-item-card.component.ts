@@ -50,7 +50,8 @@ export class OrderItemCardComponent implements OnInit, OnChanges {
     menuItemId:"",
     discount:0,
     note: "",
-    dateOfOrder:""
+    dateOfOrder:"",
+    imageName:""
   };
 
   constructor() { }
@@ -66,6 +67,7 @@ export class OrderItemCardComponent implements OnInit, OnChanges {
     this.item.discount = this.menuItem.priceItemDto.value * this.quantity;
     this.item.price = this.menuItem.priceItemDto.value;
     this.item.note = this.note;
+    this.item.imageName = this.menuItem.imageName;
     this.eventEmitter.emit(this.item);
   }
 

@@ -62,7 +62,7 @@ export class OrderTableComponent implements OnInit {
   changeStatus(object: any): void {
     let orderId: number = Number((object.event.target as Element).id);
     this.orderService.changeStatusOrder(orderId, object.status).subscribe(
-      (res) => {
+      () => {
         this.load(this.pagination.currentPage - 1);
       },
       (error) => {

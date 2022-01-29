@@ -36,26 +36,26 @@ export class OrderItemsTableComponent implements OnInit {
   form: FormGroup;
   role: string = "";
   data: any = [];
-  
+
   constructor(
     private orderItemService: OrderItemService,
     private socketService: WebsocketService,
     private menuItemService: MenuItemService
-    ) {
-      const role = localStorage.getItem('role');
-      if (role) {
-        this.role = role;
-      }
-      this.tableData = [];
-      this.form = new FormGroup({
-        filterName: new FormControl("", Validators.required),
-      })
+  ) {
+    const role = localStorage.getItem('role');
+    if (role) {
+      this.role = role;
+    }
+    this.tableData = [];
+    this.form = new FormGroup({
+      filterName: new FormControl("", Validators.required),
+    })
   }
 
   ngOnInit(): void {
     const userId = localStorage.getItem("id");
     this.socketService.connect(userId);
-     if (this.role == 'ROLE_WAITER') {
+    if (this.role == 'ROLE_WAITER') {
       this.filters = ['Pripremljeno', 'Servirano', 'Sve'];
     }
     this.load(this.pagination.currentPage - 1);
@@ -100,6 +100,7 @@ export class OrderItemsTableComponent implements OnInit {
     const item: Item = {
       ...orderItem,
       name: menuItem.name,
+      imageName:menuItem.imageName,
       category: menuItem.category,
       price: menuItem.priceItemDto.value,
       discount: menuItem.priceItemDto.value * orderItem.quantity,
@@ -123,15 +124,15 @@ export class OrderItemsTableComponent implements OnInit {
 
       });
 
-      if(this.orderItemStatusChanged) {
-        const message = {
-          "message":"Status stavke porudžbine id " + this.orderItemId +" je promjenjen u " + this.status,
-          "fromId": localStorage.getItem("userId"),
-          "status": this.status,
-          "orderItemId": (this.orderItemId).toString()
-        };
-        this.socketService.sendOrderItemStatusChangedMessage(message);
-      }
+    if (this.orderItemStatusChanged) {
+      const message = {
+        "message": "Status stavke porudžbine id " + this.orderItemId + " je promjenjen u " + this.status,
+        "fromId": localStorage.getItem("userId"),
+        "status": this.status,
+        "orderItemId": (this.orderItemId).toString()
+      };
+      this.socketService.sendOrderItemStatusChangedMessage(message);
+    }
 
   }
 }

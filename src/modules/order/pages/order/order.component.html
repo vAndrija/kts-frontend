@@ -1,6 +1,7 @@
-<app-create-order [tableId]="tableId" [discount]="discount" (triggerOrderItemsChanged)="onDelete($event)" (triggerSendNotification)="sendMessage($event)" [orderItems]="orderItems"></app-create-order>
+<app-create-order [tableId]="tableId" [discount]="discount" (triggerOrderItemsChanged)="onDelete($event)"
+    (triggerSendNotification)="sendMessage($event)" [orderItems]="orderItems"></app-create-order>
 <div class="row">
-    <div class="col-xxl-3 col-xxl-12 col-xxlg-12 col-xld-12" style="padding-bottom: 20px;">
+    <div class="col-xxl-3 col-xxl-12 col-xxlg-12 col-xld-12" style="padding-bottom: 2em;">
         <div class="header-left">
             <form #f="ngForm" (ngSubmit)="search(f)">
                 <div class="input-group">
@@ -17,7 +18,7 @@
                 </div>
             </form>
 
-            <button class="btn btn-sm btn-primary float-right primary" style="margin-left: 350px;" id="click-order"
+            <button class="btn btn-sm btn-primary float-right primary" style="margin-left: 28em;" id="click-order"
                 (click)="open()"> <i class="fa fa-shopping-basket mr-2"></i>Porudžbina</button>
         </div>
 
