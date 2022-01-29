@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
 import { MenuItemDto } from '../../model/MenuItemDto';
+import { MenuItemReviewComponent } from '../../pages/menu-item-review/menu-item-review.component';
 import { MenuItemService } from '../../services/menu-item-service/menu-item.service';
 
 @Component({
@@ -24,7 +25,6 @@ export class MenuItemFormComponent implements OnInit {
       preparationTime: new FormControl(0, Validators.required),
       category: new FormControl(null, Validators.required),
       type: new FormControl(0, Validators.required)
-
     });
    }
 
@@ -38,7 +38,14 @@ export class MenuItemFormComponent implements OnInit {
 
   public submit(): void {
     const menuItem: MenuItemDto = this.form.value;
-
+    menuItem.imageName = "";
+    
+    if(menuItem.category === "Koktel" || menuItem.category === "Topli napitak" || menuItem.category === "Bezalkoholno piće" ) {
+      menuItem.type = 0;
+    }
+    else {
+      menuItem.type = 1;
+    }
     this.menuItemService.addMenuItem(menuItem).subscribe(
       (result) => {
         this.notificationService.success("Stavka menija " + result.name + " je kreirana!");
