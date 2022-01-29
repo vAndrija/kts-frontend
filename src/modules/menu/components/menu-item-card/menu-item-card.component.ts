@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { MenuItem } from '../../model/menuItem';
 
 @Component({
@@ -6,7 +6,7 @@ import { MenuItem } from '../../model/menuItem';
   templateUrl: './menu-item-card.component.html',
   styleUrls: ['./menu-item-card.component.scss']
 })
-export class MenuItemCardComponent implements OnInit, OnChanges {
+export class MenuItemCardComponent implements OnChanges {
   @Input()
   public menuItem: MenuItem = {
     id: "",
@@ -33,14 +33,12 @@ export class MenuItemCardComponent implements OnInit, OnChanges {
     imageName: ""
   }
 
-  constructor() { }
-  ngOnChanges(changes: SimpleChanges): void {
+
+  ngOnChanges(): void {
     if(this.menuItem.imageName === "") {
       this.menuItem.imageName = "default.jpg"
     }
   }
 
-  ngOnInit(): void {
-  }
 
 }

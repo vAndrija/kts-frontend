@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import * as moment from 'moment';
 import { PAGE_SIZE } from 'src/modules/shared/constants/constants';
 import { Pagination } from 'src/modules/shared/models/pagination';
 import { SelectModel } from 'src/modules/shared/models/select-model';
@@ -26,9 +27,9 @@ export class MenuItemsReviewComponent implements OnInit {
   categories: SelectModel[] = [new SelectModel("0", ""), new SelectModel("1", "Supa"), new SelectModel("2", "Doručak"), new SelectModel("3", "Predjelo"),
                                 new SelectModel("4", "Glavno jelo"), new SelectModel("5", "Dezert"), new SelectModel("6", "Koktel"),
                                 new SelectModel("7", "Topli napitak"), new SelectModel("8", "Bezalkoholno piće")];
-  searchParam: String = "";
+  searchParam: string = "";
   searchForm: FormGroup;
-  category: String = "";
+  category: string = "";
 
   constructor(
     private menuService: MenuService, 
@@ -60,16 +61,16 @@ export class MenuItemsReviewComponent implements OnInit {
   }
 
   getMenus(): void {
-    this.menuService.getMenus().subscribe(
+    this.menuService.getActiveMenus(moment().format("YYYY-MM-DDTHH:mm")).subscribe(
       (result) => {
-        this.menus = result as Menu[];
+        this.menus = result.body as Menu[];
         this.setSelcetOptions();
         if(this.menus.length > 0) {
           this.form.patchValue({menuId: this.menus[0].id})
           this.searchMenuItems()
         }
       },
-      (error) => {
+      () => {
         this.notificationService.error("Doslo je do greske, pokusajte ponovo.")
       }
     )
@@ -89,7 +90,7 @@ export class MenuItemsReviewComponent implements OnInit {
         this.menuItems = result.body.content as MenuItem[];
         this.pagination.totalPages = result.body.totalPages as number;
       },
-      (error) => {
+      () => {
         this.notificationService.error("Doslo je do greske, pokusajte ponovo.")
       }
     )

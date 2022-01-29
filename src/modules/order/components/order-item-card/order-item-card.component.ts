@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import { MenuItem } from 'src/modules/menu/model/menuItem';
 import { Item } from 'src/modules/shared/models/item';
 
@@ -7,7 +7,7 @@ import { Item } from 'src/modules/shared/models/item';
   templateUrl: './order-item-card.component.html',
   styleUrls: ['./order-item-card.component.scss']
 })
-export class OrderItemCardComponent implements OnInit {
+export class OrderItemCardComponent implements OnChanges {
   @Input()
   public menuItem: MenuItem = {
     id: "",
@@ -50,12 +50,9 @@ export class OrderItemCardComponent implements OnInit {
     menuItemId:"",
     discount:0,
     note: "",
-    dateOfOrder:""
+    dateOfOrder:"",
+    imageName:""
   };
-
-  constructor() { }
-
-  ngOnInit(): void { }
 
   add(): void {
     this.item.priority = this.priority;
@@ -66,7 +63,14 @@ export class OrderItemCardComponent implements OnInit {
     this.item.discount = this.menuItem.priceItemDto.value * this.quantity;
     this.item.price = this.menuItem.priceItemDto.value;
     this.item.note = this.note;
+    this.item.imageName = this.menuItem.imageName;
     this.eventEmitter.emit(this.item);
+  }
+
+  ngOnChanges(): void {
+    if(this.menuItem.imageName === "") {
+      this.menuItem.imageName = "default.jpg"
+    }
   }
 
 }

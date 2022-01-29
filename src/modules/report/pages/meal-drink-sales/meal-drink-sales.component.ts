@@ -79,7 +79,7 @@ export class MealDrinkSalesComponent implements OnInit {
         this.menuItems = result as MenuItem[];
         this.menuItemsSelect = [...this.menuItems.map(menuItem => new SelectModel(menuItem.id, menuItem.name))];
       },
-      (error) => {
+      () => {
         this.notificationService.error("Došlo je do greške, pokušajte ponovo.");
       }
     )

@@ -44,7 +44,7 @@ export class OrderItemService extends RestService {
 
   changeStatusOrderItem(id: number, status: string): Observable<OrderItem> {
     return this.http.post<any>("api/v1/order-items/status/" + id, status);
-  };
+  }
 
   createOrder(order: CreateOrderDto): Observable<OrderDto> {
     return this.http.post<any>("api/v1/orders/", order);
@@ -56,7 +56,7 @@ export class OrderItemService extends RestService {
   }
 
   acceptOrderItem(orderItem: AcceptOrderItem, id: number): Observable<OrderItem> {
-    return this.http.put<any>("api/v1/order-items/" + id, orderItem);
+    return this.http.put<any>("api/v1/order-items/" + id.toString(), orderItem);
   }
   findOrderItemsByOrder(id: number): Observable<OrderItem[]> {
     return this.http.get<any>("api/v1/order-items/order/" + id);
@@ -81,7 +81,7 @@ export class OrderItemService extends RestService {
     };
 
     return this.http.get<any>("api/v1/order-items/filter/" + id + "/" + status, queryParams);
-  };
+  }
 
   filterStatusWaiter(page: number, size: number, id: number, status: string): Observable<any> {
     let queryParams = {};
@@ -94,5 +94,5 @@ export class OrderItemService extends RestService {
     };
 
     return this.http.get<any>("api/v1/order-items/waiter/" + id + "/" + status, queryParams);
-  };
+  }
 }

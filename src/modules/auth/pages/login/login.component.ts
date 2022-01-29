@@ -1,10 +1,8 @@
 import { Component} from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
+import { FormGroup, Validators, FormControl } from "@angular/forms";
 import { Router } from "@angular/router";
-import { ToastrService } from "ngx-toastr";
 import { AuthService } from '../../services/auth/auth.service';
 import { Login } from 'src/modules/shared/models/login';
-import { of } from 'rxjs';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
 import { JwtHelperService } from "@auth0/angular-jwt";
 

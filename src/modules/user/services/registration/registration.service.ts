@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { RegisterUser,User } from 'src/modules/shared/models/user';
 import { RestService } from 'src/modules/shared/services/rest/rest.service';

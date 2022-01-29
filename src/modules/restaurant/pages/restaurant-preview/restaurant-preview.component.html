@@ -1,15 +1,15 @@
 <div>
   <div class="row" *ngIf="role === 'ROLE_SYSTEM_ADMIN'">
-    <button class="btn btn-sm btn-success" style="align-self: center; margin-bottom: 20px; margin-right: 20px;"
+    <button class="btn btn-sm btn-success" style="align-self: center; margin-bottom: 1em; margin-right: 1em;"
       data-toggle="modal" data-target="#modalTable">
       Dodaj sto</button>
     <span data-toggle="modal" data-target="#deleteModal">
-      <button class="btn btn-sm btn-danger" style="align-self: center; margin-bottom: 20px;" data-toggle="modal"
+      <button class="btn btn-sm btn-danger" style="align-self: center; margin-bottom: 1em;" data-toggle="modal"
         title="Selektujte sto da biste ga obrisali!" data-toggle="tooltip">
         Obriši sto</button>
     </span>
   </div>
-  <div id="container" class="row"></div>
+  <div id="container" class="row" style="width: 73em;height: 32em;"></div>
 </div>
 
 <div class="bootstrap-modal">
@@ -29,7 +29,7 @@
                 <div class="form-group col-md-12">
                   <label>Kapacitet stola</label>
                   <input class="form-control" placeholder="Kapacitet" formControlName="quantity" type="number"
-                    style="width: 150px;" min="1" max="12" />
+                    style="width: 7em;" min="1" max="12" />
                 </div>
               </div>
               <button type="submit" class="btn btn-primary">Dodaj</button>

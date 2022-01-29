@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/modules/auth/services/auth/auth.service';
-import { User } from 'src/modules/shared/models/user';
+import { Notification } from 'src/modules/shared/models/notification';
+import { MessageService } from 'src/modules/shared/services/messages/message.service';
+import { WebsocketService } from 'src/modules/shared/services/websocket/websocket.service';
 import { UserService } from 'src/modules/user/services/user/user.service';
 
 @Component({
@@ -10,20 +12,49 @@ import { UserService } from 'src/modules/user/services/user/user.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  public role: String = '';
+  public role: string = '';
   public reportMenuVisibility: boolean = false;
   public show: boolean = false;
+  messages: Notification[] = []
+  pulse: boolean = false;
 
   constructor(
     private userService: UserService,
     private auth: AuthService,
-    private router: Router) { }
+    private messageService: MessageService,
+    private router: Router,
+    private socketService: WebsocketService) {
+      this.socketService.pulseDiv.subscribe(
+        () => {
+          this.pulse = true;
+        }
+      )
+     }
 
   ngOnInit(): void {
     this.checkRole();
     this.checkForPreparationStaff();
+    
   }
 
+  loadNotifications(): void {
+    this.pulse = false;
+    const userId = localStorage.getItem("id");
+    if (localStorage.getItem('role') === "ROLE_WAITER") {
+      this.messageService.getWaiterNotification(userId).subscribe(
+        (result) => {
+          this.messages = result as Notification[];
+        }
+      )
+    }
+    else if (localStorage.getItem('role') === "ROLE_BARTENDER" || localStorage.getItem('role') === "ROLE_COOK") {
+      this.messageService.getCookAndBartemderNotification().subscribe(
+        (result) => {
+          this.messages = result as Notification[];
+        }
+      )
+    }
+  }
   checkRole(): void {
     const role = localStorage.getItem("role");
     if(role) {

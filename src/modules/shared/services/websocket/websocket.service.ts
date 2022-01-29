@@ -3,6 +3,7 @@ import { Message } from '../../models/message';
 import { Stomp} from '@stomp/stompjs';
 import * as SockJS from 'sockjs-client';
 import { NotificationService } from '../notification/notification.service';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 
 @Injectable({
@@ -11,6 +12,10 @@ import { NotificationService } from '../notification/notification.service';
 export class WebsocketService {
 
   private stompClient: any;
+  private increment: number = 0;
+  private pulseDiv$: BehaviorSubject<number> = new BehaviorSubject(0);
+  public pulseDiv: Observable<number> = this.pulseDiv$.asObservable();
+  
   initialized: boolean = false;
 
 
@@ -64,8 +69,9 @@ export class WebsocketService {
   }
 
   showMessage(message: { body: any; }): void {
-    let messageResult: Message = JSON.parse(message.body);
+    const messageResult: Message = JSON.parse(message.body);
     this.notificationService.websocketSuccess(messageResult.message);
+    this.pulseDiv$.next(this.increment++);
   }
 
  

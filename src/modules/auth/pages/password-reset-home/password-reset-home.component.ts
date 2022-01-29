@@ -26,7 +26,7 @@ export class PasswordResetHomeComponent{
   
 
   submit(): void {
-    let data : ResetPasswordModel = this.form.value
+    const data : ResetPasswordModel = this.form.value
     this.submitted = true;
     this.passwordResetHomeService.sendResetToken(data).subscribe({
       next: ()=>{

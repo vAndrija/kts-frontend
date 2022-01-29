@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { Login } from "src/modules/shared/models/login";
 import { Token } from "src/modules/shared/models/token";
@@ -44,7 +44,6 @@ export class AuthService extends RestService {
     if (role === "ROLE_COOK") {
       this.getUser("api/v1/cook/" + userId).subscribe(
         (result) => {
-          console.log("auth: " + result.priority);
           return result.priority;
         }
       )

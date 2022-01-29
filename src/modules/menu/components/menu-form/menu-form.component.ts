@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import { MenuDto } from 'src/modules/menu/model/menuDto'
 import { MenuService } from 'src/modules/menu/services/menu-service/menu.service'
@@ -87,14 +87,14 @@ export class MenuFormComponent implements OnInit {
 
   submit(): void{
 
-    let name = this.form.controls['name'].value;
-    let stringDates = this.form.controls['period'].value;
-    let dates = this.formatDates(stringDates);
-   
-    let startDate = dates.startDate;
-    let endDate = dates.endDate;
+    const name = this.form.controls['name'].value;
+    const stringDates = this.form.controls['period'].value;
+    const dates = this.formatDates(stringDates);
 
-    let tempMenu = 
+    const startDate = dates.startDate;
+    const endDate = dates.endDate;
+
+    const tempMenu = 
     {
       name: name,
       durationStart: startDate,
@@ -127,7 +127,6 @@ export class MenuFormComponent implements OnInit {
         }
       );
     }
-    
   }
 
   public errorHandling = (control: string, error: string) => {

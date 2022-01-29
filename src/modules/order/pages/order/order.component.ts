@@ -5,6 +5,8 @@ import { NgForm } from '@angular/forms';
 import { MenuService } from 'src/modules/menu/services/menu-service/menu.service';
 import { WebsocketService } from 'src/modules/shared/services/websocket/websocket.service';
 import { Router } from '@angular/router';
+import { MessageService } from 'src/modules/shared/services/messages/message.service';
+import { NotificationDto } from 'src/modules/shared/models/notification';
 
 @Component({
   selector: 'app-order',
@@ -13,12 +15,12 @@ import { Router } from '@angular/router';
 })
 export class OrderComponent implements OnInit {
 
-  categories: String[];
+  categories: string[];
   pageSize: number = 3;
   totalPages: number = 0;
   currentPage: number = 0;
   menuItems: MenuItem[] = [];
-  category: String = 'Sve';
+  category: string = 'Sve';
   orderItems: Item[] = [];
   discount: number = 0;
   $ = (window as any).$;
@@ -30,8 +32,9 @@ export class OrderComponent implements OnInit {
   constructor(
     private menuService: MenuService,
     private socketService: WebsocketService,
+    private messageService: MessageService,
     private router: Router
-    ) {
+  ) {
     this.categories = ['Sve', 'Supa', 'Doručak', 'Predjelo', 'Glavno jelo', 'Dezert', 'Koktel', 'Topli napitak', 'Bezalkoholno piće'];
     if (this.router.getCurrentNavigation()?.extras.state) {
       this.routeState = this.router.getCurrentNavigation()?.extras.state;
@@ -45,8 +48,8 @@ export class OrderComponent implements OnInit {
   ngOnInit(): void {
     this.getMenuItems();
 
-    const userId = localStorage.getItem("id");
-    this.socketService.connect(userId);    
+    const userId = localStorage.getItem('id');
+    this.socketService.connect(userId);
   }
 
   open(): void {
@@ -68,15 +71,15 @@ export class OrderComponent implements OnInit {
   }
 
   getMenuItems(): void {
-    this.menuService.getAllMenuItems(this.currentPage, this.pageSize).subscribe(
+    this.menuService.getAllMenuItemsInActiveMenu(this.currentPage, this.pageSize).subscribe(
       (response) => {
-        this.menuItems = response.body["content"] as MenuItem[];
-        this.totalPages = response.body["totalPages"] as number;
+        this.menuItems = response.body['content'] as MenuItem[];
+        this.totalPages = response.body['totalPages'] as number;
       },
     )
   }
 
-  clickCategory(category: String): void {
+  clickCategory(category: string): void {
     this.category = category;
     if (this.category == 'Sve') {
       this.getMenuItems();
@@ -88,14 +91,14 @@ export class OrderComponent implements OnInit {
   getByCategory(): void {
     this.menuService.getMenuItemsByCategory(this.currentPage, this.pageSize, this.category).subscribe(
       (response) => {
-        this.menuItems = response.body["content"] as MenuItem[];
-        this.totalPages = response.body["totalPages"] as number;
+        this.menuItems = response.body['content'] as MenuItem[];
+        this.totalPages = response.body['totalPages'] as number;
       },
     )
   }
 
   check(id: string, quantity: number): boolean {
-    var value = true;
+    let value = true;
     if (this.quantityMap.has(id)) {
       this.quantityMap.set(id, this.quantityMap.get(id) + quantity);
       value = false;
@@ -106,7 +109,7 @@ export class OrderComponent implements OnInit {
   }
 
   addOrderItem(createOrderItem: Item): void {
-    var quantity = createOrderItem.quantity;
+    const quantity = createOrderItem.quantity;
     if (this.check(createOrderItem.menuItemId, createOrderItem.quantity) === true) {
       this.orderItems.push(createOrderItem);
       this.discount += createOrderItem.discount;
@@ -133,6 +136,11 @@ export class OrderComponent implements OnInit {
 
   sendMessage(message: string): void {
     this.socketService.sendOrderCreatedMessage({"message": message});
+    const notification: NotificationDto = {
+      orderItemId: -1,
+      message: message
+    }
+    this.messageService.addNewNotification(notification).subscribe();
   }
 
 }

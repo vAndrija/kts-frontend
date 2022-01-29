@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { OrderDto } from 'src/modules/shared/models/order';
@@ -29,7 +29,7 @@ export class OrderService extends RestService {
   changeStatusOrder(id: number, status: string): Observable<OrderDto> {
 
     return this.http.post<any>("api/v1/orders/status/" + id, status);
-  };
+  }
 
   filterStatus(page: number, size: number, id: number, status: string): Observable<any> {
     let queryParams = {};
@@ -42,5 +42,5 @@ export class OrderService extends RestService {
     };
 
     return this.http.get<any>("api/v1/orders/filter/" + id + "/" + status, queryParams);
-  };
+  }
 }

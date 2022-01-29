@@ -4,5 +4,5 @@ export interface PriceItem {
     endDate: string,
     menuItemId: string,
     current:  boolean,
-    preparationValue: Number
+    preparationValue: number
 }

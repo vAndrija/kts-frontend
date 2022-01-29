@@ -24,7 +24,7 @@ export class UserListComponent implements OnInit {
     ["COOK","Kuvar"],
     ["MANAGER","Menadžer"],
     ["WAITER","Konobar"]])
-  readonly loggedUserRole : String | null  =  localStorage.getItem('role');
+  readonly loggedUserRole : string | null  =  localStorage.getItem('role');
   loggedUserId : number;
 
   constructor(
@@ -47,7 +47,7 @@ export class UserListComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    let usersRoles=["admin","bartender","cook","manager","waiter"]
+    const usersRoles=["admin","bartender","cook","manager","waiter"]
     usersRoles.forEach(role=>{
       this.userListService.getUsers(role).subscribe({
         next: (data)=>{
@@ -85,11 +85,11 @@ export class UserListComponent implements OnInit {
   }
 
   submit(): void {
-    let salary: Salary  =  this.form.value;
-    let currentDate =  new Date()
-    let year = currentDate.getFullYear();
-    let month = currentDate.getMonth();
-    let day = currentDate.getDate();
+    const salary: Salary  =  this.form.value;
+    const currentDate =  new Date()
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    const day = currentDate.getDate();
     salary.endDate = new Date(year + 1, month, day);
     salary.startDate = new Date(year,month,day);
     if(this.currentRolePriority && this.currentUserPriority!==this.form.value.priority){

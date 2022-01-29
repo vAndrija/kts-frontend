@@ -73,25 +73,44 @@ export class RestaurantPreviewComponent implements OnInit {
     });
   }
   addItem(): void {
-    this.add(100, 100, true);
+    this.add(100, 100, true, 0, true);
   }
 
-  add(x: number, y: number, value: boolean) {
+  add(x: number, y: number, value: boolean, id: number, available: boolean) {
     const width = this.settings.blockSnapSize * 6;
     const height = this.settings.blockSnapSize * 3;
-    const rectangle = this.newRectangle(x, y, width, height, value);
+    const rectangle = this.newRectangle(x, y, width, height, value, id, available);
     this.layer.add(rectangle);
 
   }
 
 
-  newRectangle(x: number, y: number, width: number, height: number, value: boolean) {
-    let rectangle = new Konva.Rect({
+  newRectangle(x: number, y: number, width: number, height: number, value: boolean, id: number, a: boolean) {
+    const group = new Konva.Group({
       x: x,
       y: y,
       width: width,
       height: height,
-      fill: "#964B00",
+      draggable: value
+    });
+    let color = "#964B00";
+    if (a === false) {
+      color = "#eb6434";
+    }
+
+    const text = new Konva.Text({
+      x: 10,
+      y: 15,
+      text: id.toString(),
+      fontSize: 30,
+      fontFamily: 'Calibri',
+      fill: 'beige'
+    });
+
+    const rectangle = new Konva.Rect({
+      width: width,
+      height: height,
+      fill: color,
       stroke: "#ddd",
       strokeWidth: 1,
       shadowColor: "black",
@@ -101,31 +120,37 @@ export class RestaurantPreviewComponent implements OnInit {
       draggable: value,
       cornerRadius: 10
     });
-   
-    rectangle.on("dragend", () => {
-      rectangle.draggable(false);
-      this.selectedItem = rectangle;
-      this.table.xCoordinate = rectangle.getAttr("x");
-      this.table.yCoordinate = rectangle.getAttr("y");
+
+    group.on("dragend", () => {
+      group.draggable(false);
+      this.selectedItem = group;
+      this.selectedItem.children[1].setAttr("text", this.loadedTables.length + 1);
+      this.table.xCoordinate = this.selectedItem.children[0].getAttr("x") + 100;
+      this.table.yCoordinate = this.selectedItem.children[0].getAttr("y") + 100;
       if (value == true) {
         this.createTable();
       }
     });
 
     if (this.role == 'ROLE_SYSTEM_ADMIN') {
-      rectangle.on("click", () => {
+      group.on("click", () => {
+        if (this.selectedItem !== null) {
+          this.selectedItem.children[0].setAttr('fill', "#964B00");
+        }
         rectangle.setAttr("fill", "red");
-        this.selectedItem = rectangle;
+        this.selectedItem = group;
       });
     }
     if (this.role == 'ROLE_WAITER') {
-      rectangle.on("click", () => {
-        this.selectedItem = rectangle;
+      group.on("click", () => {
+        this.selectedItem = group;
         this.tableId = this.find(this.selectedItem.getAttr("x"), this.selectedItem.getAttr("y"));
         this.checkIfAvailable();
       });
     }
-    return rectangle;
+    group.add(rectangle);
+    group.add(text)
+    return group;
   }
 
   load(): void {
@@ -138,7 +163,7 @@ export class RestaurantPreviewComponent implements OnInit {
   }
 
   layout(): void {
-    this.loadedTables.forEach(table => this.add(table.xCoordinate, table.yCoordinate, false));
+    this.loadedTables.forEach(table => this.check(table.xCoordinate, table.yCoordinate, false, table.id));
   }
 
   submit(): void {
@@ -148,11 +173,17 @@ export class RestaurantPreviewComponent implements OnInit {
     this.addItem();
   }
 
+  check(xCoordinate: number, yCoordinate: number, value: boolean, tableId: number): void {
+    this.restaurantTableService.findTableWithOrder(tableId).subscribe(
+      (response) => {
+        this.add(xCoordinate, yCoordinate, false, tableId, response === null)
+      },
+    );
+  }
   createTable(): void {
     this.restaurantTableService.addRestaurantTable(this.table).subscribe(
       () => {
         this.notificationService.success("Sto je dodat!");
-        this.load();
       },
       (error) => {
         if (error.status === 400) {
@@ -174,7 +205,7 @@ export class RestaurantPreviewComponent implements OnInit {
 
   delete(value: string): void {
     if (value === 'ne') {
-      this.selectedItem.setAttr("fill", "#964B00");
+      this.selectedItem.children[0].setAttr("fill", "#964B00");
       this.close.nativeElement.click();
     } else {
       const id = this.find(this.selectedItem.getAttr("x"), this.selectedItem.getAttr("y"));
@@ -191,6 +222,7 @@ export class RestaurantPreviewComponent implements OnInit {
 
           } else {
             this.notificationService.error("Nije moguće obrisati sto!");
+            this.selectedItem.children[0].setAttr("fill", "#964B00");
           }
         },
       );
@@ -198,7 +230,6 @@ export class RestaurantPreviewComponent implements OnInit {
 
     }
   }
-
   checkIfAvailable(): void {
     this.restaurantTableService.findTableWithOrder(this.tableId).subscribe(
       (response) => {

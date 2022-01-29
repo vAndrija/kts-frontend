@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { BlobServiceClient,ContainerClient } from '@azure/storage-blob';
-import { env } from 'process';
 import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
@@ -9,7 +8,6 @@ export class AzureBlogStorageService {
   
   private readonly accountName: string = "storagekts"
   private readonly containerName: string = "pictures"
-  constructor() { }
 
 
   public uploadImage(content: Blob, name: string, handler : () => void) {
