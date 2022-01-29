@@ -4,8 +4,10 @@ import { map } from 'rxjs';
 import { MenuItem } from 'src/modules/menu/model/menuItem';
 import { MenuItemService } from 'src/modules/menu/services/menu-item-service/menu-item.service';
 import { Item } from 'src/modules/shared/models/item';
+import { NotificationDto } from 'src/modules/shared/models/notification';
 import { OrderItem } from 'src/modules/shared/models/orderitem';
 import { Pagination } from 'src/modules/shared/models/pagination';
+import { MessageService } from 'src/modules/shared/services/messages/message.service';
 import { WebsocketService } from 'src/modules/shared/services/websocket/websocket.service';
 import { OrderItemService } from '../../services/order-item/order-item.service';
 
@@ -40,16 +42,17 @@ export class OrderItemsTableComponent implements OnInit {
   constructor(
     private orderItemService: OrderItemService,
     private socketService: WebsocketService,
-    private menuItemService: MenuItemService
-  ) {
-    const role = localStorage.getItem('role');
-    if (role) {
-      this.role = role;
-    }
-    this.tableData = [];
-    this.form = new FormGroup({
-      filterName: new FormControl("", Validators.required),
-    })
+    private menuItemService: MenuItemService,
+    private messageService: MessageService
+    ) {
+      const role = localStorage.getItem('role');
+      if (role) {
+        this.role = role;
+      }
+      this.tableData = [];
+      this.form = new FormGroup({
+        filterName: new FormControl("", Validators.required),
+      })
   }
 
   ngOnInit(): void {
@@ -123,17 +126,23 @@ export class OrderItemsTableComponent implements OnInit {
         this.pagination.totalPages = response.body['totalPages'] as number;
 
       });
-
-    if (this.orderItemStatusChanged) {
-      const message = {
-        "message": "Status stavke porudžbine id " + this.orderItemId + " je promjenjen u " + this.status,
-        "fromId": localStorage.getItem("userId"),
-        "status": this.status,
-        "orderItemId": (this.orderItemId).toString()
-      };
-      this.socketService.sendOrderItemStatusChangedMessage(message);
-    }
-
+      if(this.orderItemStatusChanged && this.status !== "Servirano") {
+        const message = {
+          "message":"Status stavke porudžbine id " + this.orderItemId +" je promjenjen u " + this.status,
+          "fromId": localStorage.getItem("userId"),
+          "status": this.status,
+          "orderItemId": (this.orderItemId).toString()
+        };
+        this.socketService.sendOrderItemStatusChangedMessage(message);
+        const notification: NotificationDto = {
+          orderItemId: this.orderItemId,
+          message: message.message
+        }
+        this.messageService.addNewNotification(notification).subscribe();
+      }
+      else if(this.orderItemStatusChanged && this.status === "Servirano"){
+        this.messageService.deleteNotification(this.orderItemId).subscribe();
+      }
   }
 }
 
