@@ -65,45 +65,4 @@ export class MenuService extends RestService {
       responseType: "json",
     });
   }
-  
-  getMenuItemsByCategory(page: number, pageSize: number, category: string): Observable<HttpResponse<any>> {
-    let queryParams = {};
-    queryParams = {
-      observe: "response",
-      params: new HttpParams()
-        .set("page", String(page))
-        .append("size", String(pageSize)),
-    };
-
-    return this.http.get<HttpResponse<MenuItem[]>>("api/v1/menu-items/filter/pageable/"+ category, queryParams);
-  }
-
-  getAllMenuItems(page: number, pageSize: number): Observable<any> {
-    let queryParams = {};
-    queryParams = {
-      observe: "response",
-      params: new HttpParams()
-        .set("page", String(page))
-        .append("size", String(pageSize)),
-    };
-    return this.http.get<MenuItem[]>("api/v1/menu-items/pageable", queryParams);
-  }
-
-
-  searchMenuItems(search: string): Observable<any> {
-    return this.http.get<MenuItem[]>("api/v1/menu-items/search/"+ search);
-    
-  }
-
-  getAllMenuItemsInActiveMenu(page: number, pageSize: number): Observable<any> {
-    let queryParams = {};
-    queryParams = {
-      observe: "response",
-      params: new HttpParams()
-        .set("page", String(page))
-        .append("size", String(pageSize)),
-    };
-    return this.http.get<MenuItem[]>("api/v1/menu-items/by-active-menu", queryParams);
-  }
-
 }
