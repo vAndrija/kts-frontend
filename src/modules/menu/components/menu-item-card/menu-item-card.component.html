@@ -1,0 +1,27 @@
+
+    <div class="card">
+        <div class="card-body">
+            <div class="new-arrival-product">
+                <div class="new-arrivals-img-contnent">
+                    <img class="img-fluid" src="{{ 'https://storagekts.blob.core.windows.net/pictures/' + menuItem.imageName }}" alt="" style="height: 14em">
+                </div>
+                <div class="new-arrival-content text-center mt-3">
+                    <h4>{{menuItem.name}}</h4>
+                    <div *ngIf="menuItem.priceItemDto.current">
+                        <span class="price">{{menuItem.priceItemDto.value}} RSD</span>
+                        <div class="new-arrival-content text-center mt-3">
+                            <button type="submit" class="btn" style="margin-bottom: 2em;"
+                                [routerLink]="['/menu/menu-items/'] + menuItem.priceItemDto.menuItemId">Opširnije</button>
+                        </div>
+                    </div>
+                    <div *ngIf="!menuItem.priceItemDto.current">
+                        <span class="price">Cena nije dostupna</span>
+                        <div class="new-arrival-content text-center mt-3">
+                            <button type="submit" class="btn" style="margin-bottom: 2em;"
+                                [routerLink]="['/menu/menu-items/'] + menuItem.id">Opširnije</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

@@ -1,0 +1,51 @@
+<div class="row page-titles mx-0">
+    <div class="col-sm-6 p-md-0">
+        <div class="welcome-text">
+            <form [formGroup]="form">
+                <h5 style="margin-bottom: 1em;">Izaberite aktivan meni</h5>
+                <select class="default-select form-control" formControlName="menuId" (change)="changeMenu()" data-placeholder="Izaberite aktivan meni.."
+                    name="category-color">
+                    <option *ngFor="let prf of types" [value]="prf.prId">
+                        {{ prf.prName }}
+                    </option>
+                </select>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row page-titles mx-0">
+    <div class="col-sm-6 p-md-0">
+        <div class="basic-form">
+            <form (ngSubmit)="searchMenuItems()" [formGroup]="searchForm">
+                <h5 style="margin-bottom: 1em;">Pretraga i filteri</h5>
+                <div class="form-group row">
+                    <input class="form-control input-default" type="search" placeholder="Pretraga" formControlName="searchParam" 
+                            aria-label="Search" name="searchValue" style="width: 43%; margin-left: 1em;">
+                    <div style="margin-left: 2em; width: 40%;">
+                        <select class="default-select form-control" formControlName="category"
+                            data-placeholder="Izaberite kategoriju.." name="category-color">
+                            <option *ngFor="let prf of categories" [value]="prf.prName">
+                                {{prf.prName}}
+                            </option>
+                        </select>
+                    </div>
+                    <div></div>
+                    <button type="submit" class="btn btn-sm btn-primary" style="margin-left: auto;"><svg width="20"
+                            height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M23.7871 22.7761L17.9548 16.9437C19.5193 15.145 20.4665 12.7982 20.4665 10.2333C20.4665 4.58714 15.8741 0 10.2333 0C4.58714 0 0 4.59246 0 10.2333C0 15.8741 4.59246 20.4665 10.2333 20.4665C12.7982 20.4665 15.145 19.5193 16.9437 17.9548L22.7761 23.7871C22.9144 23.9255 23.1007 24 23.2816 24C23.4625 24 23.6488 23.9308 23.7871 23.7871C24.0639 23.5104 24.0639 23.0528 23.7871 22.7761ZM1.43149 10.2333C1.43149 5.38004 5.38004 1.43681 10.2279 1.43681C15.0812 1.43681 19.0244 5.38537 19.0244 10.2333C19.0244 15.0812 15.0812 19.035 10.2279 19.035C5.38004 19.035 1.43149 15.0865 1.43149 10.2333Z"
+                                fill="#A4A4A4" />
+                        </svg></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div *ngFor="let menuItem of menuItems" class="col-xl-3 col-lg-6 col-sm-6">
+    <app-menu-item-card  [menuItem]="menuItem"></app-menu-item-card>
+    </div>
+</div>
+<div class="col-sm-10">
+    <button type="submit" class="btn btn-primary" style="margin-bottom: 2em;" *ngIf="pagination.totalPages!== 1" (click)="loadMore()">Učitaj još</button>
+</div>

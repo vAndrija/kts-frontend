@@ -1,0 +1,8 @@
+<div class="row">
+  <div *ngFor="let menuItem of menuItems" class="col-xl-3 col-lg-6 col-sm-6">
+    <app-menu-item-card [menuItem]="menuItem"></app-menu-item-card>
+  </div>
+</div>
+<div class="col-sm-10">
+  <button type="submit" class="btn btn-primary" style="margin-bottom: 2em;" (click)="loadMore()" *ngIf="pagination.totalPages!== 1">Učitaj jos</button>
+</div>

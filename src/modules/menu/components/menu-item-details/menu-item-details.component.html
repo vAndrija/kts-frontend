@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-xl-3">
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade show active" id="first">
+                <img class="img-fluid" src="{{ 'https://storagekts.blob.core.windows.net/pictures/' + menuItem.imageName }}" alt="">
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-9 col-sm-12">
+        <div class="product-detail-content">
+            <div class="new-arrival-content pr">
+                <h4>{{menuItem.name}}</h4>
+                <p *ngIf="menuItem.accepted && menuItem.priceItemDto" class="price">{{menuItem.priceItemDto.value}} RSD</p>
+                <p>Tip: <span class="badge badge-success light">{{menuItem.type}}</span> </p>
+                <p>Kategorija:&nbsp;&nbsp;
+                    <span class="badge badge-success light">{{menuItem.category}}</span>
+                </p>
+                <p class="text-content">{{menuItem.description}}</p>
+            </div>
+        </div>
+    </div>
+</div>
