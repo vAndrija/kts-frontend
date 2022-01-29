@@ -11,4 +11,5 @@ export interface Item {
   menuItemId: string;
   note: string;
   dateOfOrder: string;
+  imageName:string;
 }

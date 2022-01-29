@@ -1,6 +1,7 @@
-<app-create-order [tableId]="tableId" [discount]="discount" (triggerOrderItemsChanged)="onDelete($event)" (triggerSendNotification)="sendMessage($event)" [orderItems]="orderItems"></app-create-order>
+<app-create-order [tableId]="tableId" [discount]="discount" (triggerOrderItemsChanged)="onDelete($event)"
+    (triggerSendNotification)="sendMessage($event)" [orderItems]="orderItems"></app-create-order>
 <div class="row">
-    <div class="col-xxl-3 col-xxl-12 col-xxlg-12 col-xld-12" style="padding-bottom: 20px;">
+    <div class="col-xxl-3 col-xxl-12 col-xxlg-12 col-xld-12" style="padding-bottom: 2em;">
         <div class="header-left">
             <form #f="ngForm" (ngSubmit)="search(f)">
                 <div class="input-group">
@@ -17,13 +18,13 @@
                 </div>
             </form>
 
-            <button class="btn btn-sm btn-primary float-right primary" style="margin-left: 350px;" id="click-order"
+            <button class="btn btn-sm btn-primary float-right primary" style="margin-left: 28em;" id="click-order"
                 (click)="open()"> <i class="fa fa-shopping-basket mr-2"></i>Porudžbina</button>
         </div>
 
     </div>
     <div class="row">
-        <div class="col-xl-10 col-xxl-3 col-lg-6 col-md-12" style="margin-bottom: 10px;">
+        <div class="col-xl-10 col-xxl-3 col-lg-6 col-md-12" style="margin-bottom: 0.5em;">
             <div class="row">
                 <div class="col-xl-10 col-lg-6 ">
                     <div class="card h-auto">
@@ -36,12 +37,12 @@
                 </div>
             </div>
         </div>
-        <div class="col" style="width: 1000px;">
+        <div class="col" style="width: 75em;">
             <app-order-item-card *ngFor="let menuItem of menuItems" [menuItem]="menuItem"
                 (eventEmitter)="addOrderItem($event)"></app-order-item-card>
         </div>
     </div>
-    <div class="col-xxl-3 col-xxl-12 col-xxlg-12 col-xld-12" style="padding-bottom: 20px;">
+    <div class="col-xxl-3 col-xxl-12 col-xxlg-12 col-xld-12" style="padding-bottom: 1em;">
         <button type="submit" class="btn btn-sm btn-primary btn-block button-load" (click)="loadMore()"
             *ngIf="totalPages !== 1" id="load">Učitaj još</button>
     </div>
