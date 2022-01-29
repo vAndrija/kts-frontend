@@ -123,8 +123,10 @@ export class UpdateMenuItemComponent implements OnInit, OnChanges {
       imageName: this.image.name
     }
 
-    this.blobService.uploadImage(this.image, this.image.name, ()=>{
-    })
+    if(this.image.name !== '') {
+         this.blobService.uploadImage(this.image, this.image.name, ()=>{
+          })
+    }
 
     this.menuItemService.updateMenuItem(updateMenuItemDto, this.menuItem.id).subscribe(
       (result) => {
