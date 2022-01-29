@@ -6,6 +6,7 @@
 * @website: http://www.daterangepicker.com/
 */
 // Following the UMD template https://github.com/umdjs/umd/blob/master/templates/returnExportsGlobal.js
+
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
         // AMD. Make globaly available as well
@@ -1538,6 +1539,12 @@
             }
         },
 
+        setPeriod: function(period) {
+            this.startDate = period.startDate;
+            this.endDate = period.endDate;
+            this.updateElement();
+        },
+
         updateElement: function() {
             if (this.element.is('input') && this.autoUpdateInput) {
                 var newValue = this.startDate.format(this.locale.format);
@@ -1558,13 +1565,20 @@
 
     };
 
+
     $.fn.daterangepicker = function(options, callback) {
         var implementOptions = $.extend(true, {}, $.fn.daterangepicker.defaultOptions, options);
         this.each(function() {
             var el = $(this);
             if (el.data('daterangepicker'))
                 el.data('daterangepicker').remove();
-            el.data('daterangepicker', new DateRangePicker(el, implementOptions, callback));
+
+            const datePicker = new DateRangePicker(el, implementOptions, callback);
+            $.fn.setPeriod = function(period) {
+                datePicker.setPeriod(period);
+            }
+            el.data('daterangepicker', datePicker);
+
         });
 
         return this;
@@ -1573,3 +1587,4 @@
     return DateRangePicker;
 
 }));
+

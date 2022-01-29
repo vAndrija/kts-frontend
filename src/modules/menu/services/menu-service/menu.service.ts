@@ -22,6 +22,13 @@ export class MenuService extends RestService {
     });
   }
 
+  getMenu(id: number): Observable<MenuDto> {
+    return this.http.get<MenuDto>("api/v1/menu/" + id.toString(), {
+      headers: this.headers,
+      responseType: "json"
+    });
+  }
+
   getPendingMenuItems(page: number, pageSize: number): Observable<HttpResponse<any>> {
     let queryParams = {};
     queryParams = {
@@ -35,6 +42,13 @@ export class MenuService extends RestService {
    
   }
 
+  updateMenu(menu: MenuDto, id: number): Observable<MenuDto> {
+    return this.http.put<MenuDto>("api/v1/menu/" + id.toString(), menu, {
+      headers: this.headers,
+      responseType: "json"
+    });
+  }
+  
   getActiveMenus(date: string): Observable<HttpResponse<any>> {
     let queryParams = {};
     queryParams = {
