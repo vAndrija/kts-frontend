@@ -34,7 +34,9 @@ const routes: Routes = [
     component: PreparingTimeReportComponent,
     canActivate: [RoleGuard],
     data: { expectedRoles: "ROLE_MANAGER" }
-  }
+  },
+  { path: "**", redirectTo: "meal-drink-costs" }
+
 ];
 
 @NgModule({
