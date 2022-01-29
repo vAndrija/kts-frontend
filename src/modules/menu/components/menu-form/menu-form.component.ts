@@ -61,7 +61,6 @@ export class MenuFormComponent implements OnInit {
     this.menuService.addMenu(menu).subscribe(
       (result) => {
         this.notificationService.success("Meni je kreiran!");
-        console.log(result);
       },
       (error) => {
         if (error.status === 400) {
