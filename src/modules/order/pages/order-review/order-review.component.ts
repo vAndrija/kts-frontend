@@ -37,6 +37,9 @@ export class OrderReviewComponent implements OnInit {
 
 
   fromOrderItemToItem(orderItem: OrderItem, menuItem: MenuItem): Item {
+    if(menuItem.imageName === "") {
+      menuItem.imageName = "default.jpg"
+    }
     const item: Item = {
       ...orderItem,
       name: menuItem.name,

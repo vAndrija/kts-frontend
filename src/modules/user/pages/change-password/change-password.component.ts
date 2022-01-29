@@ -31,7 +31,7 @@ export class ChangePasswordComponent {
     this.userService.changePassword(data).subscribe({
       next: ()=>{
         this.notificationService.success("Uspješno promjenjena lozinka.")
-        this.router.navigate(["/"]);
+        this.router.navigate(["/menu/menu-items"]);
       },
       error: (e)=>{
         if(e.status===409)

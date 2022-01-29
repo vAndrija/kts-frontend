@@ -3,10 +3,10 @@
 <div class="row">
     <div class="col-xxl-3 col-xxl-12 col-xxlg-12 col-xld-12" style="padding-bottom: 2em;">
         <div class="header-left">
-            <form #f="ngForm" (ngSubmit)="search(f)">
+            <form (ngSubmit)="search()" [formGroup]="form">>
                 <div class="input-group">
                     <input class="form-control order-search" type="search" placeholder="Pretraga" aria-label="Search"
-                        name="searchValue" ngModel>
+                        name="searchValue" formControlName="search" >
                     <div class="input-group-append">
                         <button class="btn btn-sm btn-primary" id="button-search"><svg width="20" height="20"
                                 viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

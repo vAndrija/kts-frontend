@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { MenuItem } from 'src/modules/menu/model/menuItem';
 import { Item } from 'src/modules/shared/models/item';
-import { NgForm } from '@angular/forms';
-import { MenuService } from 'src/modules/menu/services/menu-service/menu.service';
+import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { WebsocketService } from 'src/modules/shared/services/websocket/websocket.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'src/modules/shared/services/messages/message.service';
 import { NotificationDto } from 'src/modules/shared/models/notification';
+import { MenuItemService } from 'src/modules/menu/services/menu-item-service/menu-item.service';
 
 @Component({
   selector: 'app-order',
@@ -24,13 +24,13 @@ export class OrderComponent implements OnInit {
   orderItems: Item[] = [];
   discount: number = 0;
   $ = (window as any).$;
-  searchValue: string = '';
   quantityMap = new Map();
   routeState: any;
   tableId: number = 0;
+  form: FormGroup;
 
   constructor(
-    private menuService: MenuService,
+    private menuItemService: MenuItemService,
     private socketService: WebsocketService,
     private messageService: MessageService,
     private router: Router
@@ -42,6 +42,9 @@ export class OrderComponent implements OnInit {
         this.tableId = this.routeState.tableId;
       }
     }
+    this.form = new FormGroup({
+      search: new FormControl("")
+    })
 
   }
 
@@ -65,13 +68,13 @@ export class OrderComponent implements OnInit {
     this.pageSize += 3;
     if (this.category == 'Sve') {
       this.getMenuItems();
-    } else if (this.searchValue == '' && this.category != 'Sve') {
+    } else if (this.form.value.search == "" && this.category != 'Sve') {
       this.getByCategory();
     }
   }
 
   getMenuItems(): void {
-    this.menuService.getAllMenuItemsInActiveMenu(this.currentPage, this.pageSize).subscribe(
+    this.menuItemService.getAllMenuItemsInActiveMenu(this.currentPage, this.pageSize).subscribe(
       (response) => {
         this.menuItems = response.body['content'] as MenuItem[];
         this.totalPages = response.body['totalPages'] as number;
@@ -89,7 +92,7 @@ export class OrderComponent implements OnInit {
   }
 
   getByCategory(): void {
-    this.menuService.getMenuItemsByCategory(this.currentPage, this.pageSize, this.category).subscribe(
+    this.menuItemService.getMenuItemsByCategory(this.currentPage, this.pageSize, this.category).subscribe(
       (response) => {
         this.menuItems = response.body['content'] as MenuItem[];
         this.totalPages = response.body['totalPages'] as number;
@@ -111,7 +114,7 @@ export class OrderComponent implements OnInit {
   addOrderItem(createOrderItem: Item): void {
     const quantity = createOrderItem.quantity;
     if (this.check(createOrderItem.menuItemId, createOrderItem.quantity) === true) {
-      this.orderItems.push(createOrderItem);
+      this.orderItems = [... this.orderItems, createOrderItem];
       this.discount += createOrderItem.discount;
     } else {
       createOrderItem.quantity = this.quantityMap.get(createOrderItem.menuItemId);
@@ -121,8 +124,8 @@ export class OrderComponent implements OnInit {
 
   }
 
-  search(f: NgForm): void {
-    this.menuService.searchMenuItems(f.value.searchValue).subscribe(
+  search(): void {
+    this.menuItemService.searchMenuItems(this.form.value.search).subscribe(
       (response) => {
         this.totalPages = 1;
         this.menuItems = response as MenuItem[];
@@ -130,8 +133,13 @@ export class OrderComponent implements OnInit {
     )
   }
 
-  onDelete(items: Item[]): void {
-    this.orderItems = items;
+  onDelete(object:any): void {
+    this.orderItems = object.orderItems;
+    console.log(object.price);
+    if(this.quantityMap.has(object.id)){
+      this.discount -= object.price;
+      this.quantityMap.delete(object.id);
+    }
   }
 
   sendMessage(message: string): void {

@@ -97,14 +97,19 @@ export class RestaurantPreviewComponent implements OnInit {
     if (a === false) {
       color = "#eb6434";
     }
+    let t = ""
+    if(id !== 0){
+      t = id.toString();
+    }
 
     const text = new Konva.Text({
       x: 10,
       y: 15,
-      text: id.toString(),
+      text: t,
       fontSize: 30,
       fontFamily: 'Calibri',
-      fill: 'beige'
+      fill: 'beige',
+      draggable: value,
     });
 
     const rectangle = new Konva.Rect({
@@ -122,9 +127,10 @@ export class RestaurantPreviewComponent implements OnInit {
     });
 
     group.on("dragend", () => {
+      rectangle.draggable(false);
+      text.draggable(false);
       group.draggable(false);
       this.selectedItem = group;
-      this.selectedItem.children[1].setAttr("text", this.loadedTables.length + 1);
       this.table.xCoordinate = this.selectedItem.children[0].getAttr("x") + 100;
       this.table.yCoordinate = this.selectedItem.children[0].getAttr("y") + 100;
       if (value == true) {
@@ -135,10 +141,15 @@ export class RestaurantPreviewComponent implements OnInit {
     if (this.role == 'ROLE_SYSTEM_ADMIN') {
       group.on("click", () => {
         if (this.selectedItem !== null) {
+          this.selectedItem.children[1].setAttr("text", this.loadedTables.length + 1);
           this.selectedItem.children[0].setAttr('fill', "#964B00");
         }
-        rectangle.setAttr("fill", "red");
-        this.selectedItem = group;
+        if(rectangle.getAttr("fill") ==="#964B00"){
+          rectangle.setAttr("fill", "red");
+          this.selectedItem = group;
+        }
+        
+        
       });
     }
     if (this.role == 'ROLE_WAITER') {
