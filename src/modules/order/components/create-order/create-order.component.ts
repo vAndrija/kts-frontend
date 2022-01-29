@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { CreateOrderDto, OrderDto } from 'src/modules/shared/models/order';
 import { Item } from 'src/modules/shared/models/item';
 import { CreateOrderItem } from 'src/modules/shared/models/orderitem';
@@ -14,9 +14,9 @@ import { RestaurantTableService } from 'src/modules/restaurant/services/restaura
   styleUrls: ['./create-order.component.scss'],
   providers: [DatePipe]
 })
-export class CreateOrderComponent  {
+export class CreateOrderComponent {
   
-  @Output() triggerOrderItemsChanged: EventEmitter<Item[]> = new EventEmitter();
+  @Output() triggerOrderItemsChanged: EventEmitter<any> = new EventEmitter();
   @Output() triggerSendNotification: EventEmitter<any> = new EventEmitter();
 
   $ = (window as any).$;
@@ -49,16 +49,17 @@ export class CreateOrderComponent  {
     private notificationService: NotificationService,
     private router: Router, 
     private restaurantTableService: RestaurantTableService
-   ) {}
-
-  
+   ) {
+     
+   }
   close(): void {
     this.$('.order-create').removeClass('active');
   }
 
   delete(id: string): void {
+    let price = this.orderItems.filter(orderItem => orderItem.menuItemId == id)[0].discount;
     this.orderItems = this.orderItems.filter(orderItem => orderItem.menuItemId !== id);
-    this.triggerOrderItemsChanged.emit(this.orderItems);
+    this.triggerOrderItemsChanged.emit({orderItems:this.orderItems, id: id, price:price});
     this.orderDiscount();
   }
 

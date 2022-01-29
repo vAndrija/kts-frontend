@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MenuItem } from 'src/modules/menu/model/menuItem';
 import { Item } from 'src/modules/shared/models/item';
 
@@ -33,9 +34,7 @@ export class OrderItemCardComponent implements OnChanges {
     accepted: false,
     imageName: ""
   }
-  priority: any;
-  quantity: any;
-  note:any;
+  form: FormGroup
   @Output() eventEmitter : EventEmitter<Item> = new EventEmitter();
 
   public item: Item = {
@@ -54,15 +53,26 @@ export class OrderItemCardComponent implements OnChanges {
     imageName:""
   };
 
+  constructor(){
+    this.form = new FormGroup({
+      quantity: new FormControl(null, Validators.required),
+      priority: new FormControl(null, Validators.required),
+      note: new FormControl(),
+    })
+  }
+
   add(): void {
-    this.item.priority = this.priority;
-    this.item.quantity = this.quantity;
+    const priority = this.form.controls['priority'].value;
+    const quantity = this.form.controls['quantity'].value;
+    const note = this.form.controls['note'].value;
+    this.item.priority = priority;
+    this.item.quantity = quantity;
     this.item.menuItemId = this.menuItem.priceItemDto.menuItemId;
     this.item.category = this.menuItem.category;
     this.item.name = this.menuItem.name;
-    this.item.discount = this.menuItem.priceItemDto.value * this.quantity;
+    this.item.discount = this.menuItem.priceItemDto.value * quantity;
     this.item.price = this.menuItem.priceItemDto.value;
-    this.item.note = this.note;
+    this.item.note = note;
     this.item.imageName = this.menuItem.imageName;
     this.eventEmitter.emit(this.item);
   }
