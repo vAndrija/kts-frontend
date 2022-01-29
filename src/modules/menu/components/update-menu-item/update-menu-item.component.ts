@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { positiveNumberValidator } from 'src/modules/shared/custom-validators/positive-number-validator';
@@ -175,7 +175,7 @@ export class UpdateMenuItemComponent implements OnInit, OnChanges {
  
   decline(redirectTo: string): void {
     this.menuItemService.deleteMenuItem(this.menuItem.id).subscribe(
-      (result) => {
+      () => {
         this.router.navigate([redirectTo]);
       },
       (error) => {

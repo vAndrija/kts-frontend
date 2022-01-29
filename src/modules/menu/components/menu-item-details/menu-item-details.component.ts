@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MenuItem } from '../../model/menuItem';
 
 @Component({
@@ -6,7 +6,7 @@ import { MenuItem } from '../../model/menuItem';
   templateUrl: './menu-item-details.component.html',
   styleUrls: ['./menu-item-details.component.scss']
 })
-export class MenuItemDetailsComponent implements OnInit {
+export class MenuItemDetailsComponent  {
   @Input() 
   public menuItem: MenuItem = {
     id: "",
@@ -33,9 +33,7 @@ export class MenuItemDetailsComponent implements OnInit {
     imageName: ""
   };
 
-  constructor() { }
+  
 
-  ngOnInit(): void {
-  }
 
 }

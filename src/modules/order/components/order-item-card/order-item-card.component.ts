@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MenuItem } from 'src/modules/menu/model/menuItem';
 import { Item } from 'src/modules/shared/models/item';
 
@@ -7,7 +7,7 @@ import { Item } from 'src/modules/shared/models/item';
   templateUrl: './order-item-card.component.html',
   styleUrls: ['./order-item-card.component.scss']
 })
-export class OrderItemCardComponent implements OnInit {
+export class OrderItemCardComponent {
   @Input()
   public menuItem: MenuItem = {
     id: "",
@@ -54,8 +54,6 @@ export class OrderItemCardComponent implements OnInit {
   };
 
   constructor() { }
-
-  ngOnInit(): void { }
 
   add(): void {
     this.item.priority = this.priority;

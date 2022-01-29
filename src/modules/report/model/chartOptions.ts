@@ -10,4 +10,4 @@ export interface ChartOptions {
   chart: ApexChart;
   xaxis: ApexXAxis;
   title: ApexTitleSubtitle;
-};
+}

@@ -1,11 +1,11 @@
-import { Component, EventEmitter, Input, OnChanges, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
   styleUrls: ['./pagination.component.scss']
 })
-export class PaginationComponent implements OnChanges {
+export class PaginationComponent implements OnChanges, OnInit {
   @Input() totalPages: number = 0;
   @Input() pageSize: number = 0;
   @Output() pageSelected: EventEmitter<number>;

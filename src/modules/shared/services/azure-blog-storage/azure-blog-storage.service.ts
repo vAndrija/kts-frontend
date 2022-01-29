@@ -8,7 +8,7 @@ export class AzureBlogStorageService {
   
   private readonly accountName: string = "storagekts"
   private readonly containerName: string = "pictures"
-  constructor() { }
+  
 
 
   public uploadImage(content: Blob, name: string, handler : () => void) {

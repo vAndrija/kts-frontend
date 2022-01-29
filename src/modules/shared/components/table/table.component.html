@@ -9,7 +9,7 @@
                                 {{ col.header }}
                             </th>
                             <td mat-cell *matCellDef="let element" style="text-align: center;">
-                                <div *ngIf="col.key === 'status' && (element[col.key]=='U pripremi' || element[col.key]=='Pripremljeno' || element[col.key] == 'Servirano'); else first">
+                                <div *ngIf="col.key === 'status' && (element[col.key]==='U pripremi' || element[col.key]==='Pripremljeno' || element[col.key] === 'Servirano'); else first">
                                     <div class="dropdown">
                                         <button *ngIf="element[col.key]=== 'U pripremi'" type="button"
                                             class="btn btn-warning light sharp btn-block" data-toggle="dropdown"
@@ -25,13 +25,13 @@
                                             {{element[col.key]}}
                                         </button>
                                         <div class="dropdown-menu">
-                                            <button *ngIf="element[col.key]=='U pripremi'" class="dropdown-item" id="{{element['id']}}" (click)="changeStatus($event, 'Pripremljeno')">Pripremljeno</button>
-                                            <button *ngIf="element[col.key]=='Pripremljeno' && role=='ROLE_WAITER'" class="dropdown-item" id="{{element['id']}}" (click)="changeStatus($event, 'Servirano')">Servirano</button>
+                                            <button *ngIf="element[col.key]==='U pripremi'" class="dropdown-item" id="{{element['id']}}" (click)="changeStatus($event, 'Pripremljeno')">Pripremljeno</button>
+                                            <button *ngIf="element[col.key]==='Pripremljeno' && role==='ROLE_WAITER'" class="dropdown-item" id="{{element['id']}}" (click)="changeStatus($event, 'Servirano')">Servirano</button>
                                         </div>
                                     </div>
                                 </div>
                                 <ng-template #first>
-                                <div *ngIf="col.key === 'status' && (element[col.key]=='Poručeno' || element[col.key]=='Završeno' || element[col.key]=='Plaćeno' );else other">
+                                <div *ngIf="col.key === 'status' && (element[col.key]==='Poručeno' || element[col.key]==='Završeno' || element[col.key]==='Plaćeno' );else other">
                                     <div class="dropdown">
                                         <button *ngIf="element[col.key]=== 'Poručeno'" type="button"
                                             class="btn btn-warning light sharp btn-block" data-toggle="dropdown"
@@ -47,8 +47,8 @@
                                             {{element[col.key]}}
                                         </button>
                                         <div class="dropdown-menu">
-                                            <button *ngIf="element[col.key]=='Poručeno'" class="dropdown-item" id="{{element['id']}}" (click)="changeStatus($event, 'Završeno')">Završeno</button>
-                                            <button *ngIf="element[col.key]=='Završeno'" class="dropdown-item" id="{{element['id']}}" (click)="changeStatus($event, 'Plaćeno')">Plaćeno</button>
+                                            <button *ngIf="element[col.key]==='Poručeno'" class="dropdown-item" id="{{element['id']}}" (click)="changeStatus($event, 'Završeno')">Završeno</button>
+                                            <button *ngIf="element[col.key]==='Završeno'" class="dropdown-item" id="{{element['id']}}" (click)="changeStatus($event, 'Plaćeno')">Plaćeno</button>
                                         </div>
                                     </div>
                                 </div>

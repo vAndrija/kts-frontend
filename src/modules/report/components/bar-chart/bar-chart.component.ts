@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ChartOptions } from '../../model/chartOptions';
 
 @Component({
@@ -6,7 +6,7 @@ import { ChartOptions } from '../../model/chartOptions';
   templateUrl: './bar-chart.component.html',
   styleUrls: ['./bar-chart.component.scss']
 })
-export class BarChartComponent implements OnInit {
+export class BarChartComponent  {
   @Input()
   chartOptions!: ChartOptions;
 
@@ -31,7 +31,6 @@ export class BarChartComponent implements OnInit {
     };
   }
 
-  ngOnInit(): void {
-  }
+  
 
 }
