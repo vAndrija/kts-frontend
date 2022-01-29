@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/modules/auth/services/auth/auth.service';
-import { User } from 'src/modules/shared/models/user';
 import { UserService } from 'src/modules/user/services/user/user.service';
 
 @Component({
@@ -10,7 +9,7 @@ import { UserService } from 'src/modules/user/services/user/user.service';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  public role: String = '';
+  public role: string = '';
   public reportMenuVisibility: boolean = false;
   public show: boolean = false;
 

@@ -34,7 +34,8 @@ export class MenuItemCardComponent implements OnInit, OnChanges {
   }
 
   constructor() { }
-  ngOnChanges(changes: SimpleChanges): void {
+
+  ngOnChanges(): void {
     if(this.menuItem.imageName === "") {
       this.menuItem.imageName = "default.jpg"
     }

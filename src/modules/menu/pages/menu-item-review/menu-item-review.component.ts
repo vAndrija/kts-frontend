@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
 import { MenuItem } from '../../model/menuItem';
 import { MenuItemService } from '../../services/menu-item-service/menu-item.service';
@@ -41,7 +41,7 @@ export class MenuItemReviewComponent implements OnInit {
     private notificationService: NotificationService,
     private route: ActivatedRoute,
   ) { 
-    let routeParam: string | null = this.route.snapshot.paramMap.get('menuItemId');
+    const routeParam: string | null = this.route.snapshot.paramMap.get('menuItemId');
       if (routeParam) {
           this.getMenuItem(routeParam);
       }

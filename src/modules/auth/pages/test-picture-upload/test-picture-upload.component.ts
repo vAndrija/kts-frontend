@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AzureBlogStorageService } from 'src/modules/shared/services/azure-blog-storage/azure-blog-storage.service';
 @Component({
   selector: 'app-test-picture-upload',

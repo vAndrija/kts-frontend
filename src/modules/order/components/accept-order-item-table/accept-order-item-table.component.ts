@@ -47,7 +47,7 @@ export class AcceptOrderItemTableComponent implements OnInit {
   }
 
   getMenuItemName(menuItemId: string): string {
-    let menuItem: any = this.menuItems.find(value => value.id === menuItemId);
+    const menuItem: any = this.menuItems.find(value => value.id === menuItemId);
     return menuItem.name;
   }
 

@@ -12,22 +12,22 @@ export class UserService extends RestService {
   private readonly CURRENT_USER_PATH: string = "api/v1/auth/current-user";
   private readonly BASE_PATH: string  = "api/v1/"
 
-  changePassword(data:ChangePasswordModel): Observable<HttpResponse<any>>{
-    return this.http.post<HttpResponse<any>>(this.CHANGE_PASSWORD,data,{
+  changePassword(data:ChangePasswordModel): Observable<HttpResponse<any>> {
+    return this.http.post<HttpResponse<any>>(this.CHANGE_PASSWORD, data, {
       headers: this.headers,
       responseType: "json",
     })
   }
 
-  getCurrentUser():Observable<User>{
+  getCurrentUser(): Observable<User> {
     return this.http.get<User>(this.CURRENT_USER_PATH, {
       headers: this.headers,
       responseType: "json",
     });
   }
 
-  updateUser(id:number, userType:String, data:RegisterUser): Observable<User>{
-    return this.http.put<User>(this.BASE_PATH+`${userType}/${id}`,data,{
+  updateUser(id: number, userType: string, data: RegisterUser): Observable<User> {
+    return this.http.put<User>(this.BASE_PATH+`${userType}/${id}`, data, {
       headers: this.headers,
       responseType: "json",
     })

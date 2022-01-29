@@ -1,6 +1,6 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { positiveNumberValidator } from 'src/modules/shared/custom-validators/positive-number-validator';
 import { SelectModel } from 'src/modules/shared/models/select-model';
 import { AzureBlogStorageService } from 'src/modules/shared/services/azure-blog-storage/azure-blog-storage.service';
@@ -72,7 +72,7 @@ export class UpdateMenuItemComponent implements OnInit, OnChanges {
     this.getMenus();
   }
 
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     if(this.menuItem.imageName === "") {
       this.menuItem.imageName = "default.jpg"
     }
@@ -92,7 +92,7 @@ export class UpdateMenuItemComponent implements OnInit, OnChanges {
         this.menus = result as Menu[];
         this.setSelectOptions();
       },
-      (error) => {
+      () => {
         this.notificationService.error("Došlo je do greške, pokušajte ponovo.")
       }
     )
@@ -143,7 +143,7 @@ export class UpdateMenuItemComponent implements OnInit, OnChanges {
   }
 
   createPriceItem(): void {
-    let priceItem: PriceItem = {
+    const priceItem: PriceItem = {
       current: true,
       menuItemId: this.menuItem.id,
       value: this.formAccept.value.price,

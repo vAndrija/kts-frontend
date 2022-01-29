@@ -60,7 +60,7 @@ export class OrderReviewComponent implements OnInit {
         this.orderItems = this.orderItems.filter(orderItem => orderItem.id !== id);
         this.notificationService.success('Uspešno otkazana stavka porudžbine!');
       },
-      (error) => {
+      () => {
         this.notificationService.error('Greška priliko otkazivanja!');
       }
 

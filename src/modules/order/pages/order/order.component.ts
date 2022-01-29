@@ -13,12 +13,12 @@ import { Router } from '@angular/router';
 })
 export class OrderComponent implements OnInit {
 
-  categories: String[];
+  categories: string[];
   pageSize: number = 3;
   totalPages: number = 0;
   currentPage: number = 0;
   menuItems: MenuItem[] = [];
-  category: String = 'Sve';
+  category: string = 'Sve';
   orderItems: Item[] = [];
   discount: number = 0;
   $ = (window as any).$;
@@ -76,7 +76,7 @@ export class OrderComponent implements OnInit {
     )
   }
 
-  clickCategory(category: String): void {
+  clickCategory(category: string): void {
     this.category = category;
     if (this.category == 'Sve') {
       this.getMenuItems();
@@ -95,7 +95,7 @@ export class OrderComponent implements OnInit {
   }
 
   check(id: string, quantity: number): boolean {
-    var value = true;
+    let value = true;
     if (this.quantityMap.has(id)) {
       this.quantityMap.set(id, this.quantityMap.get(id) + quantity);
       value = false;
@@ -106,7 +106,7 @@ export class OrderComponent implements OnInit {
   }
 
   addOrderItem(createOrderItem: Item): void {
-    var quantity = createOrderItem.quantity;
+    const quantity = createOrderItem.quantity;
     if (this.check(createOrderItem.menuItemId, createOrderItem.quantity) === true) {
       this.orderItems.push(createOrderItem);
       this.discount += createOrderItem.discount;

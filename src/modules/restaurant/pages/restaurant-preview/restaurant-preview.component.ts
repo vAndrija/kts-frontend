@@ -86,7 +86,7 @@ export class RestaurantPreviewComponent implements OnInit {
 
 
   newRectangle(x: number, y: number, width: number, height: number, value: boolean) {
-    let rectangle = new Konva.Rect({
+    const rectangle = new Konva.Rect({
       x: x,
       y: y,
       width: width,

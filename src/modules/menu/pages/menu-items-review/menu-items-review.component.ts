@@ -26,9 +26,9 @@ export class MenuItemsReviewComponent implements OnInit {
   categories: SelectModel[] = [new SelectModel("0", ""), new SelectModel("1", "Supa"), new SelectModel("2", "Doručak"), new SelectModel("3", "Predjelo"),
                                 new SelectModel("4", "Glavno jelo"), new SelectModel("5", "Dezert"), new SelectModel("6", "Koktel"),
                                 new SelectModel("7", "Topli napitak"), new SelectModel("8", "Bezalkoholno piće")];
-  searchParam: String = "";
+  searchParam: string = "";
   searchForm: FormGroup;
-  category: String = "";
+  category: string = "";
 
   constructor(
     private menuService: MenuService, 
@@ -69,7 +69,7 @@ export class MenuItemsReviewComponent implements OnInit {
           this.searchMenuItems()
         }
       },
-      (error) => {
+      () => {
         this.notificationService.error("Doslo je do greske, pokusajte ponovo.")
       }
     )
@@ -89,7 +89,7 @@ export class MenuItemsReviewComponent implements OnInit {
         this.menuItems = result.body.content as MenuItem[];
         this.pagination.totalPages = result.body.totalPages as number;
       },
-      (error) => {
+      () => {
         this.notificationService.error("Doslo je do greske, pokusajte ponovo.")
       }
     )

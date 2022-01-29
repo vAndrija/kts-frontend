@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders,HttpResponse, HttpClient } from "@angular/common/http";
+import { HttpResponse, HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 import { ResetPasswordModel } from 'src/modules/shared/models/login';
 import { RestService } from 'src/modules/shared/services/rest/rest.service';

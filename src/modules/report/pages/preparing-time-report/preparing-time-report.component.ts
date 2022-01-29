@@ -78,7 +78,7 @@ export class PreparingTimeReportComponent implements OnInit {
         const cooks = result as User[];
         cooks.forEach(cook => this.cooksAndBartendersSelect.push(new SelectModel(cook.id.toString(), cook.name)));
       },
-      (error) => {
+      () => {
         this.notificationService.error("Došlo je do greške, pokušajte ponovo.");
       }
     )

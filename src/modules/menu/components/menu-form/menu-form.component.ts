@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import { MenuDto } from 'src/modules/menu/model/menuDto'
 import { MenuService } from 'src/modules/menu/services/menu-service/menu.service'
@@ -42,14 +42,14 @@ export class MenuFormComponent implements OnInit {
 
   submit(): void{
 
-    var name = this.form.controls['name'].value;
-    var stringDates = this.form.controls['period'].value;
-    var dates = this.formatDates(stringDates);
+    const name = this.form.controls['name'].value;
+    const stringDates = this.form.controls['period'].value;
+    const dates = this.formatDates(stringDates);
 
-    var startDate = dates.startDate;
-    var endDate = dates.endDate;
+    const startDate = dates.startDate;
+    const endDate = dates.endDate;
 
-    var tempMenu = 
+    const tempMenu = 
     {
       name: name,
       startDuration: startDate,
