@@ -23,6 +23,16 @@ export class MenuService extends RestService {
     });
   }
 
+  getActiveMenus(date: string): Observable<HttpResponse<any>> {
+    let queryParams = {};
+    queryParams = {
+      observe: "response",
+      params: new HttpParams()
+        .set("date", date)
+    };
+    return this.http.get<HttpResponse<MenuItem[]>>("api/v1/menu/active", queryParams);
+  }
+
   getPendingMenuItems(page: Number, pageSize: Number): Observable<HttpResponse<any>> {
     let queryParams = {};
     queryParams = {

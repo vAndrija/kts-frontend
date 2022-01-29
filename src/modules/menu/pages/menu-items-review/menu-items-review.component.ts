@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import * as moment from 'moment';
 import { PAGE_SIZE } from 'src/modules/shared/constants/constants';
 import { Pagination } from 'src/modules/shared/models/pagination';
 import { SelectModel } from 'src/modules/shared/models/select-model';
@@ -60,9 +61,9 @@ export class MenuItemsReviewComponent implements OnInit {
   }
 
   getMenus(): void {
-    this.menuService.getMenus().subscribe(
+    this.menuService.getActiveMenus(moment().format("YYYY-MM-DDTHH:mm")).subscribe(
       (result) => {
-        this.menus = result as Menu[];
+        this.menus = result.body as Menu[];
         this.setSelcetOptions();
         if(this.menus.length > 0) {
           this.form.patchValue({menuId: this.menus[0].id})
@@ -76,6 +77,7 @@ export class MenuItemsReviewComponent implements OnInit {
   }
 
   setSelcetOptions(): void {
+    console.log(this.menus.length)
     this.menus.forEach(menu => {
       this.types.push(new SelectModel(menu.id, menu.name))
     });
