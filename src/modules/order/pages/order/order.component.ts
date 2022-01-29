@@ -68,7 +68,7 @@ export class OrderComponent implements OnInit {
   }
 
   getMenuItems(): void {
-    this.menuService.getAllMenuItems(this.currentPage, this.pageSize).subscribe(
+    this.menuService.getAllMenuItemsInActiveMenu(this.currentPage, this.pageSize).subscribe(
       (response) => {
         this.menuItems = response.body['content'] as MenuItem[];
         this.totalPages = response.body['totalPages'] as number;
