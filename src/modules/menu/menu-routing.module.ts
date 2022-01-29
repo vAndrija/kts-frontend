@@ -6,6 +6,7 @@ import { MenuItemsReviewComponent } from './pages/menu-items-review/menu-items-r
 import { CreateMenuItemComponent } from './pages/create-menu-item/create-menu-item.component';
 import { PendingMenuItemsComponent } from './pages/pending-menu-items/pending-menu-items.component';
 import { MenuItemReviewComponent } from './pages/menu-item-review/menu-item-review.component';
+import { MenuTableReviewComponent } from './pages/menu-table-review/menu-table-review.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,20 @@ const routes: Routes = [
     component: CreateMenuItemComponent,
     canActivate: [RoleGuard],
     data: {expectedRoles: "ROLE_COOK|ROLE_BARTENDER",isPriorityRoute: 'true'}
+  },
+  {
+    path: "menu-table",
+    pathMatch: "full",
+    component: MenuTableReviewComponent,
+    canActivate: [RoleGuard],
+    data: {expectedRoles: "ROLE_MANAGER"}
+  },
+  {
+    path: "update-menu/:menuId",
+    pathMatch: "full",
+    component: CreateMenuComponent,
+    canActivate: [RoleGuard],
+    data: {expectedRoles: "ROLE_MANAGER"}
   },
   {
     path: "menu-items/:menuItemId",

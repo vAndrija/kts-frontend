@@ -1,0 +1,52 @@
+<div class="table-responsive">
+  <table class="table table-responsive-md">
+    <thead>
+      <tr>
+        <th style="width:80px;"><strong>#</strong></th>
+        <th><strong>Naziv</strong></th>
+        <th><strong>Početak trajanja</strong></th>
+        <th><strong>Kraj trajanja</strong></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let menu of menus">
+        <td class="py-3">
+          <div class="media d-flex align-items-center">
+            <div class="media-body">
+              <h5 class="mb-0 fs--1">{{ menu.id }}</h5>
+            </div>
+          </div>
+        </td>
+        <td class="py-3">
+          <div class="media d-flex align-items-center">
+            <div class="media-body">
+              <h5 class="mb-0 fs--1">{{ menu.name }}</h5>
+            </div>
+          </div>
+        </td>
+        <td class="py-3">
+          <div class="media d-flex align-items-center">
+            <div class="media-body">
+              <h5 class="mb-0 fs--1">{{ menu.durationStart | customDateTime }}</h5>
+            </div>
+          </div>
+        </td>
+        <td class="py-3">
+          <div class="media d-flex align-items-center">
+            <div class="media-body">
+              <h5 class="mb-0 fs--1">{{ menu.durationEnd | customDateTime }}</h5>
+            </div>
+          </div>
+        </td>
+        <td>
+          <div>
+            <button type="button" class="btn btn-success light sharp" [routerLink]="['/menu/update-menu/'] + menu.id">
+            Izmeni
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -19,6 +19,8 @@ import { NgApexchartsModule } from 'ng-apexcharts';
 import { SharedModule } from '../shared/shared.module';
 import { UpdateMenuItemComponent } from './components/update-menu-item/update-menu-item.component';
 import { MenuItemReviewComponent } from './pages/menu-item-review/menu-item-review.component';
+import { MenuTableComponent } from './components/menu-table/menu-table.component';
+import { MenuTableReviewComponent } from './pages/menu-table-review/menu-table-review.component';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { MenuItemReviewComponent } from './pages/menu-item-review/menu-item-revi
     MenuItemDetailsComponent,
     PendingMenuItemsComponent,
     UpdateMenuItemComponent,
-    MenuItemReviewComponent
+    MenuItemReviewComponent,
+    MenuTableComponent,
+    MenuTableReviewComponent
   ],
   imports: [
     CommonModule,

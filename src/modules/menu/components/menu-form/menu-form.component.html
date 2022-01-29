@@ -24,7 +24,7 @@
     </div>
     <div class="mb-3 row">
       <div class="col-sm-10">
-        <button type="submit" [disabled]="!form.valid" class="btn btn-primary">Dodaj</button>
+        <button type="submit" [disabled]="!form.valid" class="btn btn-primary">{{ isEdit ? 'Izmeni' : 'Dodaj' }}</button>
       </div>
     </div>
   </form>
