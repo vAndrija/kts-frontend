@@ -5,6 +5,8 @@ import { NgForm } from '@angular/forms';
 import { MenuService } from 'src/modules/menu/services/menu-service/menu.service';
 import { WebsocketService } from 'src/modules/shared/services/websocket/websocket.service';
 import { Router } from '@angular/router';
+import { MessageService } from 'src/modules/shared/services/messages/message.service';
+import { NotificationDto } from 'src/modules/shared/models/notification';
 
 @Component({
   selector: 'app-order',
@@ -30,6 +32,7 @@ export class OrderComponent implements OnInit {
   constructor(
     private menuService: MenuService,
     private socketService: WebsocketService,
+    private messageService: MessageService,
     private router: Router
     ) {
     this.categories = ['Sve', 'Supa', 'Doručak', 'Predjelo', 'Glavno jelo', 'Dezert', 'Koktel', 'Topli napitak', 'Bezalkoholno piće'];
@@ -133,6 +136,11 @@ export class OrderComponent implements OnInit {
 
   sendMessage(message: string): void {
     this.socketService.sendOrderCreatedMessage({"message": message});
+    const notification: NotificationDto = {
+      orderItemId: -1,
+      message: message
+    }
+    this.messageService.addNewNotification(notification).subscribe();
   }
 
 }
