@@ -43,7 +43,7 @@ export class RegistrationComponent {
     this.registrationService.register(registrationData,userType).subscribe({
       next: ()=>{
         this.notificationService.success("Uspješno ste kreirali korisnika !");
-        this.router.navigate(["/"]);
+        this.router.navigate(["/menu/menu-items"]);
       },
       error: (error)=>{
         if(error.status === 401 || error.status === 403){
