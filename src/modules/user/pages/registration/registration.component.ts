@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
 import {SelectModel} from "src/modules/shared/models/select-model"
 import {RegistrationService} from "../../services/registration/registration.service"
-import {RegisterUser} from "src/modules/shared/models/user"
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
 import { Router } from "@angular/router";
+import { RegisterUser } from '../../model/register-user';
 
 @Component({
   selector: 'app-registration',

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { Login } from "src/modules/shared/models/login";
 import { Token } from "src/modules/shared/models/token";
 import { RestService } from 'src/modules/shared/services/rest/rest.service';
-import { PreparationStaff } from 'src/modules/shared/models/user';
+import { Login } from '../../model/login';
+import { PreparationStaff } from 'src/modules/user/model/preparation-staff';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +29,6 @@ export class AuthService extends RestService {
     return true;
   }
 
-  //Nesto ne funkcionise dobro, kasnije moram pogledati
   isUserOnMainPosition(): boolean {
     const role = localStorage.getItem("role");
     const userId = localStorage.getItem("id");

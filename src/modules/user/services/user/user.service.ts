@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { ChangePasswordModel } from 'src/modules/shared/models/login';
 import { RestService } from 'src/modules/shared/services/rest/rest.service';
-import { User,RegisterUser } from 'src/modules/shared/models/user';
+import { ChangePasswordModel } from 'src/modules/auth/model/change-password-model';
+import { User } from '../../model/user';
+import { RegisterUser } from '../../model/register-user';
 @Injectable({
   providedIn: 'root'
 })

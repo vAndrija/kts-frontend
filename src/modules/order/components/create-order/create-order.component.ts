@@ -1,12 +1,13 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { CreateOrderDto, OrderDto } from 'src/modules/shared/models/order';
-import { Item } from 'src/modules/shared/models/item';
-import { CreateOrderItem } from 'src/modules/shared/models/orderitem';
 import { OrderItemService } from '../../services/order-item/order-item.service';
 import { DatePipe } from '@angular/common';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
 import { Router } from '@angular/router';
 import { RestaurantTableService } from 'src/modules/restaurant/services/restaurant-table.service';
+import { Item } from '../../model/item';
+import { CreateOrderDto } from '../../model/create-order';
+import { OrderDto } from '../../model/order';
+import { CreateOrderItem } from '../../model/create-order-item';
 
 @Component({
   selector: 'app-create-order',

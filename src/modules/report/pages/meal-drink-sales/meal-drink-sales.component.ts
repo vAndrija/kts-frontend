@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MenuItem } from 'src/modules/menu/model/menuItem';
+import { MenuItem } from 'src/modules/menu/model/menu-item';
 import { MenuItemService } from 'src/modules/menu/services/menu-item-service/menu-item.service';
 import { monthValidator } from 'src/modules/shared/custom-validators/month-validator';
 import { positiveNumberValidator } from 'src/modules/shared/custom-validators/positive-number-validator';
 import { SelectModel } from 'src/modules/shared/models/select-model';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
-import { ChartOptions } from '../../model/chartOptions';
+import { ChartOptions } from '../../model/chart-options';
 import { ReportService } from '../../services/report-service/report.service';
 
 @Component({

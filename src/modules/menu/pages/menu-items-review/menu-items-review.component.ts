@@ -7,7 +7,7 @@ import { SelectModel } from 'src/modules/shared/models/select-model';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
 import { WebsocketService } from 'src/modules/shared/services/websocket/websocket.service';
 import { Menu } from '../../model/menu';
-import { MenuItem } from '../../model/menuItem';
+import { MenuItem } from '../../model/menu-item';
 import { MenuItemService } from '../../services/menu-item-service/menu-item.service';
 import { MenuService } from '../../services/menu-service/menu.service';
 

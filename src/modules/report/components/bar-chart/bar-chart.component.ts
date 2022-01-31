@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { ChartOptions } from '../../model/chartOptions';
+import { ChartOptions } from '../../model/chart-options';
 
 @Component({
   selector: 'app-bar-chart',

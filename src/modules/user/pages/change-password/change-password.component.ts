@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
 import { Router } from '@angular/router';
 import { FormGroup, Validators, FormControl } from "@angular/forms";
-import { ChangePasswordModel } from 'src/modules/shared/models/login';
 import { samePasswordValidator } from 'src/modules/shared/custom-validators/same-password-validator';
 import { UserService } from '../../services/user/user.service';
+import { ChangePasswordModel } from 'src/modules/auth/model/change-password-model';
 
 @Component({
   selector: 'app-change-password',

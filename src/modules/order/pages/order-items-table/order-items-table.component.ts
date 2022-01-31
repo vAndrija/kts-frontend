@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { map } from 'rxjs';
-import { MenuItem } from 'src/modules/menu/model/menuItem';
+import { MenuItem } from 'src/modules/menu/model/menu-item';
 import { MenuItemService } from 'src/modules/menu/services/menu-item-service/menu-item.service';
-import { Item } from 'src/modules/shared/models/item';
 import { NotificationDto } from 'src/modules/shared/models/notification';
-import { OrderItem } from 'src/modules/shared/models/orderitem';
 import { Pagination } from 'src/modules/shared/models/pagination';
 import { MessageService } from 'src/modules/shared/services/messages/message.service';
 import { WebsocketService } from 'src/modules/shared/services/websocket/websocket.service';
+import { Item } from '../../model/item';
+import { OrderItem } from '../../model/order-item';
 import { OrderItemService } from '../../services/order-item/order-item.service';
 
 @Component({

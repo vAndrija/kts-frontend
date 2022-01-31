@@ -3,8 +3,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RestService } from 'src/modules/shared/services/rest/rest.service';
 import { Menu } from '../../model/menu';
-import { MenuDto} from '../../model/menuDto'
-import { MenuItem } from '../../model/menuItem';
+import { MenuDto} from '../../model/menu-dto'
+import { MenuItem } from '../../model/menu-item';
 
 @Injectable({
   providedIn: 'root'

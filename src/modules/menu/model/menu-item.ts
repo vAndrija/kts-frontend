@@ -1,5 +1,5 @@
 import { Menu } from "./menu";
-import { PriceItem } from "./priceItem";
+import { PriceItem } from "./price-item";
 
 export interface MenuItem {
     id: string,

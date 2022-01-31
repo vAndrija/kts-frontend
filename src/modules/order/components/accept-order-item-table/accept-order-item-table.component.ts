@@ -1,12 +1,13 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { MenuItem } from 'src/modules/menu/model/menuItem';
+import { MenuItem } from 'src/modules/menu/model/menu-item';
 import { MenuItemService } from 'src/modules/menu/services/menu-item-service/menu-item.service';
 import { NotificationDto } from 'src/modules/shared/models/notification';
-import { AcceptOrderItem, OrderItem } from 'src/modules/shared/models/orderitem';
 import { Pagination } from 'src/modules/shared/models/pagination';
 import { MessageService } from 'src/modules/shared/services/messages/message.service';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
 import { WebsocketService } from 'src/modules/shared/services/websocket/websocket.service';
+import { AcceptOrderItem } from '../../model/accept-order-item';
+import { OrderItem } from '../../model/order-item';
 import { OrderItemService } from '../../services/order-item/order-item.service';
 
 @Component({

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MenuItem } from 'src/modules/menu/model/menuItem';
+import { MenuItem } from 'src/modules/menu/model/menu-item';
 import { MenuItemService } from 'src/modules/menu/services/menu-item-service/menu-item.service';
-import { Item } from 'src/modules/shared/models/item';
-import { OrderDto } from 'src/modules/shared/models/order';
-import { OrderItem } from 'src/modules/shared/models/orderitem';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
+import { Item } from '../../model/item';
+import { OrderDto } from '../../model/order';
+import { OrderItem } from '../../model/order-item';
 import { OrderItemService } from '../../services/order-item/order-item.service';
 
 @Component({

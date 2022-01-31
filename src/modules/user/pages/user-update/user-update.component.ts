@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormControl } from "@angular/forms";
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
 import { Router } from "@angular/router";
-import { RegisterUser } from 'src/modules/shared/models/user';
 import { UserService } from '../../services/user/user.service';
+import { RegisterUser } from '../../model/register-user';
 @Component({
   selector: 'app-user-update',
   templateUrl: './user-update.component.html',

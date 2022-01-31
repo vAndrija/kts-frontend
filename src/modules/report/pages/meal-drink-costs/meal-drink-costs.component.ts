@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { monthValidator } from 'src/modules/shared/custom-validators/month-validator';
 import { positiveNumberValidator } from 'src/modules/shared/custom-validators/positive-number-validator';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
-import { ChartOptions } from '../../model/chartOptions';
+import { ChartOptions } from '../../model/chart-options';
 import { ReportService } from '../../services/report-service/report.service';
 
 @Component({

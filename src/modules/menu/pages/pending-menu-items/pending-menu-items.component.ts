@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PAGE_SIZE } from 'src/modules/shared/constants/constants';
-import { MenuItem } from '../../model/menuItem';
+import { MenuItem } from '../../model/menu-item';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
 import { MenuService } from '../../services/menu-service/menu.service';
 import { Pagination } from 'src/modules/shared/models/pagination';
