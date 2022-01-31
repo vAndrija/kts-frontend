@@ -27,7 +27,7 @@ export class WebsocketService {
     }
     this.initialized = true;
  
-    const socket = new SockJS('http://localhost:8081/socket');
+    const socket = new SockJS('http://kts-backend-service:8080/socket');
     this.stompClient = Stomp.over(socket);
 
     const _this = this;
