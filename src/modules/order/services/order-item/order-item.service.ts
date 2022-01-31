@@ -3,9 +3,12 @@ import {
   HttpClient, HttpParams, HttpResponse,
 } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { AcceptOrderItem, CreateOrderItem, OrderItem } from 'src/modules/shared/models/orderitem';
-import { CreateOrderDto, OrderDto } from 'src/modules/shared/models/order';
 import { RestService } from 'src/modules/shared/services/rest/rest.service';
+import { CreateOrderDto } from '../../model/create-order';
+import { OrderItem } from '../../model/order-item';
+import { OrderDto } from '../../model/order';
+import { CreateOrderItem } from '../../model/create-order-item';
+import { AcceptOrderItem } from '../../model/accept-order-item';
 @Injectable({
   providedIn: 'root'
 })

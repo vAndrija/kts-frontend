@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { RestaurantTableService } from 'src/modules/restaurant/services/restaurant-table.service';
-import { OrderDto } from 'src/modules/shared/models/order';
 import { Pagination } from 'src/modules/shared/models/pagination';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
+import { OrderDto } from '../../model/order';
 import { OrderService } from '../../services/order/order.service';
 
 @Component({

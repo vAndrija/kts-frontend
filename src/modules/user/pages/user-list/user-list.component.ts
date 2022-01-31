@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from 'src/modules/shared/models/user'
 import { UserListService } from '../../services/userList/user-list.service';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
 import { Router } from '@angular/router';
 import { FormGroup, Validators, FormControl } from "@angular/forms";
-import { Salary } from 'src/modules/shared/models/salary';
+import { User } from '../../model/user';
+import { Salary } from '../../model/salary';
 
 @Component({
   selector: 'app-user-list',

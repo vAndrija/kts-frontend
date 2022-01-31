@@ -2,7 +2,8 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RestService } from 'src/modules/shared/services/rest/rest.service';
-import { Reservation, ReservationDto } from '../../model/Reservation';
+import { Reservation } from '../../model/reservation';
+import { ReservationDto } from '../../model/reservation-dto';
 
 @Injectable({
   providedIn: 'root'

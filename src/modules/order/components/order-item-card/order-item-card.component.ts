@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MenuItem } from 'src/modules/menu/model/menuItem';
-import { Item } from 'src/modules/shared/models/item';
+import { MenuItem } from 'src/modules/menu/model/menu-item';
+import { Item } from '../../model/item';
 
 @Component({
   selector: 'app-order-item-card',

@@ -47,5 +47,5 @@
     </div>
 </div>
 <div class="col-sm-10">
-    <button type="submit" class="btn btn-primary" style="margin-bottom: 2em;" *ngIf="pagination.totalPages!== 1" (click)="loadMore()">Učitaj još</button>
+    <button type="submit" class="btn btn-primary" style="margin-bottom: 2em;" *ngIf="pagination.totalPages!== 1 && pagination.totalPages!==0" (click)="loadMore()">Učitaj još</button>
 </div>

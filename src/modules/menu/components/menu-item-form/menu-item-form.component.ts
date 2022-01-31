@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
-import { MenuItemDto } from '../../model/MenuItemDto';
-import { MenuItemReviewComponent } from '../../pages/menu-item-review/menu-item-review.component';
+import { MenuItemDto } from '../../model/menu-item-dto';
 import { MenuItemService } from '../../services/menu-item-service/menu-item.service';
 
 @Component({
@@ -10,7 +9,7 @@ import { MenuItemService } from '../../services/menu-item-service/menu-item.serv
   templateUrl: './menu-item-form.component.html',
   styleUrls: ['./menu-item-form.component.scss']
 })
-export class MenuItemFormComponent implements OnInit {
+export class MenuItemFormComponent {
 
   form: FormGroup
 
@@ -26,10 +25,6 @@ export class MenuItemFormComponent implements OnInit {
       category: new FormControl(null, Validators.required),
       type: new FormControl(0, Validators.required)
     });
-   }
-
-  ngOnInit(): void {
-    //(window as any).loadScript();
   }
 
   public errorHandling = (control: string, error: string) => {
@@ -39,8 +34,8 @@ export class MenuItemFormComponent implements OnInit {
   public submit(): void {
     const menuItem: MenuItemDto = this.form.value;
     menuItem.imageName = "";
-    
-    if(menuItem.category === "Koktel" || menuItem.category === "Topli napitak" || menuItem.category === "Bezalkoholno piće" ) {
+
+    if (menuItem.category === "Koktel" || menuItem.category === "Topli napitak" || menuItem.category === "Bezalkoholno piće") {
       menuItem.type = 0;
     }
     else {
@@ -53,7 +48,7 @@ export class MenuItemFormComponent implements OnInit {
       (error) => {
         if (error.status === 400) {
           this.notificationService.success("Došlo je do greške, pokušajte ponovo.");
-        } 
+        }
       }
     );
 

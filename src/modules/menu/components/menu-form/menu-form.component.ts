@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from "@angular/forms";
-import { MenuDto } from 'src/modules/menu/model/menuDto'
+import { MenuDto } from 'src/modules/menu/model/menu-dto'
 import { MenuService } from 'src/modules/menu/services/menu-service/menu.service'
 import { datetimePickerValidator } from 'src/modules/shared/custom-validators/datetime-picker-validator';
 import * as moment from 'moment';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
 import { ActivatedRoute } from '@angular/router';
-import { Menu } from '../../model/menu';
 
 
 const $ = (window as any).$;
@@ -32,7 +31,7 @@ export class MenuFormComponent implements OnInit {
     private menuService: MenuService,
     private notificationService: NotificationService,
     private route: ActivatedRoute
-  ) { 
+  ) {
     this.form = new FormGroup({
       name: new FormControl(null, Validators.required),
       period: new FormControl("", {
@@ -41,12 +40,12 @@ export class MenuFormComponent implements OnInit {
     })
 
     let routeParam: string | null = this.route.snapshot.paramMap.get('menuId');
-      if (routeParam) {
-          this.id = routeParam;
-          this.isEdit = true;
-          this.getMenu(routeParam);
-          
-      }
+    if (routeParam) {
+      this.id = routeParam;
+      this.isEdit = true;
+      this.getMenu(routeParam);
+
+    }
   }
 
   ngOnInit(): void {
@@ -65,11 +64,10 @@ export class MenuFormComponent implements OnInit {
   }
 
   edit(): void {
-    
+
     const formatedStart = this.makeDate(this.menu.durationStart);
     const formatedEnd = this.makeDate(this.menu.durationEnd);
     const formatedDate = formatedStart + " " + formatedEnd;
-    console.log(formatedDate);
 
     setTimeout(() => {
       $('input-daterange-timepicker').setPeriod({
@@ -82,10 +80,10 @@ export class MenuFormComponent implements OnInit {
       name: this.menu.name,
       period: formatedDate
     });
-    
+
   }
 
-  submit(): void{
+  submit(): void {
 
     const name = this.form.controls['name'].value;
     const stringDates = this.form.controls['period'].value;
@@ -94,7 +92,7 @@ export class MenuFormComponent implements OnInit {
     const startDate = dates.startDate;
     const endDate = dates.endDate;
 
-    const tempMenu = 
+    const tempMenu =
     {
       name: name,
       durationStart: startDate,
@@ -102,8 +100,8 @@ export class MenuFormComponent implements OnInit {
     }
 
     const menu: MenuDto = tempMenu;
-   
-    if(!this.isEdit) {
+
+    if (!this.isEdit) {
       this.menuService.addMenu(menu).subscribe(
         (result) => {
           this.notificationService.success("Meni " + result.name + " je kreiran!");
@@ -111,11 +109,11 @@ export class MenuFormComponent implements OnInit {
         (error) => {
           if (error.status === 400) {
             this.notificationService.error("Došlo je do greške, pokušajte ponovo.");
-          } 
+          }
         }
       );
     }
-    else{
+    else {
       this.menuService.updateMenu(menu, parseInt(this.id)).subscribe(
         (result) => {
           this.notificationService.success("Meni " + result.name + " je izmenjen!");
@@ -123,7 +121,7 @@ export class MenuFormComponent implements OnInit {
         (error) => {
           if (error.status === 400) {
             this.notificationService.error("Došlo je do greške, pokušajte ponovo.");
-          } 
+          }
         }
       );
     }
@@ -135,8 +133,8 @@ export class MenuFormComponent implements OnInit {
 
   private makeDate(date: string): string {
     const formatNumber = (value: string): string => `${value.toString().length === 1 ? 0 : ''}${value}`;
-    const formatedDate = date[0] + "-" +  formatNumber(date[1]) + "-" +formatNumber(date[2]) + "T" +  formatNumber(date[3]) + ":" + formatNumber(date[4]);
-    
+    const formatedDate = date[0] + "-" + formatNumber(date[1]) + "-" + formatNumber(date[2]) + "T" + formatNumber(date[3]) + ":" + formatNumber(date[4]);
+
     return formatedDate;
   }
 

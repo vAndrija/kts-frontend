@@ -5,10 +5,3 @@ export interface Reservation {
   durationEnd: string,
   tableId: number
 }
-
-export interface ReservationDto {
-  name: string,
-  durationStart: string,
-  durationEnd: string,
-  tableId: number
-}

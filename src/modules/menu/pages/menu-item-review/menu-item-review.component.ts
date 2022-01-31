@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
-import { MenuItem } from '../../model/menuItem';
+import { MenuItem } from '../../model/menu-item';
 import { MenuItemService } from '../../services/menu-item-service/menu-item.service';
 
 @Component({

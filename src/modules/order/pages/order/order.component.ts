@@ -1,12 +1,12 @@
 import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import { MenuItem } from 'src/modules/menu/model/menuItem';
-import { Item } from 'src/modules/shared/models/item';
+import { MenuItem } from 'src/modules/menu/model/menu-item';
 import { FormControl, FormGroup, NgForm } from '@angular/forms';
 import { WebsocketService } from 'src/modules/shared/services/websocket/websocket.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'src/modules/shared/services/messages/message.service';
 import { NotificationDto } from 'src/modules/shared/models/notification';
 import { MenuItemService } from 'src/modules/menu/services/menu-item-service/menu-item.service';
+import { Item } from '../../model/item';
 
 @Component({
   selector: 'app-order',
@@ -128,14 +128,13 @@ export class OrderComponent implements OnInit {
     this.menuItemService.searchMenuItems(this.form.value.search).subscribe(
       (response) => {
         this.totalPages = 1;
-        this.menuItems = response as MenuItem[];
+        this.menuItems = response.body as MenuItem[];
       },
     )
   }
 
   onDelete(object:any): void {
     this.orderItems = object.orderItems;
-    console.log(object.price);
     if(this.quantityMap.has(object.id)){
       this.discount -= object.price;
       this.quantityMap.delete(object.id);

@@ -2,9 +2,9 @@ import { Component} from '@angular/core';
 import { FormGroup, Validators, FormControl } from "@angular/forms";
 import { Router } from "@angular/router";
 import { AuthService } from '../../services/auth/auth.service';
-import { Login } from 'src/modules/shared/models/login';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
 import { JwtHelperService } from "@auth0/angular-jwt";
+import { Login } from '../../model/login';
 
 @Component({
   selector: 'app-login',
@@ -30,7 +30,7 @@ export class LoginComponent {
     const auth: Login = this.form.value;
     this.authService.login(auth).subscribe(
       (result) => {
-        this.notificationService.success("Successful login!");
+        this.notificationService.success("Uspešno ste ulogovali!");
         const jwtUser = JSON.stringify(result);
         localStorage.setItem("user", jwtUser);
         const jwt: JwtHelperService = new JwtHelperService();
@@ -57,7 +57,7 @@ export class LoginComponent {
       },
       (error) => {
         if(error.status === 401) {
-          this.notificationService.error("Wrong credentials. Try again.");
+          this.notificationService.error("Pogrešni kredencijali. Pokušajte ponovo.");
         }
       }
     );

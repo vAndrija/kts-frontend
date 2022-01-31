@@ -3,7 +3,7 @@ import { NotificationService } from 'src/modules/shared/services/notification/no
 import { Router } from '@angular/router';
 import { FormGroup, Validators, FormControl } from "@angular/forms";
 import { PasswordResetHomeService } from '../../services/password-reset-home/password-reset-home.service';
-import { ResetPasswordModel } from 'src/modules/shared/models/login';
+import { ResetPasswordModel } from '../../model/reset-password-model';
 
 @Component({
   selector: 'app-password-reset-home',

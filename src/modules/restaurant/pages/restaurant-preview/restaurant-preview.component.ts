@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import Konva from 'konva';
 import { Layer } from 'konva/lib/Layer';
 import { Stage } from 'konva/lib/Stage';
-import { RestaurantTable } from 'src/modules/shared/models/restaurant-table';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
+import { RestaurantTable } from '../../model/restaurant-table';
 import { RestaurantTableService } from '../../services/restaurant-table.service';
 
 @Component({
@@ -216,6 +216,7 @@ export class RestaurantPreviewComponent implements OnInit {
 
   delete(value: string): void {
     if (value === 'ne') {
+      this.selectedItem = null;
       this.selectedItem.children[0].setAttr("fill", "#964B00");
       this.close.nativeElement.click();
     } else {

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RestService } from 'src/modules/shared/services/rest/rest.service';
-import { PriceItem } from '../../model/priceItem';
+import { PriceItem } from '../../model/price-item';
 
 @Injectable({
   providedIn: 'root'

@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import * as moment from 'moment';
+import { RestaurantTable } from 'src/modules/restaurant/model/restaurant-table';
 import { RestaurantTableService } from 'src/modules/restaurant/services/restaurant-table.service';
 import { periodValidator } from 'src/modules/shared/custom-validators/period-validator';
 import { Pagination } from 'src/modules/shared/models/pagination';
-import { RestaurantTable } from 'src/modules/shared/models/restaurant-table';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
-import { Reservation, ReservationDto } from '../../model/Reservation';
+import { Reservation } from '../../model/reservation';
+import { ReservationDto } from '../../model/reservation-dto';
 import { ReservationService } from '../../service/reservation-service/reservation.service';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges } from '@angular/core';
-import { MenuItem } from '../../model/menuItem';
+import { MenuItem } from '../../model/menu-item';
 
 @Component({
   selector: 'app-menu-item-card',

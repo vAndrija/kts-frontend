@@ -3,10 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { monthValidator } from 'src/modules/shared/custom-validators/month-validator';
 import { positiveNumberValidator } from 'src/modules/shared/custom-validators/positive-number-validator';
 import { SelectModel } from 'src/modules/shared/models/select-model';
-import { User } from 'src/modules/shared/models/user';
 import { NotificationService } from 'src/modules/shared/services/notification/notification.service';
+import { User } from 'src/modules/user/model/user';
 import { UserListService } from 'src/modules/user/services/userList/user-list.service';
-import { ChartOptions } from '../../model/chartOptions';
+import { ChartOptions } from '../../model/chart-options';
 import { ReportService } from '../../services/report-service/report.service';
 
 @Component({

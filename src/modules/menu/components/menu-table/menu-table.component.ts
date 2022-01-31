@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 import { Menu } from '../../model/menu';
 import { MenuService } from '../../services/menu-service/menu.service';
 

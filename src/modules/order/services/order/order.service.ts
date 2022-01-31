@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { OrderDto } from 'src/modules/shared/models/order';
 import { RestService } from 'src/modules/shared/services/rest/rest.service';
+import { OrderDto } from '../../model/order';
 
 @Injectable({
   providedIn: 'root'

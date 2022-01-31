@@ -1,11 +1,11 @@
 
-import { MenuItemDto } from 'src/modules/menu/model/MenuItemDto';
+import { MenuItemDto } from 'src/modules/menu/model/menu-item-dto';
 import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { RestService } from 'src/modules/shared/services/rest/rest.service';
-import { MenuItem } from '../../model/menuItem';
-import { UpdateMenuItemDto } from '../../model/updateMenuItemDto';
+import { MenuItem } from '../../model/menu-item';
+import { UpdateMenuItemDto } from '../../model/update-menu-item-dto';
 
 
 @Injectable({
@@ -102,14 +102,14 @@ export class MenuItemService extends RestService {
   }
 
 
-  searchMenuItems(search: string): Observable<any> {
+  searchMenuItems(search: string): Observable<HttpResponse<any>> {
     let queryParams = {};
     queryParams = {
       observe: "response",
       params: new HttpParams()
         .set("search",search)
     };
-    return this.http.get<MenuItem[]>("api/v1/menu-items/search/", queryParams);
+    return this.http.get<HttpResponse<MenuItem[]>>("api/v1/menu-items/search/", queryParams);
     
   }
 

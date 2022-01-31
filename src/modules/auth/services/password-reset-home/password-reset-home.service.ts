@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse, HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
-import { ResetPasswordModel } from 'src/modules/shared/models/login';
 import { RestService } from 'src/modules/shared/services/rest/rest.service';
+import { ResetPasswordModel } from '../../model/reset-password-model';
 
 @Injectable({
   providedIn: 'root'
